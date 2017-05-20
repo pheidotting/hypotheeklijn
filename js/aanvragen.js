@@ -64,6 +64,11 @@ jQuery(document).ready(function($) {
         $('#stap5').hide();
         $('#stap6').show();
     });
+    $('#naar-bevestigen').click(function(){
+        plaatsAllesOpBevestigenScherm();
+        $('#stap6').hide();
+        $('#bevestigen').show();
+    });
     $('#terug-naar-stap1').click(function(){
         $('#stap2').hide();
         $('#stap1').show();
@@ -83,6 +88,10 @@ jQuery(document).ready(function($) {
     $('#terug-naar-stap5').click(function(){
         $('#stap6').hide();
         $('#stap5').show();
+    });
+    $('#terug-naar-stap6').click(function(){
+        $('#bevestigen').hide();
+        $('#stap6').show();
     });
     $('#postcode').change(function(){
         ophalenAdres($('#postcode').val(), $('#huisnummer').val()).done(function(adres) {
@@ -300,9 +309,45 @@ jQuery(document).ready(function($) {
 
     function maakBedragOp(bedrag) {
 		if(bedrag !== undefined && bedrag !== null){
-			var opgemaaktBedrag = String(bedrag) + ',00';
+		    var strBedrag = String(bedrag).replace('.', ',');
+		    
+		    var parts = strBedrag.split(',');
+		    var naDeKomma = '00';
+		    if(parts.length > 1) {
+		        naDeKomma = parts[1];
+		        if(naDeKomma.length == 1) {
+		            naDeKomma = naDeKomma + '0';
+		        } else if(naDeKomma.length == 0) {
+		            naDeKomma = '00';
+		        }
+		    }
+		    
+			var opgemaaktBedrag = parts[0] + ',' + naDeKomma;
 
 			return '\u20AC ' + opgemaaktBedrag.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 		}
+	}
+	
+	function plaatsAllesOpBevestigenScherm(){
+        zetTekst('Koopsom van het huis : ', maakBedragOp($('#koopsom').val()), $('#koopsom-output'));
+        zetTekst('Overdrachtsbelasting : ', maakBedragOp($('#overdrachtsbelasting').val()), $('#overdrachtsbelasting-output'));
+        zetTekst('Kosten leveringsakte notaris : ', maakBedragOp($('#leveringsakte-notaris').val()), $('#leveringsakte-notaris-output'));
+        zetTekst('Kosten hypotheekakte notaris : ', maakBedragOp($('#hypotheekakte-notaris').val()), $('#hypotheekakte-notaris-output'));
+        zetTekst('Kosten taxatie : ', maakBedragOp($('#taxatie').val()), $('#taxatie-output'));
+        zetTekst('Kosten commissie : ', maakBedragOp($('#commissie').val()), $('#commissie-output'));
+        zetTekst('Kosten NHG : ', maakBedragOp($('#nhgkosten').val()), $('#nhgkosten-output'));
+        zetTekst('Hoeveel hypotheek ben je nodig : ', maakBedragOp($('#benodigdehypotheek').val()), $('#benodigdehypotheek-output'));
+        zetTekst('Dat betekent dat je als eigen middelen moet inbrengen : ', $('#eigen-middelen-bedrag').html(), $('#eigen-middelen-bedrag-output'));
+
+
+	}
+	
+	function zetTekst(voorTekst, tekst, element) {
+	    if(tekst != null && tekst != '' && tekst != '0'  && tekst != '\u20AC 0,00') {
+	        element.show();
+            element.text(voorTekst + tekst);
+	    } else {
+	        element.hide();
+	    }
 	}
 });

@@ -206,6 +206,20 @@ function form_creation_aanvragen() {
         <label for="plaatswerkgever">Plaats werkgever</label><input type="text" id="plaatswerkgever" />
 
         <button id="terug-naar-stap5">Terug</button>
+        <button id="naar-bevestigen">Naar stap 7</button>
+    </div>
+    <div id="bevestigen" style="display:none;">
+        <div id="koopsom-output"></div>
+        <div id="overdrachtsbelasting-output"></div>
+        <div id="leveringsakte-notaris-output"></div>
+        <div id="hypotheekakte-notaris-output"></div>
+        <div id="taxatie-output"></div>
+        <div id="commissie-output"></div>
+        <div id="nhgkosten-output"></div>
+        <div id="benodigdehypotheek-output"></div>
+        <div id="eigen-middelen-bedrag-output"></div>
+
+        <button id="terug-naar-stap6">Terug</button>
         <button id="aanvragen">Aanvragen</button>
     </div>
     
