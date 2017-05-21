@@ -127,7 +127,7 @@ jQuery(document).ready(function($) {
     $('#aanvragen').click(function(){
         var data = {
     		'action': 'aanvragen',
-    		'jadajada': 'jan'
+    		'mail-tekst': $('#tekst-mail').html()
     	};
     	$.post('../../wp-admin/admin-ajax.php', data, function(response) {
     		console.log('Got this from the server: ' + response);
@@ -329,6 +329,8 @@ jQuery(document).ready(function($) {
 	}
 	
 	function plaatsAllesOpBevestigenScherm(){
+	    $('#tekst-mail').text('');
+	    
         zetTekst('Koopsom van het huis : ', maakBedragOp($('#koopsom').val()), $('#koopsom-output'));
         zetTekst('Overdrachtsbelasting : ', maakBedragOp($('#overdrachtsbelasting').val()), $('#overdrachtsbelasting-output'));
         zetTekst('Kosten leveringsakte notaris : ', maakBedragOp($('#leveringsakte-notaris').val()), $('#leveringsakte-notaris-output'));
@@ -337,7 +339,11 @@ jQuery(document).ready(function($) {
         zetTekst('Kosten commissie : ', maakBedragOp($('#commissie').val()), $('#commissie-output'));
         zetTekst('Kosten NHG : ', maakBedragOp($('#nhgkosten').val()), $('#nhgkosten-output'));
         zetTekst('Hoeveel hypotheek ben je nodig : ', maakBedragOp($('#benodigdehypotheek').val()), $('#benodigdehypotheek-output'));
+        zetTekst('Je maximale hypotheek is : ', maakBedragOp($('#result').html()), $('#maximale-hypotheek-output'));
         zetTekst('Dat betekent dat je als eigen middelen moet inbrengen : ', $('#eigen-middelen-bedrag').html(), $('#eigen-middelen-bedrag-output'));
+
+        zetTekst('Je bruto jaarloon : ', maakBedragOp($('#brutoloon').val()), $('#brutoloon-output'));
+        zetTekst('Je geboortedatum : ', $('#geboortedatum').val(), $('#geboortedatum-output'));
 
 
 	}
@@ -346,6 +352,7 @@ jQuery(document).ready(function($) {
 	    if(tekst != null && tekst != '' && tekst != '0'  && tekst != '\u20AC 0,00') {
 	        element.show();
             element.text(voorTekst + tekst);
+            $('#tekst-mail').append(voorTekst + tekst + '<br />');
 	    } else {
 	        element.hide();
 	    }

@@ -217,10 +217,16 @@ function form_creation_aanvragen() {
         <div id="commissie-output"></div>
         <div id="nhgkosten-output"></div>
         <div id="benodigdehypotheek-output"></div>
+        <div id="maximale-hypotheek-output"></div>
         <div id="eigen-middelen-bedrag-output"></div>
+        <br />
+        <div id="brutoloon-output"></div>
+        <div id="geboortedatum-output"></div>
+        <br />
 
         <button id="terug-naar-stap6">Terug</button>
         <button id="aanvragen">Aanvragen</button>
+        <div id="tekst-mail" style="display:none;"></div>
     </div>
     
     <!--<div id="debug"></div>-->
@@ -229,8 +235,7 @@ function form_creation_aanvragen() {
 }
 
 function verzamel_gegevens_en_verstuur_mail() {
-    echo $_POST['jadajada'];
-    // wp_mail('patrick@heidotting.nl','test','testmail');
+    wp_mail('patrick@heidotting.nl', 'Nieuwe aanvraag', $_POST['mail-tekst']);
 }
 add_shortcode('max-hypotheek-berekenen', 'form_creation_max_hypotheek');
 add_shortcode('hypotheek-aanvragen', 'form_creation_aanvragen');
