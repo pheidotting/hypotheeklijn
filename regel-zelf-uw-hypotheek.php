@@ -78,41 +78,8 @@ function form_creation_max_hypotheek(){
 function form_creation_aanvragen() {
     wp_enqueue_script('aanvragen');
     ?>
+    <div id="foutmelding-niet-alles-gevuld" style="display: none; color:red; font-weight: bold;">Niet alle verplichte velden zijn gevuld</div>
     <div id="stap1">
-        <!--<h3>Persoonlijke gegevens</h3>-->
-        <!--<label for="brutoloon">Je bruto jaarloon</label><input type="number" id="brutoloon" />-->
-        <!--<label for="geboortedatum">Je geboortedatum</label><input type="date" id="geboortedatum" />-->
-        
-        <!--<input type="checkbox" id="partner">Met partner?-->
-        <!--<div id="metPartner" style="display: none">-->
-        <!--    <label for="brutoloonpartner">Bruto jaarloon van je partner</label><input type="number" id="brutoloonpartner" />-->
-        <!--    <label for="geboortedatumpartner">Geboortedatum van je partner</label><input type="date" id="geboortedatumpartner" />-->
-        <!--</div>-->
-    
-        <h3>Hypotheeksom</h3>
-        <label for="koopsom">Koopsom van het huis</label><input type="number" id="koopsom" />
-        <label for="overdrachtsbelasting">Overdrachtsbelasting</label><input type="number" id="overdrachtsbelasting" disabled="disabled" />
-        <label for="leveringsakte-notaris">Kosten leveringsakte notaris</label><input type="number" id="leveringsakte-notaris" value="800" />
-        <label for="hypotheekakte-notaris">Kosten hypotheekakte notaris</label><input type="number" id="hypotheekakte-notaris" value="800" />
-        <label for="taxatie">Kosten taxatie</label><input type="number" id="taxatie" value="500" />
-        <label for="commissie">Kosten commissie</label><input type="number" id="commissie" value="700" disabled="disabled" />
-        <div id="nhg-vraag">
-            <input type="checkbox" id="nhg">Nationale Hypotheek Garantie?<br />
-            <div id="metNHG" style="display:none;">
-                <label for="nhgkosten">Kosten NHG</label><input type="number" id="nhgkosten" disabled="disabled" />
-            </div>
-        </div>
-
-        <label for="benodigdehypotheek">Hoeveel hypotheek ben je nodig</label><input type="number" id="benodigdehypotheek" />
-    
-        <!--<h3>Hypotheekvorm</h3>-->
-        <!--<input type="radio" id="annuiteiten" name="hypotheekvorm">Annuiteiten-->
-        <!--<input type="radio" id="lineair" name="hypotheekvorm">Lineair-->
-        <!--<label for="rentevasteperiode">Rentevaste periode</label><input type="number" id="rentevasteperiode" />-->
-    
-        <button id="naar-stap2">Naar stap 2</button>
-    </div>
-    <div id="stap2" style="display:none;">
         <label for="brutoloon">Je bruto jaarloon</label><input type="number" id="brutoloon" />
         <!--<input type="checkbox" id="ondernemer">Ben je zelfstandig ondernemer?-->
         <label for="geboortedatum">Je geboortedatum</label><input type="text" id="geboortedatum" />
@@ -148,7 +115,6 @@ function form_creation_aanvragen() {
             <label for="hoeveeloverigeleningen">Hoeveel?</label><input type="number" id="hoeveeloverigeleningen" />
         </div>
         
-        <div id="foutmelding-niet-alles-gevuld" style="display: none; color:red; font-weight: bold;">Niet alle verplichte velden zijn gevuld</div>
         <button id="opvragen">Opvragen</button>
         
         <div id="text-benodigde-hypotheek"></div>
@@ -158,6 +124,40 @@ function form_creation_aanvragen() {
         <!--<div id="debug"></div>-->
         
         <div id="aanbieders"></div>
+    
+        <button id="naar-stap2">Naar stap 2</button>
+    </div>
+    <div id="stap2" style="display:none;">
+        <!--<h3>Persoonlijke gegevens</h3>-->
+        <!--<label for="brutoloon">Je bruto jaarloon</label><input type="number" id="brutoloon" />-->
+        <!--<label for="geboortedatum">Je geboortedatum</label><input type="date" id="geboortedatum" />-->
+        
+        <!--<input type="checkbox" id="partner">Met partner?-->
+        <!--<div id="metPartner" style="display: none">-->
+        <!--    <label for="brutoloonpartner">Bruto jaarloon van je partner</label><input type="number" id="brutoloonpartner" />-->
+        <!--    <label for="geboortedatumpartner">Geboortedatum van je partner</label><input type="date" id="geboortedatumpartner" />-->
+        <!--</div>-->
+    
+        <h3>Hypotheeksom</h3>
+        <label for="koopsom">Koopsom van het huis</label><input type="number" id="koopsom" />
+        <label for="overdrachtsbelasting">Overdrachtsbelasting</label><input type="number" id="overdrachtsbelasting" disabled="disabled" />
+        <label for="leveringsakte-notaris">Kosten leveringsakte notaris</label><input type="number" id="leveringsakte-notaris" value="800" />
+        <label for="hypotheekakte-notaris">Kosten hypotheekakte notaris</label><input type="number" id="hypotheekakte-notaris" value="800" />
+        <label for="taxatie">Kosten taxatie</label><input type="number" id="taxatie" value="500" />
+        <label for="commissie">Kosten commissie</label><input type="number" id="commissie" value="700" disabled="disabled" />
+        <div id="nhg-vraag">
+            <input type="checkbox" id="nhg">Nationale Hypotheek Garantie?<br />
+            <div id="metNHG" style="display:none;">
+                <label for="nhgkosten">Kosten NHG</label><input type="number" id="nhgkosten" disabled="disabled" />
+            </div>
+        </div>
+
+        <label for="benodigdehypotheek">Hoeveel hypotheek ben je nodig</label><input type="number" id="benodigdehypotheek" />
+    
+        <!--<h3>Hypotheekvorm</h3>-->
+        <!--<input type="radio" id="annuiteiten" name="hypotheekvorm">Annuiteiten-->
+        <!--<input type="radio" id="lineair" name="hypotheekvorm">Lineair-->
+        <!--<label for="rentevasteperiode">Rentevaste periode</label><input type="number" id="rentevasteperiode" />-->
     
         <button id="terug-naar-stap1">Terug</button>
         <button id="naar-stap3">Naar stap 3</button>
@@ -227,6 +227,9 @@ function form_creation_aanvragen() {
         <button id="terug-naar-stap6">Terug</button>
         <button id="aanvragen">Aanvragen</button>
         <div id="tekst-mail" style="display:none;"></div>
+    </div>
+    <div id="ontvangen" style="display:none;">
+        We hebben uw aanvraag ontvangen.
     </div>
     
     <!--<div id="debug"></div>-->

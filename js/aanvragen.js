@@ -9,7 +9,6 @@ jQuery(document).ready(function($) {
     });
     $('#koopsom').change(function(){
         berekenHypotheekBedrag();
-        verbergOfToonNhgOptie();
     });
     $('#notaris').change(function(){
         berekenHypotheekBedrag();
@@ -19,6 +18,9 @@ jQuery(document).ready(function($) {
     });
     $('#commissie').change(function(){
         berekenHypotheekBedrag();
+    });
+    $('#benodigdehypotheek').change(function(){
+        verbergOfToonNhgOptie();
     });
     $('#geboortedatum').change(function(){
         var input = $('#geboortedatum').val();
@@ -45,29 +47,35 @@ jQuery(document).ready(function($) {
         $('#stap2').show();
         
         $('#text-benodigde-hypotheek').html('Benodigd bedrag : ' + maakBedragOp($('#benodigdehypotheek').val()));
-        
-        
     });
     $('#naar-stap3').click(function(){
         $('#stap2').hide();
         $('#stap3').show();
     });
     $('#naar-stap4').click(function(){
-        $('#stap3').hide();
-        $('#stap4').show();
+        if(zijnDeVerplichteVeldenGevuld('stap3')) {
+            $('#stap3').hide();
+            $('#stap4').show();
+        }
     });
     $('#naar-stap5').click(function(){
-        $('#stap4').hide();
-        $('#stap5').show();
+        if(zijnDeVerplichteVeldenGevuld('stap4')) {
+            $('#stap4').hide();
+            $('#stap5').show();
+        }
     });
     $('#naar-stap6').click(function(){
-        $('#stap5').hide();
-        $('#stap6').show();
+        if(zijnDeVerplichteVeldenGevuld('stap5')) {
+            $('#stap5').hide();
+            $('#stap6').show();
+        }
     });
     $('#naar-bevestigen').click(function(){
-        plaatsAllesOpBevestigenScherm();
-        $('#stap6').hide();
-        $('#bevestigen').show();
+        if(zijnDeVerplichteVeldenGevuld('stap6')) {
+            plaatsAllesOpBevestigenScherm();
+            $('#stap6').hide();
+            $('#bevestigen').show();
+        }
     });
     $('#terug-naar-stap1').click(function(){
         $('#stap2').hide();
@@ -132,6 +140,8 @@ jQuery(document).ready(function($) {
     	$.post('../../wp-admin/admin-ajax.php', data, function(response) {
     		console.log('Got this from the server: ' + response);
     	});
+        $('#bevestigen').hide();
+        $('#ontvangen').show();
     });
     // $("input[name='aanbieders_option']").on('change', function() {
     //     console.log('aoijsoijfs');
@@ -288,18 +298,22 @@ jQuery(document).ready(function($) {
         console.log(totaalBedrag);
         
         var nghCommissie = 0;
+        var benodigdehypotheek = $('#benodigdehypotheek').val();
         if($('#nhg').is(':checked')) {
-            var nghCommissie = totaalBedrag * 0.01;
+            var nghCommissie = benodigdehypotheek * 0.01;
         }
         
         $('#nhgkosten').val(nghCommissie);
-        $('#benodigdehypotheek').val(nghCommissie + totaalBedrag);
+        if(benodigdehypotheek != '' || isNaN(parseInt(benodigdehypotheek)) || parseInt(benodigdehypotheek) > 0) {
+            $('#benodigdehypotheek').val(nghCommissie + totaalBedrag);
+            verbergOfToonNhgOptie();
+        }
     }
     
     function verbergOfToonNhgOptie(){
-        var koopsom = parseInt($('#koopsom').val());
+        var benodigdehypotheek = parseInt($('#benodigdehypotheek').val());
         
-        if(koopsom > 247500) {
+        if(benodigdehypotheek > 247500) {
             $('#nhg-vraag').hide();
             $('#nhg').prop('checked', false);
         } else {
@@ -352,9 +366,52 @@ jQuery(document).ready(function($) {
 	    if(tekst != null && tekst != '' && tekst != '0'  && tekst != '\u20AC 0,00') {
 	        element.show();
             element.text(voorTekst + tekst);
-            $('#tekst-mail').append(voorTekst + tekst + '<br />');
+            $('#tekst-mail').append(voorTekst + tekst + '\n');
 	    } else {
 	        element.hide();
 	    }
+	}
+	
+	function zijnDeVerplichteVeldenGevuld(stap) {
+	    var allesGevuld = false;
+	    if(stap === 'stap3') {
+	        var postcode = $('#postcode').val();
+	        var huisnummer = $('#huisnummer').val();
+	        var emailadres = $('#emailadres').val();
+	        
+	        allesGevuld = isVeldGevuld(postcode) && isVeldGevuld(huisnummer) && isVeldGevuld(emailadres);
+	    } else if (stap === 'stap4') {
+            var bsn = $('#bsn').val();
+            var documentnummer = $('#documentnummer').val();
+            var datumgeldigheid = $('#datumgeldigheid').val();
+            var gemeente = $('#gemeente').val();
+            var geboorteplaats = $('#geboorteplaats').val();
+            
+	        allesGevuld = isVeldGevuld(bsn) && isVeldGevuld(documentnummer) && isVeldGevuld(datumgeldigheid) && isVeldGevuld(gemeente) && isVeldGevuld(geboorteplaats);
+	    } else if (stap === 'stap5') {
+            var iban = $('#iban').val();
+            
+	        allesGevuld = isVeldGevuld(iban);
+	    } else if (stap === 'stap6') {
+            var beroep = $('#beroep').val();
+            var datumindiensttreding = $('#datumindiensttreding').val();
+            var einddatumcontract = $('#einddatumcontract').val();
+            var naamwerkgever = $('#naamwerkgever').val();
+            var postcodewerkgever = $('#postcodewerkgever').val();
+            var huisnummerwerkgever = $('#huisnummerwerkgever').val();
+
+	        allesGevuld = isVeldGevuld(beroep) && isVeldGevuld(datumindiensttreding) && isVeldGevuld(einddatumcontract) && isVeldGevuld(naamwerkgever) && isVeldGevuld(postcodewerkgever) && isVeldGevuld(huisnummerwerkgever);
+	    }
+	    
+	    if(allesGevuld) {
+	        $('#foutmelding-niet-alles-gevuld').hide();
+	    } else {
+	        $('#foutmelding-niet-alles-gevuld').show();
+	    }
+	    return allesGevuld;
+	}
+	
+	function isVeldGevuld(tekst) {
+	    return tekst != null && tekst != '';
 	}
 });
