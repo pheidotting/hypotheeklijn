@@ -21,6 +21,7 @@ jQuery(document).ready(function($) {
     });
     $('#benodigdehypotheek').change(function(){
         verbergOfToonNhgOptie();
+        berekenEigenMiddelen();
     });
     $('#geboortedatum').change(function(){
         var input = $('#geboortedatum').val();
@@ -183,17 +184,20 @@ jQuery(document).ready(function($) {
             $('#resultaat').show();
             $('#result').text(maakBedragOp(maxHypotheek));
             $('#max-hypotheek').text(maxHypotheek);
-            
-            var benodigd = parseInt($('#benodigdehypotheek').val());
-            var eigenmiddelen = benodigd - maxHypotheek;
-            
-            if(eigenmiddelen > 0) {
-                $('#eigen-middelen').show();
-                $('#eigen-middelen-bedrag').text(maakBedragOp(eigenmiddelen));
-            }
         }
-
-
+    }
+    
+    function berekenEigenMiddelen() {
+        var maxHypotheek = parseInt($('#max-hypotheek').html());
+        var benodigd = parseInt($('#benodigdehypotheek').val());
+        var eigenmiddelen = benodigd - maxHypotheek;
+        
+        if(eigenmiddelen > 0) {
+            $('#eigen-middelen').show();
+            $('#eigen-middelen-bedrag').text(maakBedragOp(eigenmiddelen));
+        } else {
+            $('#eigen-middelen').hide();
+        }
     }
     
     function ophalenAdres(postcode, huisnummer) {
@@ -308,6 +312,7 @@ jQuery(document).ready(function($) {
             $('#benodigdehypotheek').val(nghCommissie + totaalBedrag);
             verbergOfToonNhgOptie();
         }
+        berekenEigenMiddelen();
     }
     
     function verbergOfToonNhgOptie(){
@@ -345,62 +350,65 @@ jQuery(document).ready(function($) {
 	function plaatsAllesOpBevestigenScherm(){
 	    $('#tekst-mail').text('');
 	    
-        zetTekst('Koopsom van het huis : ', maakBedragOp($('#koopsom').val()), $('#koopsom-output'));
-        zetTekst('Overdrachtsbelasting : ', maakBedragOp($('#overdrachtsbelasting').val()), $('#overdrachtsbelasting-output'));
-        zetTekst('Kosten leveringsakte notaris : ', maakBedragOp($('#leveringsakte-notaris').val()), $('#leveringsakte-notaris-output'));
-        zetTekst('Kosten hypotheekakte notaris : ', maakBedragOp($('#hypotheekakte-notaris').val()), $('#hypotheekakte-notaris-output'));
-        zetTekst('Kosten taxatie : ', maakBedragOp($('#taxatie').val()), $('#taxatie-output'));
-        zetTekst('Kosten commissie : ', maakBedragOp($('#commissie').val()), $('#commissie-output'));
-        zetTekst('Kosten NHG : ', maakBedragOp($('#nhgkosten').val()), $('#nhgkosten-output'));
-        zetTekst('Hoeveel hypotheek ben je nodig : ', maakBedragOp($('#benodigdehypotheek').val()), $('#benodigdehypotheek-output'));
-        zetTekst('Je maximale hypotheek is : ', maakBedragOp($('#result').html()), $('#maximale-hypotheek-output'));
-        zetTekst('Dat betekent dat je als eigen middelen moet inbrengen : ', $('#eigen-middelen-bedrag').html(), $('#eigen-middelen-bedrag-output'));
+	    var teksten = [];
+	    teksten.push(zetTekst('Koopsom van het huis', maakBedragOp($('#koopsom').val())));
+        teksten.push(zetTekst('Overdrachtsbelasting', maakBedragOp($('#overdrachtsbelasting').val())));
+        teksten.push(zetTekst('Kosten leveringsakte notaris', maakBedragOp($('#leveringsakte-notaris').val())));
+        teksten.push(zetTekst('Kosten hypotheekakte notaris', maakBedragOp($('#hypotheekakte-notaris').val())));
+        teksten.push(zetTekst('Kosten taxatie', maakBedragOp($('#taxatie').val())));
+        teksten.push(zetTekst('Kosten commissie', maakBedragOp($('#commissie').val())));
+        teksten.push(zetTekst('Kosten NHG', maakBedragOp($('#nhgkosten').val())));
+        teksten.push(zetTekst('Hoeveel hypotheek ben je nodig', maakBedragOp($('#benodigdehypotheek').val())));
+        teksten.push(zetTekst('Je maximale hypotheek is', $('#result').html()));
+        teksten.push(zetTekst('Dat betekent dat je als eigen middelen moet inbrengen', $('#eigen-middelen-bedrag').html()));
 
-        zetTekst('Je bruto jaarloon : ', maakBedragOp($('#brutoloon').val()), $('#brutoloon-output'));
-        zetTekst('Je geboortedatum : ', $('#geboortedatum').val(), $('#geboortedatum-output'));
+        teksten.push(zetTekst('Je bruto jaarloon', maakBedragOp($('#brutoloon').val())));
+        teksten.push(zetTekst('Je geboortedatum', $('#geboortedatum').val()));
 
-
+        var tekst = '';
+        $.each(teksten, function(i, t) {
+            tekst = tekst + t;
+        });
+        
+        $('#tekst-mail').html('<table>' + tekst + '</table>');
+        $('#tekst-mail').show();
 	}
 	
-	function zetTekst(voorTekst, tekst, element) {
+	function zetTekst(voorTekst, tekst) {
 	    if(tekst != null && tekst != '' && tekst != '0'  && tekst != '\u20AC 0,00') {
-	        element.show();
-            element.text(voorTekst + tekst);
-            $('#tekst-mail').append(voorTekst + tekst + '\n');
-	    } else {
-	        element.hide();
+	       return '<tr><td>' + voorTekst + '</td><td>' + tekst + '</td></tr>';
 	    }
 	}
 	
 	function zijnDeVerplichteVeldenGevuld(stap) {
 	    var allesGevuld = false;
 	    if(stap === 'stap3') {
-	        var postcode = $('#postcode').val();
-	        var huisnummer = $('#huisnummer').val();
-	        var emailadres = $('#emailadres').val();
+	        var postcode = isVeldGevuldEnVeranderRand($('#postcode'));
+	        var huisnummer = isVeldGevuldEnVeranderRand($('#huisnummer'));
+	        var emailadres = isVeldGevuldEnVeranderRand($('#emailadres'));
 	        
-	        allesGevuld = isVeldGevuld(postcode) && isVeldGevuld(huisnummer) && isVeldGevuld(emailadres);
+	        allesGevuld = postcode && huisnummer && emailadres;
 	    } else if (stap === 'stap4') {
-            var bsn = $('#bsn').val();
-            var documentnummer = $('#documentnummer').val();
-            var datumgeldigheid = $('#datumgeldigheid').val();
-            var gemeente = $('#gemeente').val();
-            var geboorteplaats = $('#geboorteplaats').val();
+            var bsn = isVeldGevuldEnVeranderRand($('#bsn'));
+            var documentnummer = isVeldGevuldEnVeranderRand($('#documentnummer'));
+            var datumgeldigheid = isVeldGevuldEnVeranderRand($('#datumgeldigheid'));
+            var gemeente = isVeldGevuldEnVeranderRand($('#gemeente'));
+            var geboorteplaats = isVeldGevuldEnVeranderRand($('#geboorteplaats'));
             
-	        allesGevuld = isVeldGevuld(bsn) && isVeldGevuld(documentnummer) && isVeldGevuld(datumgeldigheid) && isVeldGevuld(gemeente) && isVeldGevuld(geboorteplaats);
+	        allesGevuld = bsn && documentnummer && datumgeldigheid && gemeente && geboorteplaats;
 	    } else if (stap === 'stap5') {
-            var iban = $('#iban').val();
+            var iban = isVeldGevuldEnVeranderRand($('#iban'));
             
-	        allesGevuld = isVeldGevuld(iban);
+	        allesGevuld = iban;
 	    } else if (stap === 'stap6') {
-            var beroep = $('#beroep').val();
-            var datumindiensttreding = $('#datumindiensttreding').val();
-            var einddatumcontract = $('#einddatumcontract').val();
-            var naamwerkgever = $('#naamwerkgever').val();
-            var postcodewerkgever = $('#postcodewerkgever').val();
-            var huisnummerwerkgever = $('#huisnummerwerkgever').val();
+            var beroep = isVeldGevuldEnVeranderRand($('#beroep'));
+            var datumindiensttreding = isVeldGevuldEnVeranderRand($('#datumindiensttreding'));
+            var einddatumcontract = isVeldGevuldEnVeranderRand($('#einddatumcontract'));
+            var naamwerkgever = isVeldGevuldEnVeranderRand($('#naamwerkgever'));
+            var postcodewerkgever = isVeldGevuldEnVeranderRand($('#postcodewerkgever'));
+            var huisnummerwerkgever = isVeldGevuldEnVeranderRand($('#huisnummerwerkgever'));
 
-	        allesGevuld = isVeldGevuld(beroep) && isVeldGevuld(datumindiensttreding) && isVeldGevuld(einddatumcontract) && isVeldGevuld(naamwerkgever) && isVeldGevuld(postcodewerkgever) && isVeldGevuld(huisnummerwerkgever);
+	        allesGevuld = beroep && datumindiensttreding && einddatumcontract && naamwerkgever && postcodewerkgever && huisnummerwerkgever;
 	    }
 	    
 	    if(allesGevuld) {
@@ -413,5 +421,15 @@ jQuery(document).ready(function($) {
 	
 	function isVeldGevuld(tekst) {
 	    return tekst != null && tekst != '';
+	}
+	
+	function isVeldGevuldEnVeranderRand(element) {
+	    if(isVeldGevuld(element.val())) {
+    	    element.css('border', '1px solid #bbb');
+    	    return true;
+	    } else {
+    	    element.css('border', '1px solid #ff0000');
+    	    return false;
+	    }
 	}
 });

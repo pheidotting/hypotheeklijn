@@ -117,9 +117,8 @@ function form_creation_aanvragen() {
         
         <button id="opvragen">Opvragen</button>
         
-        <div id="text-benodigde-hypotheek"></div>
         <div id="resultaat" style="display:none;">Je maximale hypotheek is : <span id="result"></span></div>
-        <div id="eigen-middelen" style="display:none;">Dat betekent dat je als eigen middelen moet inbrengen : <span id="eigen-middelen-bedrag"></span></div>
+        <div id="max-hypotheek" style="display:none;">0</div>
         
         <!--<div id="debug"></div>-->
         
@@ -154,6 +153,10 @@ function form_creation_aanvragen() {
 
         <label for="benodigdehypotheek">Hoeveel hypotheek ben je nodig</label><input type="number" id="benodigdehypotheek" />
     
+        <!--<div id="text-benodigde-hypotheek"></div>-->
+        <div id="resultaat" style="display:none;">Je maximale hypotheek is : <span id="result"></span></div>
+        <div id="eigen-middelen" style="display:none;">Dat betekent dat je als eigen middelen moet inbrengen : <span id="eigen-middelen-bedrag"></span></div>
+
         <!--<h3>Hypotheekvorm</h3>-->
         <!--<input type="radio" id="annuiteiten" name="hypotheekvorm">Annuiteiten-->
         <!--<input type="radio" id="lineair" name="hypotheekvorm">Lineair-->
@@ -209,24 +212,10 @@ function form_creation_aanvragen() {
         <button id="naar-bevestigen">Naar stap 7</button>
     </div>
     <div id="bevestigen" style="display:none;">
-        <div id="koopsom-output"></div>
-        <div id="overdrachtsbelasting-output"></div>
-        <div id="leveringsakte-notaris-output"></div>
-        <div id="hypotheekakte-notaris-output"></div>
-        <div id="taxatie-output"></div>
-        <div id="commissie-output"></div>
-        <div id="nhgkosten-output"></div>
-        <div id="benodigdehypotheek-output"></div>
-        <div id="maximale-hypotheek-output"></div>
-        <div id="eigen-middelen-bedrag-output"></div>
-        <br />
-        <div id="brutoloon-output"></div>
-        <div id="geboortedatum-output"></div>
-        <br />
+        <div id="tekst-mail" style="display:none;"></div>
 
         <button id="terug-naar-stap6">Terug</button>
         <button id="aanvragen">Aanvragen</button>
-        <div id="tekst-mail" style="display:none;"></div>
     </div>
     <div id="ontvangen" style="display:none;">
         We hebben uw aanvraag ontvangen.
@@ -238,7 +227,7 @@ function form_creation_aanvragen() {
 }
 
 function verzamel_gegevens_en_verstuur_mail() {
-    wp_mail('patrick@heidotting.nl', 'Nieuwe aanvraag', $_POST['mail-tekst']);
+    wp_mail('gerben@dejongefinancieelconsult.nl', 'Nieuwe aanvraag', $_POST['mail-tekst']);
 }
 add_shortcode('max-hypotheek-berekenen', 'form_creation_max_hypotheek');
 add_shortcode('hypotheek-aanvragen', 'form_creation_aanvragen');
