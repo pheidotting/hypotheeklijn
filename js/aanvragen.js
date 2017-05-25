@@ -50,8 +50,10 @@ jQuery(document).ready(function($) {
         $('#text-benodigde-hypotheek').html('Benodigd bedrag : ' + maakBedragOp($('#benodigdehypotheek').val()));
     });
     $('#naar-stap3').click(function(){
-        $('#stap2').hide();
-        $('#stap3').show();
+        if(zijnDeVerplichteVeldenGevuld('stap2')) {
+            $('#stap2').hide();
+            $('#stap3').show();
+        }
     });
     $('#naar-stap4').click(function(){
         if(zijnDeVerplichteVeldenGevuld('stap3')) {
@@ -131,7 +133,9 @@ jQuery(document).ready(function($) {
         });
     });
     $('#opvragen').click(function(){
-        hoogteHypotheek(null);
+        if(zijnDeVerplichteVeldenGevuld('stap1')) {
+            hoogteHypotheek(null);
+        }
     });
     $('#aanvragen').click(function(){
         var data = {
@@ -333,7 +337,17 @@ jQuery(document).ready(function($) {
 	
 	function zijnDeVerplichteVeldenGevuld(stap) {
 	    var allesGevuld = false;
-	    if(stap === 'stap3') {
+	    if(stap === 'stap1') {
+	        var brutoloon = isVeldGevuldEnVeranderRand($('#brutoloon'));
+	        var geboortedatum = isVeldGevuldEnVeranderRand($('#geboortedatum'));
+	        
+	        allesGevuld = brutoloon && geboortedatum;
+	    } else if (stap === 'stap2') {
+	        var koopsom = isVeldGevuldEnVeranderRand($('#koopsom'));
+	        var benodigdehypotheek = isVeldGevuldEnVeranderRand($('#benodigdehypotheek'));
+	        
+	        allesGevuld = koopsom && benodigdehypotheek;
+	    } else if (stap === 'stap3') {
 	        var postcode = isVeldGevuldEnVeranderRand($('#postcode'));
 	        var huisnummer = isVeldGevuldEnVeranderRand($('#huisnummer'));
 	        var emailadres = isVeldGevuldEnVeranderRand($('#emailadres'));
