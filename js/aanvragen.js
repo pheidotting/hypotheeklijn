@@ -148,6 +148,15 @@ jQuery(document).ready(function($) {
         $('#bevestigen').hide();
         $('#ontvangen').show();
     });
+    $('#iban').change(function() {
+        var rek = $('#iban').val().toUpperCase();
+
+        if(rek !== undefined && rek.length === 18) {
+            rek = rek.substring(0, 4) + " " +rek.substring(4, 8) + " " +rek.substring(8, 12) + " " +rek.substring(12, 16) + " " +rek.substring(16, 18);
+        }
+
+        $('#iban').val(rek);
+    });
 
     var api_key = '&api_key=TEST-KEY!-1943-4518-95ca-ec025e6f79b';
     var url = 'https://testapi.hypotheekbond.nl';

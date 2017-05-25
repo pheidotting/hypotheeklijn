@@ -192,7 +192,7 @@ function form_creation_aanvragen() {
     </div>
     <div id="stap5" style="display:none;">
         <h3>Betaal gegevens</h3>
-        <label for="iban">Iban</label><input type="text" id="iban" />
+        <label for="iban">Iban</label><input type="text" id="iban" maxlength="18" />
     
         <button id="terug-naar-stap4">Terug</button>
         <button id="naar-stap6">Naar stap 6</button>
