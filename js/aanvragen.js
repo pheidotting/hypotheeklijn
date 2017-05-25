@@ -199,25 +199,11 @@ jQuery(document).ready(function($) {
     
     function ophalenAdres(postcode, huisnummer) {
         var deferred = $.Deferred();
-        
-        if(postcode != null && postcode != '' && huisnummer != null && huisnummer != '') {
-            $.get(url + '/address/v1/address?postalcode=' + postcode + '&housenumber=' + huisnummer + api_key, null ,function(result){
-                if(result.data.length > 0) {
-                    return deferred.resolve({
-                        straat: result.data[0].street,
-                        plaats: result.data[0].city,
-                        postcode: result.data[0].postalcode
-                    });
-                }
-            });
-        } else {
-            return deferred.resolve({
-                straat: '',
-                plaats: '',
-                postcode: postcode
-            });
-        }
-        
+
+        ophalenAdresCall(postcode, huisnummer).done(function(result){
+            return deferred.resolve(result);
+        });
+    
         return deferred.promise();
     }
     
