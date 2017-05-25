@@ -124,7 +124,7 @@ function form_creation_aanvragen() {
         
         <div id="aanbieders"></div>
     
-        <button id="naar-stap2">Naar stap 2</button>
+        <button id="naar-stap2" disabled>Naar stap 2</button>
     </div>
     <div id="stap2" style="display:none;">
         <!--<h3>Persoonlijke gegevens</h3>-->

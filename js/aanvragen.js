@@ -144,12 +144,7 @@ jQuery(document).ready(function($) {
         $('#bevestigen').hide();
         $('#ontvangen').show();
     });
-    // $("input[name='aanbieders_option']").on('change', function() {
-    //     console.log('aoijsoijfs');
-    //     _.each($("input[name='aanbieders_option']"), function(element) {
-    //         console.log(element.is(':checked'));
-    //     });
-    // });
+
     var api_key = '&api_key=TEST-KEY!-1943-4518-95ca-ec025e6f79b';
     var url = 'https://testapi.hypotheekbond.nl';
     
@@ -184,6 +179,8 @@ jQuery(document).ready(function($) {
             $('#resultaat').show();
             $('#result').text(maakBedragOp(maxHypotheek));
             $('#max-hypotheek').text(maxHypotheek);
+            
+            $('#naar-stap2').prop('disabled', false);
         }
     }
     
