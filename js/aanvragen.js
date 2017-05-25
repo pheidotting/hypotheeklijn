@@ -216,7 +216,6 @@ jQuery(document).ready(function($) {
         ophalenRentepercentages(nhg).done(function(percentage) {
             console.log(percentage);
             
-            
             var elements = [];
             _.each(percentage, function(p){
                 var currentElement = $('<input type="radio" name="aanbieders_option" value="' + p.bank + ' - ' + p.percentage + '">');
