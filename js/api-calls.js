@@ -153,3 +153,47 @@ function ophalenAdresCall(postcode, huisnummer) {
     
     return deferred.promise();
 }
+
+function ophalenRentepercentages(blnNhg) {
+    var deferred = $.Deferred();
+    var nhg = '';
+    if(blnNhg) {
+        nhg = '&ngh=true';
+    }
+
+    $.get(url + '/interest/v1/interest-rates?limit=999' + nhg + api_key, null ,function(result){
+        console.log(result);
+        console.log('ophalen rentepercentages');
+        
+        var i = 0;
+        var percentage = _.chain(result.data)
+        .sortBy('percentage')
+        .filter(function(data) {
+            if(nhg) {
+                return data.nhg;
+            } else {
+                return true;
+            }
+        })
+        .filter(function(data) {
+            return data.code === "nieuw";
+        })
+        // .filter(function(data) {
+        //     return data.productId == 582;
+        // })
+        // .each(function(a) {
+        //     console.log(a);
+        // })
+        .map(function(rente) {
+            return {
+                percentage: rente.percentage,
+                bank: rente.providerName
+            };
+        })
+        .value();
+        
+        return deferred.resolve(percentage);
+    });
+    
+    return deferred.promise();
+}

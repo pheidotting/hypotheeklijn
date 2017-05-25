@@ -208,43 +208,12 @@ jQuery(document).ready(function($) {
     }
     
 	function opvragenRentepercentages() {
-	    var nhg = '';
+	    var nhg = false;
         if($('#nhg').is(':checked')) {
-            nhg = '&ngh=true';
+            nhg = true;
         }
 
-        $.get(url + '/interest/v1/interest-rates?limit=999' + nhg + api_key, null ,function(result){
-            console.log(result);
-            console.log('ophalen rentepercentages');
-            
-            var i = 0;
-            var percentage = _.chain(result.data)
-            .sortBy('percentage')
-            .filter(function(data) {
-                if(nhg) {
-                    return data.nhg;
-                } else {
-                    return true;
-                }
-            })
-            .filter(function(data) {
-                return data.code === "nieuw";
-            })
-            // .filter(function(data) {
-            //     return data.productId == 582;
-            // })
-            // .each(function(a) {
-            //     console.log(a);
-            // })
-            .map(function(rente) {
-                return {
-                    percentage: rente.percentage,
-                    bank: rente.providerName
-                };
-            })
-            .value();
-
-
+        ophalenRentepercentages(nhg).done(function(percentage) {
             console.log(percentage);
             
             
