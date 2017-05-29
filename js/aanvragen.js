@@ -7,6 +7,41 @@ jQuery(document).ready(function($) {
             $('#metPartner').hide();
         }
     });
+    $('#studieschuld').click(function(){
+        if($('#studieschuld').is(':checked')) {
+            $('#hoeveelstudieschuldDiv').show();
+        } else {
+            $('#hoeveelstudieschuldDiv').hide();
+        }
+    });
+    $('#roodstaan').click(function(){
+        if($('#roodstaan').is(':checked')) {
+            $('#hoeveelroodstaanDiv').show();
+        } else {
+            $('#hoeveelroodstaanDiv').hide();
+        }
+    });
+    $('#creditcard').click(function(){
+        if($('#creditcard').is(':checked')) {
+            $('#hoeveelcreditcardDiv').show();
+        } else {
+            $('#hoeveelcreditcardDiv').hide();
+        }
+    });
+    $('#partneralimentatie').click(function(){
+        if($('#partneralimentatie').is(':checked')) {
+            $('#hoeveelpartneralimentatieDiv').show();
+        } else {
+            $('#hoeveelpartneralimentatieDiv').hide();
+        }
+    });
+    $('#overigeleningen').click(function(){
+        if($('#overigeleningen').is(':checked')) {
+            $('#hoeveeloverigeleningenDiv').show();
+        } else {
+            $('#hoeveeloverigeleningenDiv').hide();
+        }
+    });
     $('#koopsom').change(function(){
         berekenHypotheekBedrag();
     });
@@ -33,6 +68,17 @@ jQuery(document).ready(function($) {
         }
         
         $('#geboortedatum').val(geboortedatum.format('DD-MM-YYYY'));
+    });
+    $('#geboortedatumpartner').change(function(){
+        var input = $('#geboortedatumpartner').val();
+        
+        geboortedatum = moment(input, 'DD-MM-YYYY');
+        
+        if(!geboortedatum._isValid) {
+            $('#geboortedatumpartner').val('');
+        }
+        
+        $('#geboortedatumpartner').val(geboortedatum.format('DD-MM-YYYY'));
     });
     $('#nhg').click(function(){
         if($('#nhg').is(':checked')) {
@@ -350,7 +396,40 @@ jQuery(document).ready(function($) {
 	        var brutoloon = isVeldGevuldEnVeranderRand($('#brutoloon'));
 	        var geboortedatum = isVeldGevuldEnVeranderRand($('#geboortedatum'));
 	        
-	        allesGevuld = brutoloon && geboortedatum;
+	        var partnerOk = true;
+            if($('#partner').is(':checked')) {
+                var brutoloonpartner = isVeldGevuldEnVeranderRand($('#brutoloonpartner'));
+                var geboortedatumpartner = isVeldGevuldEnVeranderRand($('#geboortedatumpartner'));
+                
+                partnerOk = brutoloonpartner && geboortedatumpartner;
+            }
+            
+            var studieschuldOk = true;
+            if($('#studieschuld').is(':checked')) {
+                studieschuldOk = isVeldGevuldEnVeranderRand($('#hoeveelstudieschuld'));
+            }
+            
+            var roodstaanOk = true;
+            if($('#roodstaan').is(':checked')) {
+                roodstaanOk = isVeldGevuldEnVeranderRand($('#hoeveelroodstaan'));
+            }
+            
+            var creditcardOk = true;
+            if($('#creditcard').is(':checked')) {
+                creditcardOk = isVeldGevuldEnVeranderRand($('#hoeveelcreditcard'));
+            }
+            
+            var partneralimentatieOk = true;
+            if($('#partneralimentatie').is(':checked')) {
+                partneralimentatieOk = isVeldGevuldEnVeranderRand($('#hoeveelpartneralimentatie'));
+            }
+            
+            var overigeleningenOk = true;
+            if($('#overigeleningen').is(':checked')) {
+                overigeleningenOk = isVeldGevuldEnVeranderRand($('#hoeveeloverigeleningen'));
+            }
+	        
+	        allesGevuld = brutoloon && geboortedatum && partnerOk && studieschuldOk && roodstaanOk && creditcardOk && partneralimentatieOk && overigeleningenOk;
 	    } else if (stap === 'stap2') {
 	        var koopsom = isVeldGevuldEnVeranderRand($('#koopsom'));
 	        var benodigdehypotheek = isVeldGevuldEnVeranderRand($('#benodigdehypotheek'));

@@ -48,6 +48,7 @@ function ophalenMaxHoogteHypotheek(ophalenHoogteModel, callback){
     
     if(allesGevuld) {
         ophalenHoogteModel.geboortedatum = moment(ophalenHoogteModel.geboortedatum, 'DD-MM-YYYY').format('YYYY-MM-DD');
+        ophalenHoogteModel.geboortedatumpartner = moment(ophalenHoogteModel.geboortedatumpartner, 'DD-MM-YYYY').format('YYYY-MM-DD');
         console.log('Eerst de rentepercentages opvragen');
         $.get(url + '/interest/v1/interest-rates?bestInterestOnly=false&sortBy=percentage&sortDirection=ASC&limit=25' + api_key, null ,function(result){
             
