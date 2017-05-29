@@ -3,29 +3,7 @@ var url = 'https://testapi.hypotheekbond.nl';
 var $ = jQuery;
 
 function ophalenMaxHoogteHypotheek(ophalenHoogteModel, callback){
-    // console.log($('#geboortedatum').val());
     console.log('Start opvragen maximale hypotheek'); 
-    
-    // var loan = $('#loan').val();
-    // var vakantiegeld = $('#vakantiegeld').is(':checked');
-    // var dertiendemaand = $('#dertiendemaand').is(':checked');
-
-    // var partner = $('#partner').is(':checked');
-    // var brutoloon = $('#brutoloon').val();
-    // // var ondernemer = $('#ondernemer').is(':checked');
-    // var geboortedatum = $('#geboortedatum').val();
-    // var brutoloonpartner = $('#brutoloonpartner').val();
-    // var geboortedatumpartner = $('#geboortedatumpartner').val();
-    // var studieschuld = $('#studieschuld').is(':checked');
-    // var hoeveelstudieschuld = $('#hoeveelstudieschuld').val();
-    // var roodstaan = $('#roodstaan').is(':checked');
-    // var hoeveelroodstaan = $('#hoeveelroodstaan').val();
-    // var creditcard = $('#creditcard').is(':checked');
-    // var hoeveelcreditcard = $('#hoeveelcreditcard').val();
-    // var partneralimentatie = $('#partneralimentatie').is(':checked');
-    // var hoeveelpartneralimentatie = $('#hoeveelpartneralimentatie').val();
-    // var overigeleningen = $('#overigeleningen').is(':checked');
-    // var hoeveeloverigeleningen = $('#hoeveeloverigeleningen').val();
     
     $('#foutmelding-niet-alles-gevuld').hide();
 
