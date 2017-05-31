@@ -122,7 +122,7 @@ function form_creation_aanvragen() {
         
         <div id="aanbieders"></div>
     
-        <input type="submit" class="button-primary" id="naar-stap2" value="Naar stap 2" />
+        <input type="submit" class="button-primary" id="naar-stap2" disabled value="Naar stap 2" />
     </div>
     <div id="stap2" style="display:none;">
         <div id="max-hypotheek" style="display:none;">0</div>
