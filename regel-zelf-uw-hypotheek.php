@@ -227,7 +227,13 @@ function form_creation_aanvragen() {
 }
 
 function verzamel_gegevens_en_verstuur_mail() {
-    wp_mail('gerben@dejongefinancieelconsult.nl', 'Nieuwe aanvraag', $_POST['mail-tekst']);
+    function wpse27856_set_content_type(){
+        return "text/html";
+    }
+    add_filter( 'wp_mail_content_type','wpse27856_set_content_type' );
+
+    // wp_mail('gerben@dejongefinancieelconsult.nl', 'Nieuwe aanvraag', $_POST['mail-tekst']);
+    wp_mail('patrick@heidotting.nl', 'Nieuwe aanvraag', $_POST['mail-tekst']);
 }
 add_shortcode('max-hypotheek-berekenen', 'form_creation_max_hypotheek');
 add_shortcode('hypotheek-aanvragen', 'form_creation_aanvragen');

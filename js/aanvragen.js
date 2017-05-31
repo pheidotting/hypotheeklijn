@@ -358,6 +358,48 @@ jQuery(document).ready(function($) {
 	    $('#tekst-mail').text('');
 	    
 	    var teksten = [];
+	    //Stap 1
+        teksten.push(zetTekst('Je bruto jaarloon', maakBedragOp($('#brutoloon').val())));
+        teksten.push(zetTekst('Je geboortedatum', $('#geboortedatum').val()));
+
+        var metPartner = $('#partner').is(':checked') ? 'Ja' : 'Nee';
+        teksten.push(zetTekst('Met partner : ', metPartner));
+        if(metPartner === 'Ja') {
+            teksten.push(zetTekst('Bruto jaarloon van je partner : ', maakBedragOp($('#brutoloonpartner').val())));
+            teksten.push(zetTekst('Geboortedatum van je partner : ', $('#geboortedatumpartner').val()));
+        }
+
+        var studieschuld = $('#studieschuld').is(':checked') ? 'Ja' : 'Nee';
+        teksten.push(zetTekst('Heb je een studieschuld?', studieschuld));
+        if(studieschuld === 'Ja') {
+            teksten.push(zetTekst('Hoeveel studieschuld : ', maakBedragOp($('#hoeveelstudieschuld').val())));
+        }
+
+        var roodstaan = $('#roodstaan').is(':checked') ? 'Ja' : 'Nee';
+        teksten.push(zetTekst('Mag je rood staan?', roodstaan));
+        if(roodstaan === 'Ja') {
+            teksten.push(zetTekst('Hoeveel mag je roodstaan : ', maakBedragOp($('#hoeveelroodstaan').val())));
+        }
+
+        var creditcard = $('#creditcard').is(':checked') ? 'Ja' : 'Nee';
+        teksten.push(zetTekst('Heb je een creditcard?', creditcard));
+        if(creditcard === 'Ja') {
+            teksten.push(zetTekst('Wat is de limiet : ', maakBedragOp($('#hoeveelcreditcard').val())));
+        }
+
+        var partneralimentatie = $('#partneralimentatie').is(':checked') ? 'Ja' : 'Nee';
+        teksten.push(zetTekst('Betaal je partneralimentatie?', partneralimentatie));
+        if(partneralimentatie === 'Ja') {
+            teksten.push(zetTekst('Hoeveel betaal je aan partneralimentatie : ', maakBedragOp($('#hoeveelpartneralimentatie').val())));
+        }
+
+        var overigeleningen = $('#overigeleningen').is(':checked') ? 'Ja' : 'Nee';
+        teksten.push(zetTekst('Heb je overige leningen of kredieten?', overigeleningen));
+        if(overigeleningen === 'Ja') {
+            teksten.push(zetTekst('Hoeveel : ', maakBedragOp($('#hoeveeloverigeleningen').val())));
+        }
+
+        //Stap 2
 	    teksten.push(zetTekst('Koopsom van het huis', maakBedragOp($('#koopsom').val())));
         teksten.push(zetTekst('Overdrachtsbelasting', maakBedragOp($('#overdrachtsbelasting').val())));
         teksten.push(zetTekst('Kosten leveringsakte notaris', maakBedragOp($('#leveringsakte-notaris').val())));
@@ -365,12 +407,24 @@ jQuery(document).ready(function($) {
         teksten.push(zetTekst('Kosten taxatie', maakBedragOp($('#taxatie').val())));
         teksten.push(zetTekst('Kosten commissie', maakBedragOp($('#commissie').val())));
         teksten.push(zetTekst('Kosten NHG', maakBedragOp($('#nhgkosten').val())));
+        teksten.push(zetTekst('Gekozen aanbieder en rente', $("input[name='aanbieders_option']").val().replace('-', 'met') + '%'));
         teksten.push(zetTekst('Hoeveel hypotheek ben je nodig', maakBedragOp($('#benodigdehypotheek').val())));
         teksten.push(zetTekst('Je maximale hypotheek is', $('#result').html()));
         teksten.push(zetTekst('Dat betekent dat je als eigen middelen moet inbrengen', $('#eigen-middelen-bedrag').html()));
 
-        teksten.push(zetTekst('Je bruto jaarloon', maakBedragOp($('#brutoloon').val())));
-        teksten.push(zetTekst('Je geboortedatum', $('#geboortedatum').val()));
+        //Stap 3
+        teksten.push(zetTekst('Naam', $('#naam').val()));
+        teksten.push(zetTekst('Postcode', $('#postcode').val()));
+        teksten.push(zetTekst('Huisnummer', $('#huisnummer').val()));
+        teksten.push(zetTekst('Adres', $('#straatnaam').val()));
+        teksten.push(zetTekst('Woonplaats', $('#woonplaats').val()));
+        teksten.push(zetTekst('Telefoonnummer', $('#telefoonnummer').val()));
+        teksten.push(zetTekst('E-mail adres', $('#emailadres').val()));
+
+
+
+
+
 
         var tekst = '';
         $.each(teksten, function(i, t) {
