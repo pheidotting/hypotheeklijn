@@ -66,7 +66,7 @@ function form_creation_max_hypotheek(){
     </div>
     
     <div id="foutmelding-niet-alles-gevuld" style="display: none; color:red; font-weight: bold;">Niet alle verplichte velden zijn gevuld</div>
-    <button id="opvragen">Opvragen</button>
+    <input type="submit" class="button-primary" id="opvragen">Opvragen</button>
     
     <div id="resultaat" style="display:none;">Je maximale hypotheek is : <span id="result"></span></div>
     
@@ -115,18 +115,18 @@ function form_creation_aanvragen() {
             <label for="hoeveeloverigeleningen">Hoeveel?</label><input type="number" id="hoeveeloverigeleningen" />
         </div>
         
-        <button id="opvragen">Opvragen</button>
+        <!--<input type="submit" class="button-primary" id="opvragen">Opvragen</button>-->
         
-        <div id="resultaat" style="display:none;">Je maximale hypotheek is : <span id="result"></span></div>
-        <div id="max-hypotheek" style="display:none;">0</div>
         
         <!--<div id="debug"></div>-->
         
         <div id="aanbieders"></div>
     
-        <button id="naar-stap2" disabled>Naar stap 2</button>
+        <input type="submit" class="button-primary" id="naar-stap2" value="Naar stap 2" />
     </div>
     <div id="stap2" style="display:none;">
+        <div id="max-hypotheek" style="display:none;">0</div>
+        <div id="resultaat" style="display:none;">Je maximale hypotheek is : <span id="result"></span></div>
         <!--<h3>Persoonlijke gegevens</h3>-->
         <!--<label for="brutoloon">Je bruto jaarloon</label><input type="number" id="brutoloon" />-->
         <!--<label for="geboortedatum">Je geboortedatum</label><input type="date" id="geboortedatum" />-->
@@ -162,8 +162,8 @@ function form_creation_aanvragen() {
         <!--<input type="radio" id="lineair" name="hypotheekvorm">Lineair-->
         <!--<label for="rentevasteperiode">Rentevaste periode</label><input type="number" id="rentevasteperiode" />-->
     
-        <button id="terug-naar-stap1">Terug</button>
-        <button id="naar-stap3">Naar stap 3</button>
+        <input type="submit" class="button-primary" id="terug-naar-stap1" value="Terug" />
+        <input type="submit" class="button-primary" id="naar-stap3" value="Naar stap 3" />
     </div>
     <div id="stap3" style="display:none;">
         <h3>NAW gegevens</h3>
@@ -176,8 +176,8 @@ function form_creation_aanvragen() {
         <label for="telefoonnummer">Telefoonnummer</label><input type="text" id="telefoonnummer" />
         <label for="emailadres">E-mail adres</label><input type="text" id="emailadres" />
     
-        <button id="terug-naar-stap2">Terug</button>
-        <button id="naar-stap4">Naar stap 4</button>
+        <input type="submit" class="button-primary" id="terug-naar-stap2" value="Terug" />
+        <input type="submit" class="button-primary" id="naar-stap4" value="Naar stap 4" />
     </div>
     <div id="stap4" style="display:none;">
         <h3>ID gegevens</h3>
@@ -187,15 +187,15 @@ function form_creation_aanvragen() {
         <label for="gemeente">Gemeente afgifte identificatie</label><input type="text" id="gemeente" />
         <label for="geboorteplaats">Geboorteplaats</label><input type="text" id="geboorteplaats" />
     
-        <button id="terug-naar-stap3">Terug</button>
-        <button id="naar-stap5">Naar stap 5</button>
+        <input type="submit" class="button-primary" id="terug-naar-stap3" value="Terug" />
+        <input type="submit" class="button-primary" id="naar-stap5" value="Naar stap 5" />
     </div>
     <div id="stap5" style="display:none;">
         <h3>Betaal gegevens</h3>
         <label for="iban">Iban</label><input type="text" id="iban" maxlength="18" />
     
-        <button id="terug-naar-stap4">Terug</button>
-        <button id="naar-stap6">Naar stap 6</button>
+        <input type="submit" class="button-primary" id="terug-naar-stap4" value="Terug" />
+        <input type="submit" class="button-primary" id="naar-stap6" value="Naar stap 6" />
     </div>
     <div id="stap6" style="display:none;">
         <h3>Werk gegevens</h3>
@@ -208,14 +208,14 @@ function form_creation_aanvragen() {
         <label for="straatnaamwerkgever">Straatnaam werkgever</label><input type="text" id="straatnaamwerkgever" />
         <label for="plaatswerkgever">Plaats werkgever</label><input type="text" id="plaatswerkgever" />
 
-        <button id="terug-naar-stap5">Terug</button>
-        <button id="naar-bevestigen">Naar stap 7</button>
+        <input type="submit" class="button-primary" id="terug-naar-stap5" value="Terug" />
+        <input type="submit" class="button-primary" id="naar-bevestigen" value="Naar stap 7" />
     </div>
     <div id="bevestigen" style="display:none;">
         <div id="tekst-mail" style="display:none;"></div>
 
-        <button id="terug-naar-stap6">Terug</button>
-        <button id="aanvragen">Aanvragen</button>
+        <input type="submit" class="button-primary" id="terug-naar-stap6" value="Terug" />
+        <input type="submit" class="button-primary" id="aanvragen" value="Aanvragen" />
     </div>
     <div id="ontvangen" style="display:none;">
         We hebben uw aanvraag ontvangen.

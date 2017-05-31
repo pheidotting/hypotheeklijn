@@ -90,10 +90,14 @@ jQuery(document).ready(function($) {
         opvragenRentepercentages();
     });
     $('#naar-stap2').click(function(){
-        $('#stap1').hide();
-        $('#stap2').show();
-        
-        $('#text-benodigde-hypotheek').html('Benodigd bedrag : ' + maakBedragOp($('#benodigdehypotheek').val()));
+        if(zijnDeVerplichteVeldenGevuld('stap1')) {
+            hoogteHypotheek(null);
+    
+            $('#stap1').hide();
+            $('#stap2').show();
+            
+            $('#text-benodigde-hypotheek').html('Benodigd bedrag : ' + maakBedragOp($('#benodigdehypotheek').val()));
+        }
     });
     $('#naar-stap3').click(function(){
         if(zijnDeVerplichteVeldenGevuld('stap2')) {
@@ -178,11 +182,6 @@ jQuery(document).ready(function($) {
             $('#postcodewerkgever').val(adres.postcode);
         });
     });
-    $('#opvragen').click(function(){
-        if(zijnDeVerplichteVeldenGevuld('stap1')) {
-            hoogteHypotheek(null);
-        }
-    });
     $('#aanvragen').click(function(){
         var data = {
     		'action': 'aanvragen',
@@ -207,7 +206,7 @@ jQuery(document).ready(function($) {
     var api_key = '&api_key=TEST-KEY!-1943-4518-95ca-ec025e6f79b';
     var url = 'https://testapi.hypotheekbond.nl';
     
-    opvragenRentepercentages();
+    // opvragenRentepercentages();
     
     function hoogteHypotheek(percentage){
         var request = {
@@ -273,8 +272,6 @@ jQuery(document).ready(function($) {
         }
 
         ophalenRentepercentages(nhg).done(function(percentage) {
-            console.log(percentage);
-            
             var elements = [];
             _.each(percentage, function(p){
                 var currentElement = $('<input type="radio" name="aanbieders_option" value="' + p.bank + ' - ' + p.percentage + '">');
