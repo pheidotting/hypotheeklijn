@@ -87,7 +87,7 @@ jQuery(document).ready(function($) {
             $('#metNHG').hide();
         }
         berekenHypotheekBedrag();
-        opvragenRentepercentages();
+        // opvragenRentepercentages();
     });
     $('#naar-stap2').click(function(){
         if(zijnDeVerplichteVeldenGevuld('stap1')) {
@@ -357,81 +357,97 @@ jQuery(document).ready(function($) {
 	function plaatsAllesOpBevestigenScherm(){
 	    $('#tekst-mail').text('');
 	    
-	    var teksten = [];
+        var tekst = '<table>';
 	    //Stap 1
-        teksten.push(zetTekst('Je bruto jaarloon', maakBedragOp($('#brutoloon').val())));
-        teksten.push(zetTekst('Je geboortedatum', $('#geboortedatum').val()));
+	    tekst = tekst + zetTekst('Je bruto jaarloon', maakBedragOp($('#brutoloon').val()));
+        tekst = tekst + zetTekst('Je geboortedatum', $('#geboortedatum').val());
 
         var metPartner = $('#partner').is(':checked') ? 'Ja' : 'Nee';
-        teksten.push(zetTekst('Met partner : ', metPartner));
+        tekst = tekst + zetTekst('Met partner : ', metPartner);
         if(metPartner === 'Ja') {
-            teksten.push(zetTekst('Bruto jaarloon van je partner : ', maakBedragOp($('#brutoloonpartner').val())));
-            teksten.push(zetTekst('Geboortedatum van je partner : ', $('#geboortedatumpartner').val()));
+            tekst = tekst + zetTekst('Bruto jaarloon van je partner : ', maakBedragOp($('#brutoloonpartner').val()));
+            tekst = tekst + zetTekst('Geboortedatum van je partner : ', $('#geboortedatumpartner').val());
         }
 
         var studieschuld = $('#studieschuld').is(':checked') ? 'Ja' : 'Nee';
-        teksten.push(zetTekst('Heb je een studieschuld?', studieschuld));
+        tekst = tekst + zetTekst('Heb je een studieschuld?', studieschuld);
         if(studieschuld === 'Ja') {
-            teksten.push(zetTekst('Hoeveel studieschuld : ', maakBedragOp($('#hoeveelstudieschuld').val())));
+            tekst = tekst + zetTekst('Hoeveel studieschuld : ', maakBedragOp($('#hoeveelstudieschuld').val()));
         }
 
         var roodstaan = $('#roodstaan').is(':checked') ? 'Ja' : 'Nee';
-        teksten.push(zetTekst('Mag je rood staan?', roodstaan));
+        tekst = tekst + zetTekst('Mag je rood staan?', roodstaan);
         if(roodstaan === 'Ja') {
-            teksten.push(zetTekst('Hoeveel mag je roodstaan : ', maakBedragOp($('#hoeveelroodstaan').val())));
+            tekst = tekst + zetTekst('Hoeveel mag je roodstaan : ', maakBedragOp($('#hoeveelroodstaan').val()));
         }
 
         var creditcard = $('#creditcard').is(':checked') ? 'Ja' : 'Nee';
-        teksten.push(zetTekst('Heb je een creditcard?', creditcard));
+        tekst = tekst + zetTekst('Heb je een creditcard?', creditcard);
         if(creditcard === 'Ja') {
-            teksten.push(zetTekst('Wat is de limiet : ', maakBedragOp($('#hoeveelcreditcard').val())));
+            tekst = tekst + zetTekst('Wat is de limiet : ', maakBedragOp($('#hoeveelcreditcard').val()));
         }
 
         var partneralimentatie = $('#partneralimentatie').is(':checked') ? 'Ja' : 'Nee';
-        teksten.push(zetTekst('Betaal je partneralimentatie?', partneralimentatie));
+        tekst = tekst + zetTekst('Betaal je partneralimentatie?', partneralimentatie);
         if(partneralimentatie === 'Ja') {
-            teksten.push(zetTekst('Hoeveel betaal je aan partneralimentatie : ', maakBedragOp($('#hoeveelpartneralimentatie').val())));
+            tekst = tekst + zetTekst('Hoeveel betaal je aan partneralimentatie : ', maakBedragOp($('#hoeveelpartneralimentatie').val()));
         }
 
         var overigeleningen = $('#overigeleningen').is(':checked') ? 'Ja' : 'Nee';
-        teksten.push(zetTekst('Heb je overige leningen of kredieten?', overigeleningen));
+        tekst = tekst + zetTekst('Heb je overige leningen of kredieten?', overigeleningen);
         if(overigeleningen === 'Ja') {
-            teksten.push(zetTekst('Hoeveel : ', maakBedragOp($('#hoeveeloverigeleningen').val())));
+            tekst = tekst + zetTekst('Hoeveel : ', maakBedragOp($('#hoeveeloverigeleningen').val()));
         }
 
         //Stap 2
-	    teksten.push(zetTekst('Koopsom van het huis', maakBedragOp($('#koopsom').val())));
-        teksten.push(zetTekst('Overdrachtsbelasting', maakBedragOp($('#overdrachtsbelasting').val())));
-        teksten.push(zetTekst('Kosten leveringsakte notaris', maakBedragOp($('#leveringsakte-notaris').val())));
-        teksten.push(zetTekst('Kosten hypotheekakte notaris', maakBedragOp($('#hypotheekakte-notaris').val())));
-        teksten.push(zetTekst('Kosten taxatie', maakBedragOp($('#taxatie').val())));
-        teksten.push(zetTekst('Kosten commissie', maakBedragOp($('#commissie').val())));
-        teksten.push(zetTekst('Kosten NHG', maakBedragOp($('#nhgkosten').val())));
-        teksten.push(zetTekst('Gekozen aanbieder en rente', $("input[name='aanbieders_option']").val().replace('-', 'met') + '%'));
-        teksten.push(zetTekst('Hoeveel hypotheek ben je nodig', maakBedragOp($('#benodigdehypotheek').val())));
-        teksten.push(zetTekst('Je maximale hypotheek is', $('#result').html()));
-        teksten.push(zetTekst('Dat betekent dat je als eigen middelen moet inbrengen', $('#eigen-middelen-bedrag').html()));
+	    tekst = tekst + zetTekst('Koopsom van het huis', maakBedragOp($('#koopsom').val()));
+        tekst = tekst + zetTekst('Overdrachtsbelasting', maakBedragOp($('#overdrachtsbelasting').val()));
+        tekst = tekst + zetTekst('Kosten leveringsakte notaris', maakBedragOp($('#leveringsakte-notaris').val()));
+        tekst = tekst + zetTekst('Kosten hypotheekakte notaris', maakBedragOp($('#hypotheekakte-notaris').val()));
+        tekst = tekst + zetTekst('Kosten taxatie', maakBedragOp($('#taxatie').val()));
+        tekst = tekst + zetTekst('Kosten commissie', maakBedragOp($('#commissie').val()));
+        tekst = tekst + zetTekst('Kosten NHG', maakBedragOp($('#nhgkosten').val()));
+        tekst = tekst + zetTekst('Gekozen aanbieder en rente', $("input[name='aanbieders_option']").val().replace('-', 'met') + '%');
+        tekst = tekst + zetTekst('Hoeveel hypotheek ben je nodig', maakBedragOp($('#benodigdehypotheek').val()));
+        tekst = tekst + zetTekst('Je maximale hypotheek is', $('#result').html());
+        tekst = tekst + zetTekst('Dat betekent dat je als eigen middelen moet inbrengen', $('#eigen-middelen-bedrag').html());
 
         //Stap 3
-        teksten.push(zetTekst('Naam', $('#naam').val()));
-        teksten.push(zetTekst('Postcode', $('#postcode').val()));
-        teksten.push(zetTekst('Huisnummer', $('#huisnummer').val()));
-        teksten.push(zetTekst('Adres', $('#straatnaam').val()));
-        teksten.push(zetTekst('Woonplaats', $('#woonplaats').val()));
-        teksten.push(zetTekst('Telefoonnummer', $('#telefoonnummer').val()));
-        teksten.push(zetTekst('E-mail adres', $('#emailadres').val()));
+        tekst = tekst + zetTekst('Naam', $('#naam').val());
+        tekst = tekst + zetTekst('Postcode', $('#postcode').val());
+        tekst = tekst + zetTekst('Huisnummer', $('#huisnummer').val());
+        tekst = tekst + zetTekst('Adres', $('#straatnaam').val());
+        tekst = tekst + zetTekst('Woonplaats', $('#woonplaats').val());
+        tekst = tekst + zetTekst('Telefoonnummer', $('#telefoonnummer').val());
+        tekst = tekst + zetTekst('E-mail adres', $('#emailadres').val());
 
+        //Stap 4
+        tekst = tekst + zetTekst('Burgerservicenummer', $('#bsn').val());
+        tekst = tekst + zetTekst('Documentnummer identificatie', $('#documentnummer').val());
+        tekst = tekst + zetTekst('Datum geldigheid identificatie', $('#datumgeldigheid').val());
+        tekst = tekst + zetTekst('Gemeente afgifte identificatie', $('#gemeente').val());
+        tekst = tekst + zetTekst('Geboorteplaats', $('#geboorteplaats').val());
 
+        //Stap 5
+        tekst = tekst + zetTekst('Iban', $('#iban').val());
 
+        //Stap 6
+        tekst = tekst + zetTekst('Beroep/Functie', $('#beroep').val());
+        tekst = tekst + zetTekst('Datum indiensttreding', $('#datumindiensttreding').val());
+        tekst = tekst + zetTekst('Einddatum contract', $('#einddatumcontract').val());
+        tekst = tekst + zetTekst('Naam werkgever', $('#naamwerkgever').val());
+        tekst = tekst + zetTekst('Postcode werkgever', $('#postcodewerkgever').val());
+        tekst = tekst + zetTekst('Huisnummer werkgever', $('#huisnummerwerkgever').val());
+        tekst = tekst + zetTekst('Straatnaam werkgever', $('#straatnaamwerkgever').val());
+        tekst = tekst + zetTekst('Plaats werkgever', $('#plaatswerkgever').val());
 
-
-
-        var tekst = '';
-        $.each(teksten, function(i, t) {
-            tekst = tekst + t;
-        });
+        tekst = tekst + '</table>';
         
-        $('#tekst-mail').html('<table>' + tekst + '</table>');
+        tekst = 'AA' + tekst;
+        
+        console.log(tekst);
+        
+        $('#tekst-mail').html(tekst);
         $('#tekst-mail').show();
 	}
 	
@@ -491,7 +507,7 @@ jQuery(document).ready(function($) {
 	        var huisnummer = isVeldGevuldEnVeranderRand($('#huisnummer'));
 	        var emailadres = isVeldGevuldEnVeranderRand($('#emailadres'));
 	        
-	        allesGevuld = postcode && huisnummer && emailadres;
+	        allesGevuld = postcode && huisnummer;// && emailadres;
 	    } else if (stap === 'stap4') {
             var bsn = isVeldGevuldEnVeranderRand($('#bsn'));
             var documentnummer = isVeldGevuldEnVeranderRand($('#documentnummer'));
