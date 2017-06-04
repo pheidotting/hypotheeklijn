@@ -443,10 +443,6 @@ jQuery(document).ready(function($) {
 
         tekst = tekst + '</table>';
         
-        tekst = 'AA' + tekst;
-        
-        console.log(tekst);
-        
         $('#tekst-mail').html(tekst);
         $('#tekst-mail').show();
 	}
@@ -454,6 +450,8 @@ jQuery(document).ready(function($) {
 	function zetTekst(voorTekst, tekst) {
 	    if(tekst != null && tekst != '' && tekst != '0'  && tekst != '\u20AC 0,00') {
 	       return '<tr><td>' + voorTekst + '</td><td>' + tekst + '</td></tr>';
+	    } else {
+	        return '';
 	    }
 	}
 	
