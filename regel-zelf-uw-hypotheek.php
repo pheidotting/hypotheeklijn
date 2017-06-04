@@ -85,7 +85,7 @@ function form_creation_aanvragen($atts = []) {
 
     ob_start();
     
-    echo "<div id=\"emailadres\" style=\"display:none;\">".$atts['adres']."</div>";
+    echo "<div id=\"emailadresbeheerder\" style=\"display:none;\">".$atts['adres']."</div>";
     echo "<div id=\"foutmelding-niet-alles-gevuld\" style=\"display: none; color:red; font-weight: bold;\">Niet alle verplichte velden zijn gevuld</div>";
 
     echo "<div id=\"stap1\">";
@@ -241,7 +241,7 @@ function verzamel_gegevens_en_verstuur_mail() {
     add_filter( 'wp_mail_content_type','wpse27856_set_content_type' );
 
     // wp_mail('gerben@dejongefinancieelconsult.nl', 'Nieuwe aanvraag', $_POST['mail-tekst']);
-    wp_mail('patrick@heidotting.nl', 'Nieuwe aanvraag', $_POST['mail-tekst']);
+    wp_mail($_POST['emailadres'], 'Nieuwe aanvraag', $_POST['mail-tekst']);
 }
 
 add_shortcode('hypotheek-aanvragen', 'form_creation_aanvragen');

@@ -185,7 +185,8 @@ jQuery(document).ready(function($) {
     $('#aanvragen').click(function(){
         var data = {
     		'action': 'aanvragen',
-    		'mail-tekst': $('#tekst-mail').html()
+    		'mail-tekst': $('#tekst-mail').html(),
+    		'emailadres': $('#emailadresbeheerder').html()
     	};
     	$.post('../../wp-admin/admin-ajax.php', data, function(response) {
     		console.log('Got this from the server: ' + response);
