@@ -28,51 +28,53 @@ function scripts_with_jquery() {
 
 function form_creation_max_hypotheek(){
     wp_enqueue_script('max-hypotheek-bepalen');
-    ?>
-    <input type="checkbox" id="nhg">Nationale Hypotheek Garantie?<br />
-    <label for="brutoloon">Je bruto jaarloon</label><input type="number" id="brutoloon" />
-    <!--<input type="checkbox" id="ondernemer">Ben je zelfstandig ondernemer?-->
-    <label for="geboortedatum">Je geboortedatum</label><input type="date" id="geboortedatum" />
+
+    ob_start();
+
+    echo "<input type=\"checkbox\" id=\"nhg\">Nationale Hypotheek Garantie?<br />";
+    echo "<label for=\"brutoloon\">Je bruto jaarloon</label><input type=\"number\" id=\"brutoloon\" />";
+    // <!--<input type=\"checkbox\" id=\"ondernemer\">Ben je zelfstandig ondernemer?-->
+    echo "<label for=\"geboortedatum\">Je geboortedatum</label><input type=\"date\" id=\"geboortedatum\" />";
     
-    <input type="checkbox" id="partner">Met partner?
-    <div id="metPartner" style="display: none">
-        <label for="brutoloonpartner">Bruto jaarloon van je eventuele partner</label><input type="number" id="brutoloonpartner" />
-        <label for="geboortedatumpartner">Geboortedatum van je partner</label><input type="date" id="geboortedatumpartner" />
-    </div>
+    echo "<input type=\"checkbox\" id=\"partner\">Met partner?";
+    echo "<div id=\"metPartner\" style=\"display: none\">";
+        echo "<label for=\"brutoloonpartner\">Bruto jaarloon van je eventuele partner</label><input type=\"number\" id=\"brutoloonpartner\" />";
+        echo "<label for=\"geboortedatumpartner\">Geboortedatum van je partner</label><input type=\"date\" id=\"geboortedatumpartner\" />";
+    echo "</div>";
     
-    <input type="checkbox" id="studieschuld">Heb je een studieschuld?<br />
-    <div id="hoeveelstudieschuldDiv" style="display: none">
-        <label for="hoeveelstudieschuld">Hoeveel?</label><input type="number" id="hoeveelstudieschuld" />
-    </div>
+    echo "<input type=\"checkbox\" id=\"studieschuld\">Heb je een studieschuld?<br />";
+    echo "<div id=\"hoeveelstudieschuldDiv\" style=\"display: none\">";
+        echo "<label for=\"hoeveelstudieschuld\">Hoeveel?</label><input type=\"number\" id=\"hoeveelstudieschuld\" />";
+    echo "</div>";
     
-    <input type="checkbox" id="roodstaan">Mag je rood staan?<br />
-    <div id="hoeveelroodstaanDiv" style="display: none">
-        <label for="hoeveelroodstaan">Hoeveel?</label><input type="number" id="hoeveelroodstaan" />
-    </div>
+    echo "<input type=\"checkbox\" id=\"roodstaan\">Mag je rood staan?<br />";
+    echo "<div id=\"hoeveelroodstaanDiv\" style=\"display: none\">";
+        echo "<label for=\"hoeveelroodstaan\">Hoeveel?</label><input type=\"number\" id=\"hoeveelroodstaan\" />";
+    echo "</div>";
     
-    <input type="checkbox" id="creditcard">Heb je een creditcard?<br />
-    <div id="hoeveelcreditcardDiv" style="display: none">
-        <label for="hoeveelcreditcard">Wat is de limiet?</label><input type="number" id="hoeveelcreditcard" />
-    </div>
+    echo "<input type=\"checkbox\" id=\"creditcard\">Heb je een creditcard?<br />";
+    echo "<div id=\"hoeveelcreditcardDiv\" style=\"display: none\">";
+        echo "<label for=\"hoeveelcreditcard\">Wat is de limiet?</label><input type=\"number\" id=\"hoeveelcreditcard\" />";
+    echo "</div>";
     
-    <input type="checkbox" id="partneralimentatie">Betaal je partneralimentatie?<br />
-    <div id="hoeveelpartneralimentatieDiv" style="display: none">
-        <label for="hoeveelpartneralimentatie">Hoeveel?</label><input type="number" id="hoeveelpartneralimentatie" />
-    </div>
+    echo "<input type=\"checkbox\" id=\"partneralimentatie\">Betaal je partneralimentatie?<br />";
+    echo "<div id=\"hoeveelpartneralimentatieDiv\" style=\"display: none\">";
+        echo "<label for=\"hoeveelpartneralimentatie\">Hoeveel?</label><input type=\"number\" id=\"hoeveelpartneralimentatie\" />";
+    echo "</div>";
     
-    <input type="checkbox" id="overigeleningen">Heb je overige leningen of kredieten?<br />
-    <div id="hoeveeloverigeleningenDiv" style="display: none">
-        <label for="hoeveeloverigeleningen">Hoeveel?</label><input type="number" id="hoeveeloverigeleningen" />
-    </div>
+    echo "<input type=\"checkbox\" id=\"overigeleningen\">Heb je overige leningen of kredieten?<br />";
+    echo "<div id=\"hoeveeloverigeleningenDiv\" style=\"display: none\">";
+        echo "<label for=\"hoeveeloverigeleningen\">Hoeveel?</label><input type=\"number\" id=\"hoeveeloverigeleningen\" />";
+    echo "</div>";
     
-    <div id="foutmelding-niet-alles-gevuld" style="display: none; color:red; font-weight: bold;">Niet alle verplichte velden zijn gevuld</div>
-    <input type="submit" class="button-primary" id="opvragen">Opvragen</button>
+    echo "<div id=\"foutmelding-niet-alles-gevuld\" style=\"display: none; color:red; font-weight: bold;\">Niet alle verplichte velden zijn gevuld</div>";
+    echo "<input type=\"submit\" class=\"button-primary\" id=\"opvragen\">Opvragen</button>";
     
-    <div id="resultaat" style="display:none;">Je maximale hypotheek is : <span id="result"></span></div>
+    echo "<div id=\"resultaat\" style=\"display:none;\">Je maximale hypotheek is : <span id=\"result\"></span></div>";
     
-    <!--<div id="debug"></div>-->
+    // <!--<div id=\"debug\"></div>-->
     
-    <?php
+    return ob_get_clean();
 }
 
 function form_creation_aanvragen($atts = []) {
