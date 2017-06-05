@@ -1,8 +1,6 @@
-var api_key = '&api_key=TEST-KEY!-1943-4518-95ca-ec025e6f79b';
-var url = 'https://testapi.hypotheekbond.nl';
 var $ = jQuery;
 
-function ophalenMaxHoogteHypotheek(ophalenHoogteModel, callback){
+function ophalenMaxHoogteHypotheek(ophalenHoogteModel, callback, apikey, apiurl){
     console.log('Start opvragen maximale hypotheek'); 
     
     $('#foutmelding-niet-alles-gevuld').hide();
@@ -28,7 +26,7 @@ function ophalenMaxHoogteHypotheek(ophalenHoogteModel, callback){
         ophalenHoogteModel.geboortedatum = moment(ophalenHoogteModel.geboortedatum, 'DD-MM-YYYY').format('YYYY-MM-DD');
         ophalenHoogteModel.geboortedatumpartner = moment(ophalenHoogteModel.geboortedatumpartner, 'DD-MM-YYYY').format('YYYY-MM-DD');
         console.log('Eerst de rentepercentages opvragen');
-        $.get(url + '/interest/v1/interest-rates?bestInterestOnly=false&sortBy=percentage&sortDirection=ASC&limit=25' + api_key, null ,function(result){
+        $.get(apiurl + '/interest/v1/interest-rates?bestInterestOnly=false&sortBy=percentage&sortDirection=ASC&limit=25' + '&api_key=' + apikey, null ,function(result){
             
             var percentage = ophalenHoogteModel.percentage != null ? ophalenHoogteModel.percentage : _.chain(result.data)
             .sortBy('percentage')
@@ -57,7 +55,7 @@ function ophalenMaxHoogteHypotheek(ophalenHoogteModel, callback){
                 percentage = 1;
             }
     
-            var request = url + '/calculation/v1/mortgage/maximum-by-income';
+            var request = apiurl + '/calculation/v1/mortgage/maximum-by-income';
             
             request += '?nhg=' + ophalenHoogteModel.nhg;
             request += '&duration=360';
@@ -84,7 +82,7 @@ function ophalenMaxHoogteHypotheek(ophalenHoogteModel, callback){
                 request += '&person%5B1%5D%5BstudentLoans%5D=0'
             }
             $('#debug').html(replaceAll(request, '\&', '<br />'));
-            $.get(request + api_key, null ,function(result){
+            $.get(request + '&api_key=' + apikey, null ,function(result){
                 result.data.result = 250000;
                 
                 callback(result.data.result);
@@ -109,11 +107,11 @@ function maakBedragOp(bedrag) {
 	}
 }
 
-function ophalenAdresCall(postcode, huisnummer) {
+function ophalenAdresCall(postcode, huisnummer, apikey, apiurl) {
     var deferred = $.Deferred();
     
     if(postcode != null && postcode != '' && huisnummer != null && huisnummer != '') {
-        $.get(url + '/address/v1/address?postalcode=' + postcode + '&housenumber=' + huisnummer + api_key, null ,function(result){
+        $.get(apiurl + '/address/v1/address?postalcode=' + postcode + '&housenumber=' + huisnummer + '&api_key=' + apikey, null ,function(result){
             if(result.data.length > 0) {
                 return deferred.resolve({
                     straat: result.data[0].street,
@@ -133,14 +131,14 @@ function ophalenAdresCall(postcode, huisnummer) {
     return deferred.promise();
 }
 
-function ophalenRentepercentages(blnNhg) {
+function ophalenRentepercentages(blnNhg, apikey, apiurl) {
     var deferred = $.Deferred();
     var nhg = '';
     if(blnNhg) {
         nhg = '&ngh=true';
     }
 
-    $.get(url + '/interest/v1/interest-rates?limit=999' + nhg + api_key, null ,function(result){
+    $.get(apiurl + '/interest/v1/interest-rates?limit=999' + nhg + '&api_key=' + apikey, null ,function(result){
         console.log(result);
         console.log('ophalen rentepercentages');
         

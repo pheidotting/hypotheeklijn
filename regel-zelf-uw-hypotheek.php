@@ -11,7 +11,7 @@ License: GPL2
 function scripts_with_jquery() {
     // Register the script like this for a plugin:
     wp_register_script('max-hypotheek-bepalen', plugins_url('/js/max-hypotheek-bepalen.js', __FILE__ ), array('jquery'));
-    wp_register_script('aanvragen', plugins_url('/js/aanvragen.js', __FILE__ ), array('jquery'), '1.0', true);
+    wp_register_script('aanvragen', plugins_url('/js/aanvragen.js', __FILE__ ), array('jquery'));
     wp_register_script('moment', plugins_url('/js/moment-with-locales.js', __FILE__ ));
     wp_register_script('underscore', plugins_url('/js/underscore-min.js', __FILE__ ));
     wp_register_script('api-calls', plugins_url('/js/api-calls.js', __FILE__ ), array('jquery'));
@@ -86,6 +86,9 @@ function form_creation_aanvragen($atts = []) {
     ob_start();
     
     echo "<div id=\"emailadresbeheerder\" style=\"display:none;\">".$atts['adres']."</div>";
+    echo "<div id=\"apikey\" style=\"display:none;\">".$atts['apikey']."</div>";
+    echo "<div id=\"apiurl\" style=\"display:none;\">".$atts['apiurl']."</div>";
+
     echo "<div id=\"foutmelding-niet-alles-gevuld\" style=\"display: none; color:red; font-weight: bold;\">Niet alle verplichte velden zijn gevuld</div>";
 
     echo "<div id=\"stap1\">";

@@ -203,9 +203,6 @@ jQuery(document).ready(function($) {
 
         $('#iban').val(rek);
     });
-
-    var api_key = '&api_key=TEST-KEY!-1943-4518-95ca-ec025e6f79b';
-    var url = 'https://testapi.hypotheekbond.nl';
     
     opvragenRentepercentages();
     
@@ -232,7 +229,7 @@ jQuery(document).ready(function($) {
                 nhg : $('#nhg').is(':checked'),
                 percentage : percentage
         }
-        ophalenMaxHoogteHypotheek(request, resultaatBerekenen);
+        ophalenMaxHoogteHypotheek(request, resultaatBerekenen, $('#apikey').html(), $('#apiurl').html());
     
         function resultaatBerekenen(maxHypotheek) {
             $('#resultaat').show();
@@ -257,7 +254,7 @@ jQuery(document).ready(function($) {
     function ophalenAdres(postcode, huisnummer) {
         var deferred = $.Deferred();
 
-        ophalenAdresCall(postcode, huisnummer).done(function(result){
+        ophalenAdresCall(postcode, huisnummer, $('#apikey').html(), $('#apiurl').html()).done(function(result){
             return deferred.resolve(result);
         });
     
@@ -270,7 +267,7 @@ jQuery(document).ready(function($) {
             nhg = true;
         }
 
-        ophalenRentepercentages(nhg).done(function(percentage) {
+        ophalenRentepercentages(nhg, $('#apikey').html(), $('#apiurl').html()).done(function(percentage) {
             var elements = [];
             _.each(percentage, function(p){
                 var currentElement = $('<input type="radio" name="aanbieders_option" value="' + p.bank + ' - ' + p.percentage + '">');
