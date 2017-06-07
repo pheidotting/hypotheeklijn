@@ -78,9 +78,6 @@ function form_creation_max_hypotheek(){
 }
 
 function form_creation_aanvragen($atts = []) {
-    // echo $atts['apikey'];
-    // echo $atts['apiurl'];
-    // echo $atts['adres'];
     wp_enqueue_script('aanvragen');
 
     ob_start();
@@ -96,10 +93,15 @@ function form_creation_aanvragen($atts = []) {
         echo "<label for=\"geboortedatum\">Je geboortedatum</label><input type=\"text\" id=\"geboortedatum\" />";
         
         echo "<input type=\"checkbox\" id=\"partner\">Met partner?";
+        echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap1-met-partner-question\" />";
+        echo "<div id=\"stap1-met-partner-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-met-partner-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        $tekstStap1MetPartner = $atts['stap1-met-partner'] == '' ? 'stap1-met-partner' : $atts['stap1-met-partner'];
+        echo $tekstStap1MetPartner."</div>";
         echo "<div id=\"metPartner\" style=\"display: none\">";
             echo "<label for=\"brutoloonpartner\">Bruto jaarloon van je eventuele partner</label><input type=\"number\" id=\"brutoloonpartner\" />";
-            echo "<label for=\"geboortedatumpartner\">Geboortedatum van je partner</label><input type=\"text\" id=\"geboortedatumpartner\" />";
-        echo "</div>";
+            echo "<label for=\"geboortedatumpartner\" style=\"float:left;\">Geboortedatum van je partner</label>";
+            echo "<input type=\"text\" id=\"geboortedatumpartner\" />";
+        echo "</div><br />";
         
         echo "<input type=\"checkbox\" id=\"studieschuld\">Heb je een studieschuld?<br />";
         echo "<div id=\"hoeveelstudieschuldDiv\" style=\"display: none\">";

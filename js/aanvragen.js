@@ -203,6 +203,14 @@ jQuery(document).ready(function($) {
 
         $('#iban').val(rek);
     });
+    $('#stap1-met-partner-kruis').click(function(){
+        $('#stap1-met-partner-help').hide();
+        $('#stap1-met-partner-question').show();
+    });
+    $('#stap1-met-partner-question').click(function(){
+        $('#stap1-met-partner-help').show();
+        $('#stap1-met-partner-question').hide();
+    });
     
     opvragenRentepercentages();
     
