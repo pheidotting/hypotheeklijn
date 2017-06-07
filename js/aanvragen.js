@@ -252,6 +252,62 @@ jQuery(document).ready(function($) {
         $('#stap1-overigeleningen-help').show();
         $('#stap1-overigeleningen-question').hide();
     });
+    $('#stap2-koopsom-kruis').click(function(){
+        $('#stap2-koopsom-help').hide();
+        $('#stap2-koopsom-question').show();
+    });
+    $('#stap2-koopsom-question').click(function(){
+        $('#stap2-koopsom-help').show();
+        $('#stap2-koopsom-question').hide();
+    });
+    $('#stap2-overdrachtsbelasting-kruis').click(function(){
+        $('#stap2-overdrachtsbelasting-help').hide();
+        $('#stap2-overdrachtsbelasting-question').show();
+    });
+    $('#stap2-overdrachtsbelasting-question').click(function(){
+        $('#stap2-overdrachtsbelasting-help').show();
+        $('#stap2-overdrachtsbelasting-question').hide();
+    });
+    $('#stap2-leveringsakte-kruis').click(function(){
+        $('#stap2-leveringsakte-help').hide();
+        $('#stap2-leveringsakte-question').show();
+    });
+    $('#stap2-leveringsakte-question').click(function(){
+        $('#stap2-leveringsakte-help').show();
+        $('#stap2-leveringsakte-question').hide();
+    });
+    $('#stap2-hypotheekakte-kruis').click(function(){
+        $('#stap2-hypotheekakte-help').hide();
+        $('#stap2-hypotheekakte-question').show();
+    });
+    $('#stap2-hypotheekakte-question').click(function(){
+        $('#stap2-hypotheekakte-help').show();
+        $('#stap2-hypotheekakte-question').hide();
+    });
+    $('#stap2-taxatie-kruis').click(function(){
+        $('#stap2-taxatie-help').hide();
+        $('#stap2-taxatie-question').show();
+    });
+    $('#stap2-taxatie-question').click(function(){
+        $('#stap2-taxatie-help').show();
+        $('#stap2-taxatie-question').hide();
+    });
+    $('#stap2-commissie-kruis').click(function(){
+        $('#stap2-commissie-help').hide();
+        $('#stap2-commissie-question').show();
+    });
+    $('#stap2-commissie-question').click(function(){
+        $('#stap2-commissie-help').show();
+        $('#stap2-commissie-question').hide();
+    });
+    $('#stap2-nhg-kruis').click(function(){
+        $('#stap2-nhg-help').hide();
+        $('#stap2-nhg-question').show();
+    });
+    $('#stap2-nhg-question').click(function(){
+        $('#stap2-nhg-help').show();
+        $('#stap2-nhg-question').hide();
+    });
     
     opvragenRentepercentages();
     

@@ -171,17 +171,51 @@ function form_creation_aanvragen($atts = []) {
         // <!--</div>-->
     
         echo "<h3>Hypotheeksom</h3>";
-        echo "<label for=\"koopsom\">Koopsom van het huis</label><input type=\"number\" id=\"koopsom\" />";
-        echo "<label for=\"overdrachtsbelasting\">Overdrachtsbelasting</label><input type=\"number\" id=\"overdrachtsbelasting\" disabled=\"disabled\" />";
-        echo "<label for=\"leveringsakte-notaris\">Kosten leveringsakte notaris</label><input type=\"number\" id=\"leveringsakte-notaris\" value=\"800\" />";
-        echo "<label for=\"hypotheekakte-notaris\">Kosten hypotheekakte notaris</label><input type=\"number\" id=\"hypotheekakte-notaris\" value=\"800\" />";
-        echo "<label for=\"taxatie\">Kosten taxatie</label><input type=\"number\" id=\"taxatie\" value=\"500\" />";
-        echo "<label for=\"commissie\">Kosten commissie</label><input type=\"number\" id=\"commissie\" value=\"700\" disabled=\"disabled\" />";
+        echo "<label for=\"koopsom\">Koopsom van het huis</label><input type=\"number\" id=\"koopsom\" style=\"display: inline-block; width: 95%;\" />";
+        echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-koopsom-question\" />";
+        echo "<div id=\"stap2-koopsom-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-koopsom-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        $tekstStap2koopsom = $atts['stap2-koopsom'] == '' ? 'stap2-koopsom' : $atts['stap2-koopsom'];
+        echo "<div style=\"padding:15px;\">".$tekstStap2koopsom."</div></div>";
+
+        echo "<label for=\"overdrachtsbelasting\">Overdrachtsbelasting</label><input type=\"number\" id=\"overdrachtsbelasting\" disabled=\"disabled\" style=\"display: inline-block; width: 95%;\" />";
+        echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-overdrachtsbelasting-question\" />";
+        echo "<div id=\"stap2-overdrachtsbelasting-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-overdrachtsbelasting-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        $tekstStap2Overdrachtsbelasting = $atts['stap2-overdrachtsbelasting'] == '' ? 'stap2-overdrachtsbelasting' : $atts['stap2-overdrachtsbelasting'];
+        echo "<div style=\"padding:15px;\">".$tekstStap2Overdrachtsbelasting."</div></div>";
+
+        echo "<label for=\"leveringsakte-notaris\">Kosten leveringsakte notaris</label><input type=\"number\" id=\"leveringsakte-notaris\" value=\"800\" style=\"display: inline-block; width: 95%;\" />";
+        echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-leveringsakte-question\" />";
+        echo "<div id=\"stap2-leveringsakte-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-leveringsakte-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        $tekstStap2Leveringsakte = $atts['stap2-leveringsakte'] == '' ? 'stap2-leveringsakte' : $atts['stap2-leveringsakte'];
+        echo "<div style=\"padding:15px;\">".$tekstStap2Leveringsakte."</div></div>";
+
+        echo "<label for=\"hypotheekakte-notaris\">Kosten hypotheekakte notaris</label><input type=\"number\" id=\"hypotheekakte-notaris\" value=\"800\" style=\"display: inline-block; width: 95%;\" />";
+        echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-hypotheekakte-question\" />";
+        echo "<div id=\"stap2-hypotheekakte-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-hypotheekakte-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        $tekstStap2Hypotheekakte = $atts['stap2-hypotheekakte'] == '' ? 'stap2-hypotheekakte' : $atts['stap2-hypotheekakte'];
+        echo "<div style=\"padding:15px;\">".$tekstStap2Hypotheekakte."</div></div>";
+
+        echo "<label for=\"taxatie\">Kosten taxatie</label><input type=\"number\" id=\"taxatie\" value=\"500\" style=\"display: inline-block; width: 95%;\" />";
+        echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-taxatie-question\" />";
+        echo "<div id=\"stap2-taxatie-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-taxatie-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        $tekstStap2Taxatie = $atts['stap2-taxatie'] == '' ? 'stap2-taxatie' : $atts['stap2-taxatie'];
+        echo "<div style=\"padding:15px;\">".$tekstStap2Taxatie."</div></div>";
+
+        echo "<label for=\"commissie\">Kosten commissie</label><input type=\"number\" id=\"commissie\" value=\"700\" disabled=\"disabled\" style=\"display: inline-block; width: 95%;\" />";
+        echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-commissie-question\" />";
+        echo "<div id=\"stap2-commissie-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-commissie-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        $tekstStap2Commissie = $atts['stap2-commissie'] == '' ? 'stap2-commissie' : $atts['stap2-commissie'];
+        echo "<div style=\"padding:15px;\">".$tekstStap2Commissie."</div></div>";
+
         echo "<div id=\"nhg-vraag\">";
-            echo "<input type=\"checkbox\" id=\"nhg\">Nationale Hypotheek Garantie?<br />";
+            echo "<input type=\"checkbox\" id=\"nhg\">Nationale Hypotheek Garantie?";
+            echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-nhg-question\" />";
+            echo "<div id=\"stap2-nhg-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-nhg-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+            $tekstStap2nhg = $atts['stap2-nhg'] == '' ? 'stap2-nhg' : $atts['stap2-nhg'];
+            echo "<div style=\"padding:15px;\">".$tekstStap2nhg."</div></div>";
             echo "<div id=\"metNHG\" style=\"display:none;\">";
                 echo "<label for=\"nhgkosten\">Kosten NHG</label><input type=\"number\" id=\"nhgkosten\" disabled=\"disabled\" />";
-            echo "</div>";
+            echo "</div><br />";
         echo "</div>";
 
         echo "<label for=\"benodigdehypotheek\">Hoeveel hypotheek ben je nodig</label><input type=\"number\" id=\"benodigdehypotheek\" />";
