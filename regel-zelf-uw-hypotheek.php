@@ -103,30 +103,50 @@ function form_creation_aanvragen($atts = []) {
             echo "<input type=\"text\" id=\"geboortedatumpartner\" />";
         echo "</div><br />";
         
-        echo "<input type=\"checkbox\" id=\"studieschuld\">Heb je een studieschuld?<br />";
+        echo "<input type=\"checkbox\" id=\"studieschuld\">Heb je een studieschuld?";
+        echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap1-studieschuld-question\" />";
+        echo "<div id=\"stap1-studieschuld-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-studieschuld-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        $tekstStap1Studieschuld = $atts['stap1-studieschuld'] == '' ? 'stap1-studieschuld' : $atts['stap1-studieschuld'];
+        echo $tekstStap1Studieschuld."</div>";
         echo "<div id=\"hoeveelstudieschuldDiv\" style=\"display: none\">";
             echo "<label for=\"hoeveelstudieschuld\">Hoeveel?</label><input type=\"number\" id=\"hoeveelstudieschuld\" />";
-        echo "</div>";
+        echo "</div><br />";
         
-        echo "<input type=\"checkbox\" id=\"roodstaan\">Mag je rood staan?<br />";
+        echo "<input type=\"checkbox\" id=\"roodstaan\">Mag je rood staan?";
+        echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap1-roodstaan-question\" />";
+        echo "<div id=\"stap1-roodstaan-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-roodstaan-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        $tekstStap1Roodstaan = $atts['stap1-roodstaan'] == '' ? 'stap1-roodstaan' : $atts['stap1-roodstaan'];
+        echo $tekstStap1Roodstaan."</div>";
         echo "<div id=\"hoeveelroodstaanDiv\" style=\"display: none\">";
             echo "<label for=\"hoeveelroodstaan\">Hoeveel?</label><input type=\"number\" id=\"hoeveelroodstaan\" />";
-        echo "</div>";
+        echo "</div><br />";
         
-        echo "<input type=\"checkbox\" id=\"creditcard\">Heb je een creditcard?<br />";
+        echo "<input type=\"checkbox\" id=\"creditcard\">Heb je een creditcard?";
+        echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap1-creditcard-question\" />";
+        echo "<div id=\"stap1-creditcard-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-creditcard-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        $tekstStap1Creditcard = $atts['stap1-creditcard'] == '' ? 'stap1-creditcard' : $atts['stap1-creditcard'];
+        echo $tekstStap1Creditcard."</div>";
         echo "<div id=\"hoeveelcreditcardDiv\" style=\"display: none\">";
             echo "<label for=\"hoeveelcreditcard\">Wat is de limiet?</label><input type=\"number\" id=\"hoeveelcreditcard\" />";
-        echo "</div>";
+        echo "</div><br />";
         
-        echo "<input type=\"checkbox\" id=\"partneralimentatie\">Betaal je partneralimentatie?<br />";
+        echo "<input type=\"checkbox\" id=\"partneralimentatie\">Betaal je partneralimentatie?";
+        echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap1-partneralimentatie-question\" />";
+        echo "<div id=\"stap1-partneralimentatie-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-partneralimentatie-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        $tekstStap1Partneralimentatie = $atts['stap1-partneralimentatie'] == '' ? 'stap1-partneralimentatie' : $atts['stap1-partneralimentatie'];
+        echo $tekstStap1Partneralimentatie."</div>";
         echo "<div id=\"hoeveelpartneralimentatieDiv\" style=\"display: none\">";
             echo "<label for=\"hoeveelpartneralimentatie\">Hoeveel?</label><input type=\"number\" id=\"hoeveelpartneralimentatie\" />";
-        echo "</div>";
+        echo "</div><br />";
         
-        echo "<input type=\"checkbox\" id=\"overigeleningen\">Heb je overige leningen of kredieten?<br />";
+        echo "<input type=\"checkbox\" id=\"overigeleningen\">Heb je overige leningen of kredieten?";
+        echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap1-overigeleningen-question\" />";
+        echo "<div id=\"stap1-overigeleningen-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-overigeleningen-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        $tekstStap1Overigeleningen = $atts['stap1-overigeleningen'] == '' ? 'stap1-overigeleningen' : $atts['stap1-overigeleningen'];
+        echo $tekstStap1Overigeleningen."</div>";
         echo "<div id=\"hoeveeloverigeleningenDiv\" style=\"display: none\">";
             echo "<label for=\"hoeveeloverigeleningen\">Hoeveel?</label><input type=\"number\" id=\"hoeveeloverigeleningen\" />";
-        echo "</div>";
+        echo "</div><br />";
         
         // <!--<input type=\"submit\" class=\"button-primary\" id=\"opvragen\">Opvragen</button>-->
         

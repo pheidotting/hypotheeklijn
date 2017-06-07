@@ -203,6 +203,7 @@ jQuery(document).ready(function($) {
 
         $('#iban').val(rek);
     });
+    //hulptekstballonnen
     $('#stap1-met-partner-kruis').click(function(){
         $('#stap1-met-partner-help').hide();
         $('#stap1-met-partner-question').show();
@@ -210,6 +211,46 @@ jQuery(document).ready(function($) {
     $('#stap1-met-partner-question').click(function(){
         $('#stap1-met-partner-help').show();
         $('#stap1-met-partner-question').hide();
+    });
+    $('#stap1-studieschuld-kruis').click(function(){
+        $('#stap1-studieschuld-help').hide();
+        $('#stap1-studieschuld-question').show();
+    });
+    $('#stap1-studieschuld-question').click(function(){
+        $('#stap1-studieschuld-help').show();
+        $('#stap1-studieschuld-question').hide();
+    });
+    $('#stap1-roodstaan-kruis').click(function(){
+        $('#stap1-roodstaan-help').hide();
+        $('#stap1-roodstaan-question').show();
+    });
+    $('#stap1-roodstaan-question').click(function(){
+        $('#stap1-roodstaan-help').show();
+        $('#stap1-roodstaan-question').hide();
+    });
+    $('#stap1-creditcard-kruis').click(function(){
+        $('#stap1-creditcard-help').hide();
+        $('#stap1-creditcard-question').show();
+    });
+    $('#stap1-creditcard-question').click(function(){
+        $('#stap1-creditcard-help').show();
+        $('#stap1-creditcard-question').hide();
+    });
+    $('#stap1-partneralimentatie-kruis').click(function(){
+        $('#stap1-partneralimentatie-help').hide();
+        $('#stap1-partneralimentatie-question').show();
+    });
+    $('#stap1-partneralimentatie-question').click(function(){
+        $('#stap1-partneralimentatie-help').show();
+        $('#stap1-partneralimentatie-question').hide();
+    });
+    $('#stap1-overigeleningen-kruis').click(function(){
+        $('#stap1-overigeleningen-help').hide();
+        $('#stap1-overigeleningen-question').show();
+    });
+    $('#stap1-overigeleningen-question').click(function(){
+        $('#stap1-overigeleningen-help').show();
+        $('#stap1-overigeleningen-question').hide();
     });
     
     opvragenRentepercentages();
