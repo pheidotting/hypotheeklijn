@@ -1,6 +1,6 @@
 var $ = jQuery;
 
-function ophalenMaxHoogteHypotheek(ophalenHoogteModel, callback, str_apikey, str_apiurl){
+function ophalenMaxHoogteHypotheek(percentage, ophalenHoogteModel, callback, str_apikey, str_apiurl){
     console.log('Start opvragen maximale hypotheek'); 
     
     $('#foutmelding-niet-alles-gevuld').hide();
@@ -25,73 +25,43 @@ function ophalenMaxHoogteHypotheek(ophalenHoogteModel, callback, str_apikey, str
     if(allesGevuld) {
         ophalenHoogteModel.geboortedatum = moment(ophalenHoogteModel.geboortedatum, 'DD-MM-YYYY').format('YYYY-MM-DD');
         ophalenHoogteModel.geboortedatumpartner = moment(ophalenHoogteModel.geboortedatumpartner, 'DD-MM-YYYY').format('YYYY-MM-DD');
-        console.log('Eerst de rentepercentages opvragen');
-        $.get(str_apiurl + '/interest/v1/interest-rates?bestInterestOnly=false&sortBy=percentage&sortDirection=ASC&limit=25' + '&api_key=' + str_apikey, null ,function(result){
-            
-            var percentage = ophalenHoogteModel.percentage != null ? ophalenHoogteModel.percentage : _.chain(result.data)
-            .sortBy('percentage')
-            .filter(function(data) {
-                if(ophalenHoogteModel.nhg) {
-                    return data.nhg;
-                } else {
-                    return true;
-                }
-            })
-            // .filter(function(data) {
-            //     return data.code === "nieuw";
-            // })
-            // .filter(function(data) {
-            //     return data.productId == 582;
-            // })
-            // .each(function(a) {
-            //     console.log(a);
-            // })
-            .map('percentage')
-            .first().value();
     
-            console.log('Done : ' + percentage);
+        var request = str_apiurl + '/calculation/v1/mortgage/maximum-by-income';
+        
+        request += '?nhg=' + ophalenHoogteModel.nhg;
+        request += '&duration=360';
+        request += '&percentage=' + percentage;
+        request += '&rateFixation=10';
+        request += '&notDeductible=0';
+        request += '&groundRent=0';
+        request += '&person%5B0%5D%5Bincome%5D=' + ophalenHoogteModel.brutoloon;
+        request += '&person%5B0%5D%5Bage%5D=' + moment().diff(ophalenHoogteModel.geboortedatum, 'years');
+        if(ophalenHoogteModel.partneralimentatie) {
+            request += '&person%5B0%5D%5Balimony%5D=0';
+        }
+        if(ophalenHoogteModel.overigeleningen) {
+            request += '&person%5B0%5D%5Bloans%5D=0';
+        }
+        if(ophalenHoogteModel.studieschuld) {
+            request += '&person%5B0%5D%5BstudentLoans%5D=0';
+        }
+        if(ophalenHoogteModel.partner) {
+            request += '&person%5B1%5D%5Bincome%5D=' + ophalenHoogteModel.brutoloonpartner;
+            request += '&person%5B1%5D%5Bage%5D=' + moment().diff(ophalenHoogteModel.geboortedatumpartner, 'years');
+            request += '&person%5B1%5D%5Balimony%5D=0';
+            request += '&person%5B1%5D%5Bloans%5D=0';
+            request += '&person%5B1%5D%5BstudentLoans%5D=0'
+        }
+        $('#debug').html(replaceAll(request, '\&', '<br />'));
+        $.get(request + '&api_key=' + str_apikey, null ,function(result){
+            // result.data.result = 250000;
             
-            if(percentage == null) {
-                percentage = 1;
-            }
-    
-            var request = str_apiurl + '/calculation/v1/mortgage/maximum-by-income';
-            
-            request += '?nhg=' + ophalenHoogteModel.nhg;
-            request += '&duration=360';
-            request += '&percentage=' + percentage;
-            request += '&rateFixation=10';
-            request += '&notDeductible=0';
-            request += '&groundRent=0';
-            request += '&person%5B0%5D%5Bincome%5D=' + ophalenHoogteModel.brutoloon;
-            request += '&person%5B0%5D%5Bage%5D=' + moment().diff(ophalenHoogteModel.geboortedatum, 'years');
-            if(ophalenHoogteModel.partneralimentatie) {
-                request += '&person%5B0%5D%5Balimony%5D=0';
-            }
-            if(ophalenHoogteModel.overigeleningen) {
-                request += '&person%5B0%5D%5Bloans%5D=0';
-            }
-            if(ophalenHoogteModel.studieschuld) {
-                request += '&person%5B0%5D%5BstudentLoans%5D=0';
-            }
-            if(ophalenHoogteModel.partner) {
-                request += '&person%5B1%5D%5Bincome%5D=0';
-                request += '&person%5B1%5D%5Bage%5D=' + moment().diff(ophalenHoogteModel.geboortedatumpartner, 'years');
-                request += '&person%5B1%5D%5Balimony%5D=0';
-                request += '&person%5B1%5D%5Bloans%5D=0';
-                request += '&person%5B1%5D%5BstudentLoans%5D=0'
-            }
-            $('#debug').html(replaceAll(request, '\&', '<br />'));
-            $.get(request + '&api_key=' + str_apikey, null ,function(result){
-                // result.data.result = 250000;
-                
-                callback(result.data.result);
-            });
-            
-            function replaceAll(str, find, replace) {
-                return str.replace(new RegExp(find, 'g'), replace);
-            }
+            callback(result.data.result);
         });
+        
+        function replaceAll(str, find, replace) {
+            return str.replace(new RegExp(find, 'g'), replace);
+        }
     } else {
         console.log('Niet alle verplichte velden zijn gevuld, foutmelding!');
 
@@ -138,23 +108,23 @@ function ophalenRentepercentages(blnNhg, str_apikey, str_apiurl) {
         nhg = '&ngh=true';
     }
 
-    $.get(str_apiurl + '/interest/v1/interest-rates?limit=999' + nhg + '&api_key=' + str_apikey, null ,function(result){
-        console.log(result);
+    $.get(str_apiurl + '/interest/v1/interest-top-5' + '?api_key=' + str_apikey, null ,function(result){
         console.log('ophalen rentepercentages');
+        console.log(result);
         
         var i = 0;
         var percentage = _.chain(result.data)
         .sortBy('percentage')
-        .filter(function(data) {
-            if(nhg) {
-                return data.nhg;
-            } else {
-                return true;
-            }
-        })
-        .filter(function(data) {
-            return data.code === "nieuw";
-        })
+        // .filter(function(data) {
+        //     if(nhg) {
+        //         return data.nhg;
+        //     } else {
+        //         return true;
+        //     }
+        // })
+        // .filter(function(data) {
+            // return data.code === "nieuw";
+        // })
         // .filter(function(data) {
         //     return data.productId == 582;
         // })
@@ -163,8 +133,9 @@ function ophalenRentepercentages(blnNhg, str_apikey, str_apiurl) {
         // })
         .map(function(rente) {
             return {
-                percentage: rente.percentage,
-                bank: rente.providerName
+                percentage: rente.lowest_interest,
+                bank: rente.bank_name,
+                logo: rente.bank_logo
             };
         })
         .value();

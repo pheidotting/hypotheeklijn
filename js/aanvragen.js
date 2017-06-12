@@ -87,11 +87,11 @@ jQuery(document).ready(function($) {
             $('#metNHG').hide();
         }
         berekenHypotheekBedrag();
-        // opvragenRentepercentages();
+        opvragenRentepercentages();
     });
     $('#naar-stap2').click(function(){
         if(zijnDeVerplichteVeldenGevuld('stap1')) {
-            hoogteHypotheek(null);
+            // hoogteHypotheek(null);
     
             $('#stap1').hide();
             $('#stap2').show();
@@ -334,7 +334,7 @@ jQuery(document).ready(function($) {
                 nhg : $('#nhg').is(':checked'),
                 percentage : percentage
         }
-        ophalenMaxHoogteHypotheek(request, resultaatBerekenen, $('#apikey').html(), $('#apiurl').html());
+        ophalenMaxHoogteHypotheek(percentage, request, resultaatBerekenen, $('#apikey').html(), $('#apiurl').html());
     
         function resultaatBerekenen(maxHypotheek) {
             $('#resultaat').show();
@@ -367,6 +367,8 @@ jQuery(document).ready(function($) {
     }
     
 	function opvragenRentepercentages() {
+	    $('#aanbieders').html('');
+	    
 	    var nhg = false;
         if($('#nhg').is(':checked')) {
             nhg = true;
@@ -377,10 +379,9 @@ jQuery(document).ready(function($) {
             _.each(percentage, function(p){
                 var currentElement = $('<input type="radio" name="aanbieders_option" value="' + p.bank + ' - ' + p.percentage + '">');
                 elements.push(currentElement[0]);
+                elements.push('<span style="widtht:100px !important;"><img src="' + p.logo + '" /></span>');
                 elements.push(p.bank + ': ' + p.percentage + '%');
-                var currentElement = $('<input type="radio" name="aanbieders_option" value="' + p.bank + ' - ' + p.percentage + '2">');
-                elements.push(currentElement[0]);
-                elements.push(p.bank + ': ' + p.percentage + '2%');
+                elements.push('<div style="clear: both;">');
             });
             $('#aanbieders').append(elements);
             $("input[name='aanbieders_option']").on('change', function() {

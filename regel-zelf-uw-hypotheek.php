@@ -153,13 +153,11 @@ function form_creation_aanvragen($atts = []) {
         
         // <!--<div id=\"debug\"></div>-->
         
-        echo "<div id=\"aanbieders\"></div>";
-    
-        echo "<input type=\"submit\" class=\"button-primary\" id=\"naar-stap2\" disabled value=\"Naar stap 2\" />";
+        echo "<input type=\"submit\" class=\"button-primary\" id=\"naar-stap2\"  value=\"Naar stap 2\" />";
     echo "</div>";
     echo "<div id=\"stap2\" style=\"display:none;\">";
-        echo "<div id=\"max-hypotheek\" style=\"display:none;\">0</div>";
-        echo "<div id=\"resultaat\" style=\"display:none;\">Je maximale hypotheek is : <span id=\"result\"></span></div>";
+        
+        echo "<h3>Hypotheeksom</h3>";
         // <!--<h3>Persoonlijke gegevens</h3>-->
         // <!--<label for=\"brutoloon\">Je bruto jaarloon</label><input type=\"number\" id=\"brutoloon\" />-->
         // <!--<label for=\"geboortedatum\">Je geboortedatum</label><input type=\"date\" id=\"geboortedatum\" />-->
@@ -170,7 +168,6 @@ function form_creation_aanvragen($atts = []) {
         // <!--    <label for=\"geboortedatumpartner\">Geboortedatum van je partner</label><input type=\"date\" id=\"geboortedatumpartner\" />-->
         // <!--</div>-->
     
-        echo "<h3>Hypotheeksom</h3>";
         echo "<label for=\"koopsom\">Koopsom van het huis</label><input type=\"number\" id=\"koopsom\" style=\"display: inline-block; width: 95%;\" />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-koopsom-question\" />";
         echo "<div id=\"stap2-koopsom-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-koopsom-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
@@ -217,9 +214,14 @@ function form_creation_aanvragen($atts = []) {
                 echo "<label for=\"nhgkosten\">Kosten NHG</label><input type=\"number\" id=\"nhgkosten\" disabled=\"disabled\" />";
             echo "</div><br />";
         echo "</div>";
+        echo "Kies een aanbieder uit de lijst:";
+        echo "<div id=\"aanbieders\"></div>";
+
+        echo "<div id=\"max-hypotheek\" style=\"display:none;\">0</div>";
+        echo "<div id=\"resultaat\" style=\"display:none;\">Je maximale hypotheek is : <span id=\"result\"></span></div>";
 
         echo "<label for=\"benodigdehypotheek\">Hoeveel hypotheek ben je nodig</label><input type=\"number\" id=\"benodigdehypotheek\" />";
-    
+
         // <!--<div id=\"text-benodigde-hypotheek\"></div>-->
         echo "<div id=\"resultaat\" style=\"display:none;\">Je maximale hypotheek is : <span id=\"result\"></span></div>";
         echo "<div id=\"eigen-middelen\" style=\"display:none;\">Dat betekent dat je als eigen middelen moet inbrengen : <span id=\"eigen-middelen-bedrag\"></span></div>";
