@@ -340,6 +340,7 @@ jQuery(document).ready(function($) {
             $('#resultaat').show();
             $('#result').text(maakBedragOp(maxHypotheek));
             $('#max-hypotheek').text(maxHypotheek);
+            berekenEigenMiddelen();
         }
     }
     
