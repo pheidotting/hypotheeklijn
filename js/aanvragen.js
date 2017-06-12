@@ -369,7 +369,11 @@ jQuery(document).ready(function($) {
     
 	function opvragenRentepercentages() {
 	    $('#aanbieders').html('');
-	    
+        $('#resultaat').hide();
+        $('#result').text('');
+        $('#max-hypotheek').text('');
+        berekenEigenMiddelen();
+
 	    var nhg = false;
         if($('#nhg').is(':checked')) {
             nhg = true;
