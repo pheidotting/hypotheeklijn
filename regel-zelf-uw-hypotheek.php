@@ -218,6 +218,7 @@ function form_creation_aanvragen($atts = []) {
         echo "<div id=\"aanbieders\"></div>";
 
         echo "<div id=\"max-hypotheek\" style=\"display:none;\">0</div>";
+        echo "<div id=\"percentage\" style=\"display:none;\">0</div>";
         echo "<div id=\"resultaat\" style=\"display:none;\">Je maximale hypotheek is : <span id=\"result\"></span></div>";
 
         echo "<label for=\"benodigdehypotheek\">Hoeveel hypotheek ben je nodig</label><input type=\"number\" id=\"benodigdehypotheek\" />";

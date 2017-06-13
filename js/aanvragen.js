@@ -44,6 +44,7 @@ jQuery(document).ready(function($) {
     });
     $('#koopsom').change(function(){
         berekenHypotheekBedrag();
+        hoogteHypotheek($('#percentage').val());
     });
     $('#notaris').change(function(){
         berekenHypotheekBedrag();
@@ -337,9 +338,22 @@ jQuery(document).ready(function($) {
         ophalenMaxHoogteHypotheek(percentage, request, resultaatBerekenen, $('#apikey').html(), $('#apiurl').html());
     
         function resultaatBerekenen(maxHypotheek) {
+            var koopsom = $('#koopsom').val();
+            if(koopsom != null && koopsom != ''){
+                var maxHypotheekKoopsom = koopsom * 1.01;
+
+                if(maxHypotheek > maxHypotheekKoopsom) {
+                    $('#result').text('Je kunt maximaal lenen : ' + maakBedragOp(maxHypotheek) + ', maar op basis van de koopsom kun je lenen : ' + maakBedragOp(maxHypotheekKoopsom));
+                    $('#max-hypotheek').text(maxHypotheekKoopsom);
+                } else {
+                    $('#result').text(maakBedragOp(maxHypotheek));
+                    $('#max-hypotheek').text(maxHypotheek);
+                }
+            } else {
+                $('#result').text(maakBedragOp(maxHypotheek));
+                $('#max-hypotheek').text(maxHypotheek);
+            }
             $('#resultaat').show();
-            $('#result').text(maakBedragOp(maxHypotheek));
-            $('#max-hypotheek').text(maxHypotheek);
             berekenEigenMiddelen();
         }
     }
@@ -394,6 +408,8 @@ jQuery(document).ready(function($) {
                 console.log(input);
                 
                 var percentage = input.split(' - ')[1];
+                
+                $('#percentage').val(percentage);
                 
                 hoogteHypotheek(percentage);
 
