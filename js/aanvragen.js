@@ -46,14 +46,21 @@ jQuery(document).ready(function($) {
         berekenHypotheekBedrag();
         hoogteHypotheek($('#percentage').val());
     });
-    $('#notaris').change(function(){
+    $('#hypotheekakte-notaris').change(function(){
         berekenHypotheekBedrag();
+        berekenEigenMiddelen();
+    });
+    $('#leveringsakte-notaris').change(function(){
+        berekenHypotheekBedrag();
+        berekenEigenMiddelen();
     });
     $('#taxatie').change(function(){
         berekenHypotheekBedrag();
+        berekenEigenMiddelen();
     });
     $('#commissie').change(function(){
         berekenHypotheekBedrag();
+        berekenEigenMiddelen();
     });
     $('#benodigdehypotheek').change(function(){
         verbergOfToonNhgOptie();
