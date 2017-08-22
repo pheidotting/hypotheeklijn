@@ -1,6 +1,25 @@
 jQuery(document).ready(function($) { 
     var geboortedatum;
     $('#huidigestap').text('1');
+    $('#brutomaandloon').change(function(){
+        berekenBrutojaarloon();
+    });
+    $('#dertiendemaand').change(function(){
+        berekenBrutojaarloon();
+    });
+    $('#vakantiegeld').change(function(){
+        berekenBrutojaarloon();
+    });
+    $('#brutomaandloonpartner').change(function(){
+        berekenBrutojaarloonPartner();
+    });
+    $('#dertiendemaandpartner').change(function(){
+        berekenBrutojaarloonPartner();
+    });
+    $('#vakantiegeldpartner').change(function(){
+        berekenBrutojaarloonPartner();
+    });
+    
     $('#partner').click(function(){
         if($('#partner').is(':checked')) {
             $('#metPartner').show();
@@ -122,7 +141,7 @@ jQuery(document).ready(function($) {
     });
     $('#hoeveeleigengeld').change(function(){
         kloptHoeveelEigenGeldWel();
-        berekenHypotheekBedrag();
+        // berekenHypotheekBedrag();
         // opvragenRentepercentages();
         berekenTeLenen();
     });
@@ -382,9 +401,9 @@ jQuery(document).ready(function($) {
                 vakantiegeld : $('#vakantiegeld').is(':checked'),
                 dertiendemaand : $('#dertiendemaand').is(':checked'),
                 partner : $('#partner').is(':checked'),
-                brutoloon : $('#brutoloon').val(),
+                brutoloon : $('#brutoloon').text(),
                 geboortedatum : $('#geboortedatum').val(),
-                brutoloonpartner : $('#brutoloonpartner').val(),
+                brutoloonpartner : $('#brutoloonpartner').text(),
                 geboortedatumpartner : $('#geboortedatumpartner').val(),
                 studieschuld : $('#studieschuld').is(':checked'),
                 hoeveelstudieschuld : $('#hoeveelstudieschuld').val(),
@@ -718,12 +737,12 @@ jQuery(document).ready(function($) {
 	function zijnDeVerplichteVeldenGevuld(stap) {
 	    var allesGevuld = false;
 	    if(stap === 'stap1') {
-	        var brutoloon = isVeldGevuldEnVeranderRand($('#brutoloon'));
+	        var brutoloon = isVeldGevuldEnVeranderRand($('#brutomaandloon'));
 	        var geboortedatum = isVeldGevuldEnVeranderRand($('#geboortedatum'));
 	        
 	        var partnerOk = true;
             if($('#partner').is(':checked')) {
-                var brutoloonpartner = isVeldGevuldEnVeranderRand($('#brutoloonpartner'));
+                var brutoloonpartner = isVeldGevuldEnVeranderRand($('#brutomaandloonpartner'));
                 var geboortedatumpartner = isVeldGevuldEnVeranderRand($('#geboortedatumpartner'));
                 
                 partnerOk = brutoloonpartner && geboortedatumpartner;
@@ -845,5 +864,25 @@ jQuery(document).ready(function($) {
 	    var eigengeld = parseInt($('#hoeveeleigengeld').val());
 	    
 	    $('#telenen').text(maakBedragOp(benodigd - eigengeld));
+	}
+	
+	function berekenBrutojaarloon() {
+	    var brutomaandloon = parseInt($('#brutomaandloon').val());
+	    var dertiendemaand = $('#dertiendemaand').is(':checked');
+	    var vakantiegeld = $('#vakantiegeld').is(':checked');
+
+        opvragenBrutoinkomen(brutomaandloon, dertiendemaand, vakantiegeld, $('#apikey').html(), $('#apiurl').html()).done(function(result) {
+            $('#brutoloon').html(result);
+        });
+	}
+	
+	function berekenBrutojaarloonPartner() {
+	    var brutomaandloonpartner = parseInt($('#brutomaandloonpartner').val());
+	    var dertiendemaandpartner = $('#dertiendemaandpartner').is(':checked');
+	    var vakantiegeldpartner = $('#vakantiegeldpartner').is(':checked');
+
+        opvragenBrutoinkomen(brutomaandloonpartner, dertiendemaandpartner, vakantiegeldpartner, $('#apikey').html(), $('#apiurl').html()).done(function(result) {
+            $('#brutoloonpartner').text(result);
+        });
 	}
 });

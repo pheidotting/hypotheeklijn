@@ -215,5 +215,14 @@ function opvragenNhg(hoogteHypotheek, str_apikey, str_apiurl){
     });
     
     return deferred.promise();
+}
 
+function opvragenBrutoinkomen(maandelijksinkomen, dertiendemaand, vakantiegeld, str_apikey, str_apiurl){
+    var deferred = $.Deferred();
+
+    $.get(str_apiurl + '/calculation/v1/income/gross?grossMonthlyIncome=' + maandelijksinkomen + '&receivesHolidayPay=' + vakantiegeld + '&receivesThirteenthMonth=' + dertiendemaand + '&api_key=' + str_apikey, null ,function(result){
+        return deferred.resolve(Math.round(result.data.result));
+    });
+    
+    return deferred.promise();
 }

@@ -92,7 +92,12 @@ function form_creation_aanvragen($atts = []) {
         echo "<div class=\"stappenteller\" id=\"stappenteller\">Stap <span id=\"huidigestap\">1</span> van 6</div>";
     
         echo "<div id=\"stap1\">";
-            echo "<label for=\"brutoloon\">Je bruto jaarloon</label><input class=\"form-breedte250\" type=\"number\" id=\"brutoloon\" />";
+            echo "<label for=\"brutomaandloon\">Je bruto maandloon</label><input class=\"form-breedte250\" type=\"number\" id=\"brutomaandloon\" />";
+            echo "Ontvang je een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaand\" /><br />";
+            echo "Ontvang je vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeld\" /><br />";
+
+            echo "Je bruto jaarloon :<span id=\"brutoloon\"></span><br />";
+            
             echo "<label for=\"geboortedatum\">Je geboortedatum</label><input class=\"form-breedte250\" type=\"text\" id=\"geboortedatum\" />";
             
             echo "<div class=\"form-breedte250\">";
@@ -103,7 +108,13 @@ function form_creation_aanvragen($atts = []) {
             $tekstStap1MetPartner = $atts['stap1-met-partner'] == '' ? 'stap1-met-partner' : $atts['stap1-met-partner'];
             echo "<div style=\"padding:15px;\">".$tekstStap1MetPartner."</div></div>";
             echo "<div id=\"metPartner\" style=\"display: none\">";
-                echo "<label for=\"brutoloonpartner\">Bruto jaarloon van je eventuele partner</label><input class=\"form-breedte250\" type=\"number\" id=\"brutoloonpartner\" />";
+                echo "<label for=\"brutomaandloonpartner\">Je partners bruto maandloon</label><input class=\"form-breedte250\" type=\"number\" id=\"brutomaandloonpartner\" />";
+                echo "Ontvangt je partner een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaandpartner\" /><br />";
+                echo "Ontvangt je partner vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeldpartner\" /><br />";
+    
+                echo "Je partners bruto jaarloon :<span id=\"brutoloonpartner\"></span><br />";
+    
+                // echo "<label for=\"brutoloonpartner\">Bruto jaarloon van je eventuele partner</label><input class=\"form-breedte250\" type=\"number\" id=\"brutoloonpartner\" />";
                 echo "<label for=\"geboortedatumpartner\">Geboortedatum van je partner</label>";
                 echo "<input class=\"form-breedte250\" type=\"text\" id=\"geboortedatumpartner\" />";
             echo "</div>";
