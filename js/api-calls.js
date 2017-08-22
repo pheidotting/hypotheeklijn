@@ -1,6 +1,6 @@
 var $ = jQuery;
 
-function ophalenMaxHoogteHypotheek(percentage, ophalenHoogteModel, callback, str_apikey, str_apiurl){
+function ophalenMaxHoogteHypotheek(percentage, ophalenHoogteModel, callback, voorsidebar,   str_apikey, str_apiurl){
     console.log('Start opvragen maximale hypotheek'); 
     
     $('#foutmelding-niet-alles-gevuld').hide();
@@ -54,9 +54,7 @@ function ophalenMaxHoogteHypotheek(percentage, ophalenHoogteModel, callback, str
         }
         $('#debug').html(replaceAll(request, '\&', '<br />'));
         $.get(request + '&api_key=' + str_apikey, null ,function(result){
-            // result.data.result = 250000;
-            
-            callback(result.data.result);
+            callback(result.data.result, percentage, voorsidebar);
         });
         
         function replaceAll(str, find, replace) {
@@ -101,14 +99,17 @@ function ophalenAdresCall(postcode, huisnummer, str_apikey, str_apiurl) {
     return deferred.promise();
 }
 
-function ophalenRentepercentages(blnNhg, str_apikey, str_apiurl) {
+function ophalenRentepercentages(blnNhg, rentevasteperiode, str_apikey, str_apiurl) {
     var deferred = $.Deferred();
     var nhg = '';
     if(blnNhg) {
         nhg = '&ngh=true';
     }
+    //loanToValuePercentage
+    var rvp = '&period=' + rentevasteperiode;
+    //period
 
-    $.get(str_apiurl + '/interest/v1/interest-top-5' + '?api_key=' + str_apikey, null ,function(result){
+    $.get(str_apiurl + '/interest/v1/interest-top-5?api_key=' + str_apikey + nhg + rvp, null ,function(result){
         console.log('ophalen rentepercentages');
         console.log(result);
         
@@ -144,4 +145,75 @@ function ophalenRentepercentages(blnNhg, str_apikey, str_apiurl) {
     });
     
     return deferred.promise();
+}
+
+function ophalenWaardeWoonhuis(postcode, huisnummer, str_apikey, str_apiurl) {
+    var deferred = $.Deferred();
+
+    $.get(str_apiurl + '/address/v1/estimateHouseValue?postalcode=7894AB&housenumber=41' + '&api_key=' + str_apikey, null ,function(result){
+        return deferred.resolve(result);
+    });
+    
+    return deferred.promise();
+}
+
+function ophalenMaandelijkeBetalingen(hoogteHypotheek, rentevasteperiode, soortHypotheek, rentepercentage, geboortedatum1, inkomen1, geboortedatum2, inkomen2, woz, callback, str_apikey, str_apiurl){
+    var people = [{
+        "dob": geboortedatum1,
+        "grossIncome": parseInt(inkomen1)
+    }];
+    
+    if(inkomen2 != null && inkomen2 != '') {
+        people.push({
+            "dob": geboortedatum2,
+            "grossIncome": parseInt(inkomen2)
+        });
+    }
+    
+    var request = {
+        "loanparts": [
+            {
+                // "startDate": "2017-08-09",
+                "amount": hoogteHypotheek,
+                "mortgageType": soortHypotheek,
+                // "nonDeductableAmount": 0,
+                "durationInMonths": 360,
+                // "deductablePeriodInMonths": 0,
+                "interestPeriods": [
+                    {
+                        "duration": rentevasteperiode,
+                        "interestRate": parseFloat(rentepercentage)
+                    }
+                // ],
+                // "extraDeposits": [
+                //     {
+                //         "inMonth": 1,
+                //         "amount": 0
+                //     }
+                ]
+            }
+        ],
+        "people": people,
+        "WOZ": woz};
+    
+    $.ajax({
+        type: 'POST',
+        url: str_apiurl + '/calculation/v1/mortgage/payment?api_key=' + str_apikey,
+        data: JSON.stringify(request),
+        success: callback,
+        contentType: "application/json",
+        dataType: 'json'
+    });
+}
+
+function opvragenNhg(hoogteHypotheek, str_apikey, str_apiurl){
+    var deferred = $.Deferred();
+    var datum = moment().format('YYYY-MM-DD');
+
+    $.get(str_apiurl + '/calculation/v1/nhg/cost?amount=' + hoogteHypotheek + '&calculationDate=' + datum + '&addNhgToAmount=true' + '&api_key=' + str_apikey, null ,function(result){
+        return deferred.resolve(Math.round(result.data.result));
+    });
+    
+    return deferred.promise();
+
 }

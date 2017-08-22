@@ -1,5 +1,6 @@
 jQuery(document).ready(function($) { 
     var geboortedatum;
+    $('#huidigestap').text('1');
     $('#partner').click(function(){
         if($('#partner').is(':checked')) {
             $('#metPartner').show();
@@ -41,6 +42,23 @@ jQuery(document).ready(function($) {
         } else {
             $('#hoeveeloverigeleningenDiv').hide();
         }
+    });
+    $('#eigengeldinbrengen').click(function(){
+        if($('#eigengeldinbrengen').is(':checked')) {
+            $('#hoeveeleigengelddiv').show();
+        } else {
+            $('#hoeveeleigengelddiv').hide();
+        }
+    });
+    $('#postcodehuis').change(function() {
+        ophalenWaardeWoonhuis(null, null, $('#apikey').html(), $('#apiurl').html());
+    });
+    $('#huisnummerhuis').change(function() {
+        ophalenWaardeWoonhuis(null, null, $('#apikey').html(), $('#apiurl').html());
+    });
+    $('#waardehuis').change(function(){
+        berekenHypotheekBedrag();
+        hoogteHypotheek($('#percentage').val());
     });
     $('#koopsom').change(function(){
         berekenHypotheekBedrag();
@@ -89,17 +107,33 @@ jQuery(document).ready(function($) {
         $('#geboortedatumpartner').val(geboortedatum.format('DD-MM-YYYY'));
     });
     $('#nhg').click(function(){
+        var nhg;
         if($('#nhg').is(':checked')) {
             $('#metNHG').show();
+            nhg = true;
         } else {
             $('#metNHG').hide();
+            nhg = false;
         }
         berekenHypotheekBedrag();
         opvragenRentepercentages();
+        zetNhgSidebar(nhg);
+    });
+    $('#hoeveeleigengeld').click(function(){
+        berekenHypotheekBedrag();
+        opvragenRentepercentages();
+    });
+    $('#rentevasteperiode').change(function(){
+        zetRentevasteperiodeSidebar();
+        opvragenRentepercentages();
+    });
+    $('#soorthypotheek').change(function(){
+        zetSoorthypotheekSidebar();
     });
     $('#naar-stap2').click(function(){
         if(zijnDeVerplichteVeldenGevuld('stap1')) {
-            // hoogteHypotheek(null);
+            $('#huidigestap').text('2');
+            hoogteHypotheek(null, true);
     
             $('#stap1').hide();
             $('#stap2').show();
@@ -109,24 +143,28 @@ jQuery(document).ready(function($) {
     });
     $('#naar-stap3').click(function(){
         if(zijnDeVerplichteVeldenGevuld('stap2')) {
+            $('#huidigestap').text('3');
             $('#stap2').hide();
             $('#stap3').show();
         }
     });
     $('#naar-stap4').click(function(){
         if(zijnDeVerplichteVeldenGevuld('stap3')) {
+            $('#huidigestap').text('4');
             $('#stap3').hide();
             $('#stap4').show();
         }
     });
     $('#naar-stap5').click(function(){
         if(zijnDeVerplichteVeldenGevuld('stap4')) {
+            $('#huidigestap').text('5');
             $('#stap4').hide();
             $('#stap5').show();
         }
     });
     $('#naar-stap6').click(function(){
         if(zijnDeVerplichteVeldenGevuld('stap5')) {
+            $('#huidigestap').text('6');
             $('#stap5').hide();
             $('#stap6').show();
         }
@@ -136,31 +174,39 @@ jQuery(document).ready(function($) {
             plaatsAllesOpBevestigenScherm();
             $('#stap6').hide();
             $('#bevestigen').show();
+            $('#stappenteller').hide();
         }
     });
     $('#terug-naar-stap1').click(function(){
+        $('#huidigestap').text('1');
         $('#stap2').hide();
         $('#stap1').show();
     });
     $('#terug-naar-stap2').click(function(){
+        $('#huidigestap').text('2');
         $('#stap3').hide();
         $('#stap2').show();
     });
     $('#terug-naar-stap3').click(function(){
+        $('#huidigestap').text('3');
         $('#stap4').hide();
         $('#stap3').show();
     });
     $('#terug-naar-stap4').click(function(){
+        $('#huidigestap').text('4');
         $('#stap5').hide();
         $('#stap4').show();
     });
     $('#terug-naar-stap5').click(function(){
+        $('#huidigestap').text('5');
         $('#stap6').hide();
         $('#stap5').show();
     });
     $('#terug-naar-stap6').click(function(){
+        $('#huidigestap').text('6');
         $('#bevestigen').hide();
         $('#stap6').show();
+        $('#stappenteller').show();
     });
     $('#postcode').change(function(){
         ophalenAdres($('#postcode').val(), $('#huisnummer').val()).done(function(adres) {
@@ -316,10 +362,18 @@ jQuery(document).ready(function($) {
         $('#stap2-nhg-help').show();
         $('#stap2-nhg-question').hide();
     });
+    $('#stap2-eigen-geld-kruis').click(function(){
+        $('#stap2-eigen-geld-help').hide();
+        $('#stap2-eigen-geld-question').show();
+    });
+    $('#stap2-eigen-geld-question').click(function(){
+        $('#stap2-eigen-geld-help').show();
+        $('#stap2-eigen-geld-question').hide();
+    });
     
     opvragenRentepercentages();
     
-    function hoogteHypotheek(percentage){
+    function hoogteHypotheek(percentage, voorsidebar){
         var request = {
                 loan : $('#loan').val(),
                 vakantiegeld : $('#vakantiegeld').is(':checked'),
@@ -342,26 +396,72 @@ jQuery(document).ready(function($) {
                 nhg : $('#nhg').is(':checked'),
                 percentage : percentage
         }
-        ophalenMaxHoogteHypotheek(percentage, request, resultaatBerekenen, $('#apikey').html(), $('#apiurl').html());
-    
-        function resultaatBerekenen(maxHypotheek) {
-            var koopsom = $('#koopsom').val();
-            if(koopsom != null && koopsom != ''){
-                var maxHypotheekKoopsom = koopsom * 1.01;
+        if(percentage == null || percentage == '') {
+            $.when(ophalenRentepercentages(request.nhg, $('#rentevasteperiode').val(), $('#apikey').html(), $('#apiurl').html())).then(function(result) {
+                percentage = result[0].percentage;
 
-                if(maxHypotheek > maxHypotheekKoopsom) {
-                    $('#result').text('Je kunt maximaal lenen : ' + maakBedragOp(maxHypotheek) + ', maar op basis van de koopsom kun je lenen : ' + maakBedragOp(maxHypotheekKoopsom));
-                    $('#max-hypotheek').text(maxHypotheekKoopsom);
+                $('#rentepercentage-sidebar').text(percentage);
+
+                ophalenMaxHoogteHypotheek(percentage, request, resultaatBerekenen, true, $('#apikey').html(), $('#apiurl').html());
+            })
+        } else {
+            $('#rentepercentage-sidebar').text(percentage);
+
+            ophalenMaxHoogteHypotheek(percentage, request, resultaatBerekenen, false, $('#apikey').html(), $('#apiurl').html());
+        }
+    
+        function resultaatBerekenen(maxHypotheek, percentage, voorsidebar) {
+            var max = 0;
+            if(voorsidebar) {
+                $('#sidebar-max-hypotheek').text(maakBedragOp(maxHypotheek));
+                var waardehuis = $('#waardehuis').val();
+                if(waardehuis != null && waardehuis != ''){
+                    var maxHypotheekKoopsom = waardehuis * 1.01;
+                    $('#sidebar-max-hypotheek-koopsom').text(maakBedragOp(maxHypotheekKoopsom));
+                }
+                max = maxHypotheek;
+            } else {
+                var waardehuis = $('#waardehuis').val();
+                if(waardehuis != null && waardehuis != ''){
+                    var maxHypotheekKoopsom = waardehuis * 1.01;
+    
+                    if(maxHypotheek > maxHypotheekKoopsom) {
+                        $('#result').text('Je kunt maximaal lenen : ' + maakBedragOp(maxHypotheek) + ', maar op basis van de waarde van het huis kun je lenen : ' + maakBedragOp(maxHypotheekKoopsom));
+                        $('#max-hypotheek').text(maxHypotheekKoopsom);
+                        max = maxHypotheekKoopsom;
+                    } else {
+                        $('#result').text('Je kunt maximaal lenen : ' + maakBedragOp(maxHypotheek));
+                        $('#max-hypotheek').text(maxHypotheek);
+                        max = maxHypotheek;
+                    }
                 } else {
                     $('#result').text(maakBedragOp(maxHypotheek));
                     $('#max-hypotheek').text(maxHypotheek);
+                    max = maxHypotheek;
                 }
-            } else {
-                $('#result').text(maakBedragOp(maxHypotheek));
-                $('#max-hypotheek').text(maxHypotheek);
+                $('#sidebar-max-hypotheek').text(maakBedragOp(maxHypotheek));
+                $('#sidebar-max-hypotheek-koopsom').text(maakBedragOp(maxHypotheekKoopsom));
+                $('#resultaat').show();
+                berekenEigenMiddelen();
             }
-            $('#resultaat').show();
-            berekenEigenMiddelen();
+                
+            var waardehuis = parseInt($('#waardehuis').val());
+            var rentevasteperiode = parseInt($('#rentevasteperiode').val());
+            var soortHypotheek = $('#soorthypotheek').val();
+
+            if(!isNaN(waardehuis)) {
+                ophalenMaandelijkeBetalingen(max, rentevasteperiode, soortHypotheek, percentage, request.geboortedatum, request.brutoloon, request.geboortedatumpartner, request.brutoloonpartner, waardehuis, verwerkMaandelijkeBetalingen, $('#apikey').html(), $('#apiurl').html());
+            }
+            
+            function verwerkMaandelijkeBetalingen(result) {
+                var eersteMaand = result.data.months[0];
+                
+                var netto = eersteMaand.repayment + eersteMaand.net;
+                var bruto = eersteMaand.repayment + eersteMaand.gross;
+                
+                $('#nettomaandlast-sidebar').text(maakBedragOp(parseInt(netto)));
+                $('#brutomaandlast-sidebar').text(maakBedragOp(parseInt(bruto)));
+            }
         }
     }
     
@@ -400,13 +500,13 @@ jQuery(document).ready(function($) {
             nhg = true;
         }
 
-        ophalenRentepercentages(nhg, $('#apikey').html(), $('#apiurl').html()).done(function(percentage) {
+        ophalenRentepercentages(nhg, $('#rentevasteperiode').val(), $('#apikey').html(), $('#apiurl').html()).done(function(percentage) {
             var elements = [];
             _.each(percentage, function(p){
                 var currentElement = $('<input type="radio" name="aanbieders_option" value="' + p.bank + ' - ' + p.percentage + '">');
                 elements.push(currentElement[0]);
-                elements.push('<span style="widtht:100px !important;"><img src="' + p.logo + '" /></span>');
-                elements.push(p.bank + ': ' + p.percentage + '%');
+                elements.push('<span style="height: 50px; display:inline-block; vertical-align: top; margin-bottom: 5px;"><img style="width:75px;" src="' + p.logo + '" />');
+                elements.push(p.bank + ': ' + p.percentage + '%</span>');
                 elements.push('<div style="clear: both;">');
             });
             $('#aanbieders').append(elements);
@@ -417,8 +517,9 @@ jQuery(document).ready(function($) {
                 var percentage = input.split(' - ')[1];
                 
                 $('#percentage').val(percentage);
-                
+
                 hoogteHypotheek(percentage);
+                hoogteHypotheek(percentage, true);
 
                 $('#naar-stap2').prop('disabled', false);
             });
@@ -435,23 +536,43 @@ jQuery(document).ready(function($) {
         var hypotheekakteNotaris = parseInt($('#hypotheekakte-notaris').val());
         var taxatie = parseInt($('#taxatie').val());
         var commissie = parseInt($('#commissie').val());
+        var eigengeld = parseInt($('#hoeveeleigengeld').val());
+        if(isNaN(eigengeld)) {
+            eigengeld = 0;
+        }
         
         var totaalBedrag = koopsom + leveringsakteNotaris + hypotheekakteNotaris + taxatie + commissie + overdrachtsbelasting;
         
-        console.log(totaalBedrag);
+ //        console.log(totaalBedrag);
         
-        var nghCommissie = 0;
+        var nhgCommissie = 0;
         var benodigdehypotheek = $('#benodigdehypotheek').val();
-        if($('#nhg').is(':checked')) {
-            var nghCommissie = benodigdehypotheek * 0.01;
-        }
         
-        $('#nhgkosten').val(nghCommissie);
-        if(benodigdehypotheek != '' || isNaN(parseInt(benodigdehypotheek)) || parseInt(benodigdehypotheek) > 0) {
-            $('#benodigdehypotheek').val(nghCommissie + totaalBedrag);
-            verbergOfToonNhgOptie();
-        }
-        berekenEigenMiddelen();
+        opvragenNhg(totaalBedrag, $('#apikey').html(), $('#apiurl').html()).done(function(opgehaaldeNhgCommissie) {
+            //als marktwaarde < koopsom, dan nhg = over marktwaarde, anders koopsom
+            if($('#nhg').is(':checked')) {
+                var marktwaarde = parseInt($('#waardehuis').val());
+                // var nhgCommissie = 0;
+                // if(marktwaarde < koopsom) {
+                    // nhgCommissie = opvragenNhg(totaalBedrag, $('#apikey').html(), $('#apiurl').html());
+                    nhgCommissie = (marktwaarde * 101) * 0.0001;
+                    console.log(nhgCommissie);
+                // } else {
+                //     nhgCommissie = (totaalBedrag * 101) * 0.0001;
+                // }
+                
+                //nhgCommissie afronden
+                // nhgCommissie = Math.round(nhgCommissie);
+                nhgCommissie = opgehaaldeNhgCommissie;
+            }
+            
+            $('#nhgkosten').val(nhgCommissie);
+            if(benodigdehypotheek != '' || isNaN(parseInt(benodigdehypotheek)) || parseInt(benodigdehypotheek) > 0) {
+                $('#benodigdehypotheek').val((nhgCommissie + totaalBedrag) - eigengeld);
+                verbergOfToonNhgOptie();
+            }
+            berekenEigenMiddelen();
+        });
     }
     
     function verbergOfToonNhgOptie(){
@@ -681,5 +802,25 @@ jQuery(document).ready(function($) {
     	    element.css('border', '1px solid #ff0000');
     	    return false;
 	    }
+	}
+	
+	function zetNhgSidebar(nhg) {
+	    var nhgText = 'Nee';
+	    if(nhg) {
+	        nhgText = 'Ja';
+	    }
+	    $('#nhg-sidebar').text(nhgText);
+	}
+	
+	function zetRentevasteperiodeSidebar() {
+	    $('#rentevasteperiode-sidebar').text(parseInt($('#rentevasteperiode').val()));
+        hoogteHypotheek($('#percentage').val());
+        hoogteHypotheek($('#percentage').val(), true);
+    }
+    
+	function zetSoorthypotheekSidebar() {
+	    $('#soorthypotheek-sidebar').text($('#soorthypotheek option:selected').text());
+        hoogteHypotheek($('#percentage').val());
+        hoogteHypotheek($('#percentage').val(), true);
 	}
 });
