@@ -83,6 +83,7 @@ jQuery(document).ready(function($) {
     $('#benodigdehypotheek').change(function(){
         verbergOfToonNhgOptie();
         berekenEigenMiddelen();
+        berekenTeLenen();
     });
     $('#geboortedatum').change(function(){
         var input = $('#geboortedatum').val();
@@ -119,9 +120,11 @@ jQuery(document).ready(function($) {
         opvragenRentepercentages();
         zetNhgSidebar(nhg);
     });
-    $('#hoeveeleigengeld').click(function(){
+    $('#hoeveeleigengeld').change(function(){
+        kloptHoeveelEigenGeldWel();
         berekenHypotheekBedrag();
-        opvragenRentepercentages();
+        // opvragenRentepercentages();
+        berekenTeLenen();
     });
     $('#rentevasteperiode').change(function(){
         zetRentevasteperiodeSidebar();
@@ -473,9 +476,12 @@ jQuery(document).ready(function($) {
         if(eigenmiddelen > 0) {
             $('#eigen-middelen').show();
             $('#eigen-middelen-bedrag').text(maakBedragOp(eigenmiddelen));
+            $('#eigen-middelen-bedrag-backup').text(eigenmiddelen);
+            $('#hoeveeleigengeld').val(eigenmiddelen);
         } else {
             $('#eigen-middelen').hide();
         }
+        berekenTeLenen();
     }
     
     function ophalenAdres(postcode, huisnummer) {
@@ -568,7 +574,8 @@ jQuery(document).ready(function($) {
             
             $('#nhgkosten').val(nhgCommissie);
             if(benodigdehypotheek != '' || isNaN(parseInt(benodigdehypotheek)) || parseInt(benodigdehypotheek) > 0) {
-                $('#benodigdehypotheek').val((nhgCommissie + totaalBedrag) - eigengeld);
+                $('#benodigdehypotheek').val((nhgCommissie + totaalBedrag));
+                $('#hoeveeleigengeld').val(eigengeld);
                 verbergOfToonNhgOptie();
             }
             berekenEigenMiddelen();
@@ -822,5 +829,21 @@ jQuery(document).ready(function($) {
 	    $('#soorthypotheek-sidebar').text($('#soorthypotheek option:selected').text());
         hoogteHypotheek($('#percentage').val());
         hoogteHypotheek($('#percentage').val(), true);
+	}
+	
+	function kloptHoeveelEigenGeldWel() {
+	    var nieuwBedrag = parseInt($('#hoeveeleigengeld').val());
+	    var minimum = parseInt($('#eigen-middelen-bedrag-backup').text());
+	    
+	    if (nieuwBedrag < minimum) {
+	        $('#hoeveeleigengeld').val(minimum);
+	    }
+	}
+	
+	function berekenTeLenen() {
+	    var benodigd = parseInt($('#benodigdehypotheek').val());
+	    var eigengeld = parseInt($('#hoeveeleigengeld').val());
+	    
+	    $('#telenen').text(maakBedragOp(benodigd - eigengeld));
 	}
 });

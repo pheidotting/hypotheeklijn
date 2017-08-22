@@ -281,17 +281,6 @@ function form_creation_aanvragen($atts = []) {
             echo "</div>";
 
             echo "<div class=\"form-breedte250\">";
-                echo "<input type=\"checkbox\" id=\"eigengeldinbrengen\">Wil je eigen geld inbrengen?";
-                echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-eigen-geld-question\" />";
-            echo "</div>";
-            echo "<div id=\"stap2-eigen-geld-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-eigen-geld-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-            $tekstStap2EigenGeld = $atts['eigen-geld'] == '' ? 'eigen-geld' : $atts['eigen-geld'];
-            echo "<div style=\"padding:15px;\">".$tekstStap2EigenGeld."</div></div>";
-            echo "<div id=\"hoeveeleigengelddiv\" style=\"display: none\">";
-                echo "<label for=\"hoeveeleigengeld\">Hoeveel eigen geld wil je inbrengen</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveeleigengeld\" />";
-            echo "</div>";
-    
-            echo "<div class=\"form-breedte250\">";
                 echo "Kies een aanbieder uit de lijst:";
                 echo "<div id=\"aanbieders\"></div>";
             echo "</div>";
@@ -307,6 +296,19 @@ function form_creation_aanvragen($atts = []) {
             // <!--<div id=\"text-benodigde-hypotheek\"></div>-->
             echo "<div id=\"resultaat\" style=\"display:none;\">Je maximale hypotheek is : <span id=\"result\"></span></div>";
             echo "<div id=\"eigen-middelen\" style=\"display:none;\">Dat betekent dat je als eigen middelen moet inbrengen : <span id=\"eigen-middelen-bedrag\"></span></div>";
+            echo "<span id=\"eigen-middelen-bedrag-backup\" style=\"display:none;\"></span>";
+    
+            // echo "<div class=\"form-breedte250\">";
+            //     echo "<input type=\"checkbox\" id=\"eigengeldinbrengen\">Wil je eigen geld inbrengen?";
+            //     echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-eigen-geld-question\" />";
+            // echo "</div>";
+            echo "<div id=\"stap2-eigen-geld-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-eigen-geld-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+            $tekstStap2EigenGeld = $atts['eigen-geld'] == '' ? 'eigen-geld' : $atts['eigen-geld'];
+            echo "<div style=\"padding:15px;\">".$tekstStap2EigenGeld."</div></div>";
+            // echo "<div id=\"hoeveeleigengelddiv\">";
+            echo "<label for=\"hoeveeleigengeld\">Inbreng eigen geld</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveeleigengeld\" />";
+            // echo "</div>";
+            echo "<div>Te lenen : <span id=\"telenen\"></span></div>";
     
             // <!--<h3>Hypotheekvorm</h3>-->
             // <!--<input class=\"form-breedte250\" type=\"radio\" id=\"annuiteiten\" name=\"hypotheekvorm\">Annuiteiten-->
@@ -388,11 +390,11 @@ function form_creation_aanvragen($atts = []) {
             echo "</tr>";
             echo "<tr>";
                 echo "<td>Bruto maandlast</td>";
-                echo "<td><span id=\"brutomaandlast-sidebar\">€0</span></td>";
+                echo "<td><span id=\"brutomaandlast-sidebar\">€ 0</span></td>";
             echo "</tr>";
             echo "<tr>";
                 echo "<td>Netto maandlast (eerste maand)</td>";
-                echo "<td><span id=\"nettomaandlast-sidebar\">€0</span></td>";
+                echo "<td><span id=\"nettomaandlast-sidebar\">€ 0</span></td>";
             echo "</tr>";
             echo "<tr>";
                 echo "<td colspan=\"2\"><hr /></td>";
