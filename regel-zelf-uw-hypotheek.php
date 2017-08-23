@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Regel zelf uw hypotheek
-Plugin URI: http://www.heidottinga.nl/
+Plugin URI: http://www.heidotting.nl/
 Description: Plugin voor Regel zelf uw hypotheek
 Version: 1.0
 Author: Patrick Heidotting
@@ -92,11 +92,23 @@ function form_creation_aanvragen($atts = []) {
         echo "<div class=\"stappenteller\" id=\"stappenteller\">Stap <span id=\"huidigestap\">1</span> van 6</div>";
     
         echo "<div id=\"stap1\">";
-            echo "<label for=\"brutomaandloon\">Je bruto maandloon</label><input class=\"form-breedte250\" type=\"number\" id=\"brutomaandloon\" />";
-            echo "Ontvang je een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaand\" /><br />";
-            echo "Ontvang je vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeld\" /><br />";
+            echo "<input type=\"checkbox\" id=\"loon-uit-onderneming-check\">Loon uit eigen onderneming toevoegen?<br />";
+            echo "<div id=\"loon-uit-onderneming\" style=\"display:none;\">";
+                echo "<label for=\"inkomenEen\">Inkomen 2 jaar geleden</label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenEen\" />";
+                echo "<label for=\"inkomenTwee\">Inkomen vorig jaar</label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenTwee\" />";
+                echo "<label for=\"inkomenDrie\">Inkomen huidig jaar</label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenDrie\" />";
 
-            echo "Je bruto jaarloon :<span id=\"brutoloon\"></span><br />";
+                echo "Je bruto jaarloon uit onderneming :<span id=\"brutoloon-onderneming\"></span><br />";
+            echo "</div>";
+
+            echo "<input type=\"checkbox\" id=\"loon-uit-loondienst-check\">Loon uit loondienst toevoegen?<br />";
+            echo "<div id=\"loon-uit-loondienst\" style=\"display:none;\">";
+                echo "<label for=\"brutomaandloon\">Je bruto maandloon</label><input class=\"form-breedte250\" type=\"number\" id=\"brutomaandloon\" />";
+                echo "Ontvang je een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaand\" /><br />";
+                echo "Ontvang je vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeld\" /><br />";
+
+                echo "Je bruto jaarloon :<span id=\"brutoloon\"></span><br />";
+            echo "</div>";
             
             echo "<label for=\"geboortedatum\">Je geboortedatum</label><input class=\"form-breedte250\" type=\"text\" id=\"geboortedatum\" />";
             
@@ -107,13 +119,26 @@ function form_creation_aanvragen($atts = []) {
             echo "<div id=\"stap1-met-partner-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-met-partner-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
             $tekstStap1MetPartner = $atts['stap1-met-partner'] == '' ? 'stap1-met-partner' : $atts['stap1-met-partner'];
             echo "<div style=\"padding:15px;\">".$tekstStap1MetPartner."</div></div>";
+
             echo "<div id=\"metPartner\" style=\"display: none\">";
-                echo "<label for=\"brutomaandloonpartner\">Je partners bruto maandloon</label><input class=\"form-breedte250\" type=\"number\" id=\"brutomaandloonpartner\" />";
-                echo "Ontvangt je partner een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaandpartner\" /><br />";
-                echo "Ontvangt je partner vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeldpartner\" /><br />";
+                echo "<input type=\"checkbox\" id=\"loon-uit-onderneming-partner-check\">Loon uit eigen onderneming toevoegen?<br />";
+                echo "<div id=\"loon-uit-onderneming-partner\" style=\"display:none;\">";
+                    echo "<label for=\"inkomenEenPartner\">Inkomen 2 jaar geleden</label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenEenPartner\" />";
+                    echo "<label for=\"inkomenTweePartner\">Inkomen vorig jaar</label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenTweePartner\" />";
+                    echo "<label for=\"inkomenDriePartner\">Inkomen huidig jaar</label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenDriePartner\" />";
     
-                echo "Je partners bruto jaarloon :<span id=\"brutoloonpartner\"></span><br />";
+                    echo "Je bruto jaarloon uit onderneming :<span id=\"brutoloon-onderneming-partner\"></span><br />";
+                echo "</div>";
     
+                echo "<input type=\"checkbox\" id=\"loon-uit-loondienst-partner-check\">Loon uit loondienst toevoegen?<br />";
+                echo "<div id=\"loon-uit-loondienst-partner\" style=\"display:none;\">";
+                    echo "<label for=\"brutomaandloonpartner\">Je partners bruto maandloon</label><input class=\"form-breedte250\" type=\"number\" id=\"brutomaandloonpartner\" />";
+                    echo "Ontvangt je partner een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaandpartner\" /><br />";
+                    echo "Ontvangt je partner vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeldpartner\" /><br />";
+        
+                    echo "Je partners bruto jaarloon :<span id=\"brutoloonpartner\"></span><br />";
+                echo "</div>";
+
                 // echo "<label for=\"brutoloonpartner\">Bruto jaarloon van je eventuele partner</label><input class=\"form-breedte250\" type=\"number\" id=\"brutoloonpartner\" />";
                 echo "<label for=\"geboortedatumpartner\">Geboortedatum van je partner</label>";
                 echo "<input class=\"form-breedte250\" type=\"text\" id=\"geboortedatumpartner\" />";
@@ -174,32 +199,13 @@ function form_creation_aanvragen($atts = []) {
                 echo "<label for=\"hoeveeloverigeleningen\">Hoeveel?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveeloverigeleningen\" />";
             echo "</div>";
             
-            // <!--<input type=\"submit\" class=\"button-primary\" id=\"opvragen\">Opvragen</button>-->
-            
-            
-            // <!--<div id=\"debug\"></div>-->
-            
             echo "<input type=\"submit\" class=\"button-primary\" id=\"naar-stap2\"  value=\"Naar stap 2\" />";
         echo "</div>";
         echo "<div id=\"stap2\" style=\"display:none;\">";
             
             echo "<h3>Hypotheeksom</h3>";
-            // <!--<h3>Persoonlijke gegevens</h3>-->
-            // <!--<label for=\"brutoloon\">Je bruto jaarloon</label><input class=\"form-breedte250\" type=\"number\" id=\"brutoloon\" />-->
-            // <!--<label for=\"geboortedatum\">Je geboortedatum</label><input class=\"form-breedte250\" type=\"date\" id=\"geboortedatum\" />-->
-            
-            // <!--<input type=\"checkbox\" id=\"partner\">Met partner?-->
-            // <!--<div id=\"metPartner\" style=\"display: none\">-->
-            // <!--    <label for=\"brutoloonpartner\">Bruto jaarloon van je partner</label><input class=\"form-breedte250\" type=\"number\" id=\"brutoloonpartner\" />-->
-            // <!--    <label for=\"geboortedatumpartner\">Geboortedatum van je partner</label><input class=\"form-breedte250\" type=\"date\" id=\"geboortedatumpartner\" />-->
-            // <!--</div>-->
-            
             echo "<div class=\"form-breedte250\">";
-    //            echo "<label for=\"postcodehuis\">Postcode van het huis</label><input class=\"form-breedte250\" type=\"text\" id=\"postcodehuis\" style=\"display: inline-block; width: 95%;\" />";
-    //            echo "<label for=\"huisnummerhuis\">Huisnummer van het huis</label><input class=\"form-breedte250\" type=\"number\" id=\"huisnummerhuis\" style=\"display: inline-block; width: 95%;\" />";
-    
                 echo "<label for=\"waardehuis\">Waarde van het huis</label><input class=\"form-breedte250\" type=\"number\" id=\"waardehuis\" style=\"display: inline-block; width: 95%;\" />";
-    
             echo "</div>";
             
             echo "<div class=\"form-breedte250\">";

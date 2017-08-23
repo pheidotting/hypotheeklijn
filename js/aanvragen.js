@@ -20,6 +20,34 @@ jQuery(document).ready(function($) {
         berekenBrutojaarloonPartner();
     });
     
+    $('#loon-uit-onderneming-check').click(function(){
+        if($('#loon-uit-onderneming-check').is(':checked')) {
+            $('#loon-uit-onderneming').show();
+        } else {
+            $('#loon-uit-onderneming').hide();
+        }
+    });
+    $('#loon-uit-loondienst-check').click(function(){
+        if($('#loon-uit-loondienst-check').is(':checked')) {
+            $('#loon-uit-loondienst').show();
+        } else {
+            $('#loon-uit-loondienst').hide();
+        }
+    });
+    $('#loon-uit-onderneming-partner-check').click(function(){
+        if($('#loon-uit-onderneming-partner-check').is(':checked')) {
+            $('#loon-uit-onderneming-partner').show();
+        } else {
+            $('#loon-uit-onderneming-partner').hide();
+        }
+    });
+    $('#loon-uit-loondienst-partner-check').click(function(){
+        if($('#loon-uit-loondienst-partner-check').is(':checked')) {
+            $('#loon-uit-loondienst-partner').show();
+        } else {
+            $('#loon-uit-loondienst-partner').hide();
+        }
+    });
     $('#partner').click(function(){
         if($('#partner').is(':checked')) {
             $('#metPartner').show();
@@ -279,6 +307,25 @@ jQuery(document).ready(function($) {
 
         $('#iban').val(rek);
     });
+    $('#inkomenEen').change(function() {
+        berekenInkomenEigenOnderneming();
+    });
+    $('#inkomenTwee').change(function() {
+        berekenInkomenEigenOnderneming();
+    });
+    $('#inkomenDrie').change(function() {
+        berekenInkomenEigenOnderneming();
+    });
+    $('#inkomenEenPartner').change(function() {
+        berekenInkomenEigenOndernemingPartner();
+    });
+    $('#inkomenTweePartner').change(function() {
+        berekenInkomenEigenOndernemingPartner();
+    });
+    $('#inkomenDriePartner').change(function() {
+        berekenInkomenEigenOndernemingPartner();
+    });
+    
     //hulptekstballonnen
     $('#stap1-met-partner-kruis').click(function(){
         $('#stap1-met-partner-help').hide();
@@ -401,9 +448,9 @@ jQuery(document).ready(function($) {
                 vakantiegeld : $('#vakantiegeld').is(':checked'),
                 dertiendemaand : $('#dertiendemaand').is(':checked'),
                 partner : $('#partner').is(':checked'),
-                brutoloon : $('#brutoloon').text(),
+                brutoloon : (parseInt($('#brutoloon').text()) + parseInt($('#brutoloon-onderneming').text())),
                 geboortedatum : $('#geboortedatum').val(),
-                brutoloonpartner : $('#brutoloonpartner').text(),
+                brutoloonpartner : (parseInt('#brutoloonpartner').text() + parseInt('#brutoloon-onderneming-partner').text()),
                 geboortedatumpartner : $('#geboortedatumpartner').val(),
                 studieschuld : $('#studieschuld').is(':checked'),
                 hoeveelstudieschuld : $('#hoeveelstudieschuld').val(),
@@ -883,6 +930,44 @@ jQuery(document).ready(function($) {
 
         opvragenBrutoinkomen(brutomaandloonpartner, dertiendemaandpartner, vakantiegeldpartner, $('#apikey').html(), $('#apiurl').html()).done(function(result) {
             $('#brutoloonpartner').text(result);
+        });
+	}
+	
+	function berekenInkomenEigenOnderneming() {
+	    var jaarEen = parseInt($('#inkomenEen').val());
+	    if (isNaN(jaarEen)) {
+	        jaarEen = 0;
+	    }
+	    var jaarTwee = parseInt($('#inkomenTwee').val());
+	    if (isNaN(jaarTwee)) {
+	        jaarTwee = 0;
+	    }
+	    var jaarDrie = parseInt($('#inkomenDrie').val());
+	    if (isNaN(jaarDrie)) {
+	        jaarDrie = 0;
+	    }
+
+        opvragenBrutoinkomenOndernemer(jaarEen, jaarTwee, jaarDrie, $('#apikey').html(), $('#apiurl').html()).done(function(result) {
+            $('#brutoloon-onderneming').text(result);
+        });
+	}
+	
+	function berekenInkomenEigenOndernemingPartner() {
+	    var jaarEen = parseInt($('#inkomenEenPartner').val());
+	    if (isNaN(jaarEen)) {
+	        jaarEen = 0;
+	    }
+	    var jaarTwee = parseInt($('#inkomenTweePartner').val());
+	    if (isNaN(jaarTwee)) {
+	        jaarTwee = 0;
+	    }
+	    var jaarDrie = parseInt($('#inkomenDriePartner').val());
+	    if (isNaN(jaarDrie)) {
+	        jaarDrie = 0;
+	    }
+
+        opvragenBrutoinkomenOndernemer(jaarEen, jaarTwee, jaarDrie, $('#apikey').html(), $('#apiurl').html()).done(function(result) {
+            $('#brutoloon-onderneming-partner').text(result);
         });
 	}
 });

@@ -226,3 +226,13 @@ function opvragenBrutoinkomen(maandelijksinkomen, dertiendemaand, vakantiegeld, 
     
     return deferred.promise();
 }
+
+function opvragenBrutoinkomenOndernemer(jaarEen, jaarTwee, jaarDrie, str_apikey, str_apiurl) {
+    var deferred = $.Deferred();
+
+    $.get(str_apiurl + '/calculation/v1/income/entrepreneur?calculationMethod=nhg&incomeYearOne=' + jaarEen + '&incomeYearTwo=' + jaarTwee + '&incomeYearThree=' + jaarDrie + '&thirdYearAPrognoses=false' + '&api_key=' + str_apikey, null ,function(result){
+        return deferred.resolve(Math.round(result.data.result));
+    });
+    
+    return deferred.promise();
+}
