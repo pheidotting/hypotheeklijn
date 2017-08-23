@@ -450,7 +450,7 @@ jQuery(document).ready(function($) {
                 partner : $('#partner').is(':checked'),
                 brutoloon : (parseInt($('#brutoloon').text()) + parseInt($('#brutoloon-onderneming').text())),
                 geboortedatum : $('#geboortedatum').val(),
-                brutoloonpartner : (parseInt('#brutoloonpartner').text() + parseInt('#brutoloon-onderneming-partner').text()),
+                brutoloonpartner : (parseInt($('#brutoloonpartner').text()) + parseInt($('#brutoloon-onderneming-partner').text())),
                 geboortedatumpartner : $('#geboortedatumpartner').val(),
                 studieschuld : $('#studieschuld').is(':checked'),
                 hoeveelstudieschuld : $('#hoeveelstudieschuld').val(),
