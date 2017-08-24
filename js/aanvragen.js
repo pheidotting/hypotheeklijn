@@ -1,6 +1,11 @@
 jQuery(document).ready(function($) { 
     var geboortedatum;
     $('#huidigestap').text('1');
+    
+    $('[name=\'jaarEenTekst\']').text(moment().clone().subtract(3, 'years').format('YYYY'));
+    $('[name=\'jaarTweeTekst\']').text(moment().clone().subtract(2, 'years').format('YYYY'));
+    $('[name=\'jaarDrieTekst\']').text(moment().clone().subtract(1, 'years').format('YYYY'));
+    
     $('#brutomaandloon').change(function(){
         berekenBrutojaarloon();
     });
@@ -443,10 +448,10 @@ jQuery(document).ready(function($) {
     opvragenRentepercentages();
     
     function hoogteHypotheek(percentage, voorsidebar){
-        var brutoloon = parseInt($('#brutoloon').text());
-        var brutoloonOnderneming = parseInt($('#brutoloon-onderneming').text());
-        var brutoloonpartner = parseInt($('#brutoloonpartner').text());
-        var brutoloonOndernemingPartner = parseInt($('#brutoloon-onderneming-partner').text());
+        var brutoloon = parseInt($('#brutoloon').val());
+        var brutoloonOnderneming = parseInt($('#brutoloon-onderneming').val());
+        var brutoloonpartner = parseInt($('#brutoloonpartner').val());
+        var brutoloonOndernemingPartner = parseInt($('#brutoloon-onderneming-partner').val());
         
         var loon = 0;
         if(!isNaN(brutoloon)) {
@@ -939,7 +944,7 @@ jQuery(document).ready(function($) {
 	    var vakantiegeld = $('#vakantiegeld').is(':checked');
 
         opvragenBrutoinkomen(brutomaandloon, dertiendemaand, vakantiegeld, $('#apikey').html(), $('#apiurl').html()).done(function(result) {
-            $('#brutoloon').html(result);
+            $('#brutoloon').val(result);
         });
 	}
 	
@@ -949,7 +954,7 @@ jQuery(document).ready(function($) {
 	    var vakantiegeldpartner = $('#vakantiegeldpartner').is(':checked');
 
         opvragenBrutoinkomen(brutomaandloonpartner, dertiendemaandpartner, vakantiegeldpartner, $('#apikey').html(), $('#apiurl').html()).done(function(result) {
-            $('#brutoloonpartner').text(result);
+            $('#brutoloonpartner').val(result);
         });
 	}
 	
