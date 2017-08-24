@@ -443,14 +443,34 @@ jQuery(document).ready(function($) {
     opvragenRentepercentages();
     
     function hoogteHypotheek(percentage, voorsidebar){
+        var brutoloon = parseInt($('#brutoloon').text());
+        var brutoloonOnderneming = parseInt($('#brutoloon-onderneming').text());
+        var brutoloonpartner = parseInt($('#brutoloonpartner').text());
+        var brutoloonOndernemingPartner = parseInt($('#brutoloon-onderneming-partner').text());
+        
+        var loon = 0;
+        if(!isNaN(brutoloon)) {
+            loon += brutoloon;
+        }
+        if(!isNaN(brutoloonOnderneming)) {
+            loon += brutoloonOnderneming;
+        }
+        var loonPartner = 0;
+        if(!isNaN(brutoloonpartner)) {
+            loonPartner += brutoloonpartner;
+        }
+        if(!isNaN(brutoloonOndernemingPartner)) {
+            loonPartner += brutoloonOndernemingPartner;
+        }
+        
         var request = {
                 loan : $('#loan').val(),
                 vakantiegeld : $('#vakantiegeld').is(':checked'),
                 dertiendemaand : $('#dertiendemaand').is(':checked'),
                 partner : $('#partner').is(':checked'),
-                brutoloon : (parseInt($('#brutoloon').text()) + parseInt($('#brutoloon-onderneming').text())),
+                brutoloon : loon,
                 geboortedatum : $('#geboortedatum').val(),
-                brutoloonpartner : (parseInt($('#brutoloonpartner').text()) + parseInt($('#brutoloon-onderneming-partner').text())),
+                brutoloonpartner : loonPartner,
                 geboortedatumpartner : $('#geboortedatumpartner').val(),
                 studieschuld : $('#studieschuld').is(':checked'),
                 hoeveelstudieschuld : $('#hoeveelstudieschuld').val(),
