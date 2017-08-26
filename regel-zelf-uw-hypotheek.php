@@ -102,7 +102,7 @@ function form_creation_aanvragen($atts = []) {
     echo "<div class=\"stappenteller\" id=\"stappenteller\">Stap <span id=\"huidigestap\">1</span> van 7</div>";
     
     echo "<div class=\"links\">";
-        echo "<div id=\"foutmelding-niet-alles-gevuld\" style=\"display: none; color:red; font-weight: bold;\">Niet alle verplichte velden zijn gevuld</div>";
+        echo "<div id=\"foutmelding-niet-alle-verplichte-velden-gevuld\" style=\"display: none; color:red; font-weight: bold;\">Niet alle verplichte velden zijn gevuld</div>";
     
         echo "<div id=\"stap1\">";
             include_once(dirname(__FILE__) . '/php/stap1/stap1-html.php');

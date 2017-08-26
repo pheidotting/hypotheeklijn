@@ -456,9 +456,9 @@ jQuery(document).ready(function($) {
     
     function hoogteHypotheek(percentage, voorsidebar){
         var brutoloon = parseInt($('#brutoloon').val());
-        var brutoloonOnderneming = parseInt($('#brutoloon-onderneming').val());
+        var brutoloonOnderneming = parseInt($('#brutoloon-onderneming').text());
         var brutoloonpartner = parseInt($('#brutoloonpartner').val());
-        var brutoloonOndernemingPartner = parseInt($('#brutoloon-onderneming-partner').val());
+        var brutoloonOndernemingPartner = parseInt($('#brutoloon-onderneming-partner').text());
         
         var loon = 0;
         if(!isNaN(brutoloon)) {
@@ -845,12 +845,24 @@ jQuery(document).ready(function($) {
 	function zijnDeVerplichteVeldenGevuld(stap) {
 	    var allesGevuld = false;
 	    if(stap === 'stap1') {
-	        var brutoloon = isVeldGevuldEnVeranderRand($('#brutomaandloon'));
+	        var brutoloon = true;
+	        var onderneming = $('#loon-uit-onderneming-check').is(':checked');
+	        if(onderneming) {
+	            brutoloon = isVeldGevuldEnVeranderRand($('#inkomenEen')) && isVeldGevuldEnVeranderRand($('#inkomenTwee')) && isVeldGevuldEnVeranderRand($('#inkomenDrie'));
+	        } else {
+    	        brutoloon = isVeldGevuldEnVeranderRand($('#brutomaandloon'));
+	        }
 	        var geboortedatum = isVeldGevuldEnVeranderRand($('#geboortedatum'));
 	        
 	        var partnerOk = true;
             if($('#partner').is(':checked')) {
-                var brutoloonpartner = isVeldGevuldEnVeranderRand($('#brutomaandloonpartner'));
+                var brutoloonpartner = true;
+	            var ondernemingPartner = $('#loon-uit-onderneming-partner-check').is(':checked');
+    	        if(ondernemingPartner) {
+    	            brutoloonpartner = isVeldGevuldEnVeranderRand($('#inkomenEenPartner')) && isVeldGevuldEnVeranderRand($('#inkomenTweePartner')) && isVeldGevuldEnVeranderRand($('#inkomenDriePartner'));
+    	        } else {
+        	        brutoloonpartner = isVeldGevuldEnVeranderRand($('#brutomaandloonpartner'));
+    	        }
                 var geboortedatumpartner = isVeldGevuldEnVeranderRand($('#geboortedatumpartner'));
                 
                 partnerOk = brutoloonpartner && geboortedatumpartner;
@@ -917,9 +929,9 @@ jQuery(document).ready(function($) {
 	    }
 	    
 	    if(allesGevuld) {
-	        $('#foutmelding-niet-alles-gevuld').hide();
+	        $('#foutmelding-niet-alle-verplichte-velden-gevuld').hide();
 	    } else {
-	        $('#foutmelding-niet-alles-gevuld').show();
+	        $('#foutmelding-niet-alle-verplichte-velden-gevuld').show();
 	    }
 	    return allesGevuld;
 	}
