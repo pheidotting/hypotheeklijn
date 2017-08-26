@@ -23,56 +23,69 @@ function scripts_with_jquery() {
     wp_enqueue_script('moment');
     wp_enqueue_script('underscore');
     wp_enqueue_script('api-calls');
+
+    $simulatie = false;
 }
 
 
-function form_creation_max_hypotheek(){
-    wp_enqueue_script('max-hypotheek-bepalen');
+function form_creation_max_hypotheek($atts = []){
+    // wp_enqueue_script('max-hypotheek-bepalen');
+    wp_enqueue_script('aanvragen');
 
     ob_start();
 
-    echo "<input type=\"checkbox\" id=\"nhg\">Nationale Hypotheek Garantie?<br />";
-    echo "<label for=\"brutoloon\">Je bruto jaarloon</label><input class=\"form-breedte250\" type=\"number\" id=\"brutoloon\" />";
-    // <!--<input type=\"checkbox\" id=\"ondernemer\">Ben je zelfstandig ondernemer?-->
-    echo "<label for=\"geboortedatum\">Je geboortedatum</label><input class=\"form-breedte250\" type=\"date\" id=\"geboortedatum\" />";
+    echo "<div id=\"emailadresbeheerder\" style=\"display:none;\">".$atts['adres']."</div>";
+    echo "<div id=\"apikey\" style=\"display:none;\">".$atts['apikey']."</div>";
+    echo "<div id=\"apiurl\" style=\"display:none;\">".$atts['apiurl']."</div>";
     
-    echo "<input type=\"checkbox\" id=\"partner\">Met partner?";
-    echo "<div id=\"metPartner\" style=\"display: none\">";
-        echo "<label for=\"brutoloonpartner\">Bruto jaarloon van je eventuele partner</label><input class=\"form-breedte250\" type=\"number\" id=\"brutoloonpartner\" />";
-        echo "<label for=\"geboortedatumpartner\">Geboortedatum van je partner</label><input class=\"form-breedte250\" type=\"date\" id=\"geboortedatumpartner\" />";
-    echo "</div>";
+    echo "<input id=\"rentevasteperiode\" style=\"display: none;\" />";
+
+
+    // echo "<input type=\"checkbox\" id=\"nhg\">Nationale Hypotheek Garantie?<br />";
+    // echo "<label for=\"brutoloon\">Je bruto jaarloon</label><input class=\"form-breedte250\" type=\"number\" id=\"brutoloon\" />";
+    // // <!--<input type=\"checkbox\" id=\"ondernemer\">Ben je zelfstandig ondernemer?-->
+    // echo "<label for=\"geboortedatum\">Je geboortedatum</label><input class=\"form-breedte250\" type=\"date\" id=\"geboortedatum\" />";
     
-    echo "<input type=\"checkbox\" id=\"studieschuld\">Heb je een studieschuld?<br />";
-    echo "<div id=\"hoeveelstudieschuldDiv\" style=\"display: none\">";
-        echo "<label for=\"hoeveelstudieschuld\">Hoeveel?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveelstudieschuld\" />";
-    echo "</div>";
+    // echo "<input type=\"checkbox\" id=\"partner\">Met partner?";
+    // echo "<div id=\"metPartner\" style=\"display: none\">";
+    //     echo "<label for=\"brutoloonpartner\">Bruto jaarloon van je eventuele partner</label><input class=\"form-breedte250\" type=\"number\" id=\"brutoloonpartner\" />";
+    //     echo "<label for=\"geboortedatumpartner\">Geboortedatum van je partner</label><input class=\"form-breedte250\" type=\"date\" id=\"geboortedatumpartner\" />";
+    // echo "</div>";
     
-    echo "<input type=\"checkbox\" id=\"roodstaan\">Mag je rood staan?<br />";
-    echo "<div id=\"hoeveelroodstaanDiv\" style=\"display: none\">";
-        echo "<label for=\"hoeveelroodstaan\">Hoeveel?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveelroodstaan\" />";
-    echo "</div>";
+    // echo "<input type=\"checkbox\" id=\"studieschuld\">Heb je een studieschuld?<br />";
+    // echo "<div id=\"hoeveelstudieschuldDiv\" style=\"display: none\">";
+    //     echo "<label for=\"hoeveelstudieschuld\">Hoeveel?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveelstudieschuld\" />";
+    // echo "</div>";
     
-    echo "<input type=\"checkbox\" id=\"creditcard\">Heb je een creditcard?<br />";
-    echo "<div id=\"hoeveelcreditcardDiv\" style=\"display: none\">";
-        echo "<label for=\"hoeveelcreditcard\">Wat is de limiet?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveelcreditcard\" />";
-    echo "</div>";
+    // echo "<input type=\"checkbox\" id=\"roodstaan\">Mag je rood staan?<br />";
+    // echo "<div id=\"hoeveelroodstaanDiv\" style=\"display: none\">";
+    //     echo "<label for=\"hoeveelroodstaan\">Hoeveel?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveelroodstaan\" />";
+    // echo "</div>";
     
-    echo "<input type=\"checkbox\" id=\"partneralimentatie\">Betaal je partneralimentatie?<br />";
-    echo "<div id=\"hoeveelpartneralimentatieDiv\" style=\"display: none\">";
-        echo "<label for=\"hoeveelpartneralimentatie\">Hoeveel?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveelpartneralimentatie\" />";
-    echo "</div>";
+    // echo "<input type=\"checkbox\" id=\"creditcard\">Heb je een creditcard?<br />";
+    // echo "<div id=\"hoeveelcreditcardDiv\" style=\"display: none\">";
+    //     echo "<label for=\"hoeveelcreditcard\">Wat is de limiet?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveelcreditcard\" />";
+    // echo "</div>";
     
-    echo "<input type=\"checkbox\" id=\"overigeleningen\">Heb je overige leningen of kredieten?<br />";
-    echo "<div id=\"hoeveeloverigeleningenDiv\" style=\"display: none\">";
-        echo "<label for=\"hoeveeloverigeleningen\">Hoeveel?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveeloverigeleningen\" />";
-    echo "</div>";
+    // echo "<input type=\"checkbox\" id=\"partneralimentatie\">Betaal je partneralimentatie?<br />";
+    // echo "<div id=\"hoeveelpartneralimentatieDiv\" style=\"display: none\">";
+    //     echo "<label for=\"hoeveelpartneralimentatie\">Hoeveel?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveelpartneralimentatie\" />";
+    // echo "</div>";
     
-    echo "<div id=\"foutmelding-niet-alles-gevuld\" style=\"display: none; color:red; font-weight: bold;\">Niet alle verplichte velden zijn gevuld</div>";
-    echo "<input type=\"submit\" class=\"button-primary\" id=\"opvragen\">Opvragen</button>";
+    // echo "<input type=\"checkbox\" id=\"overigeleningen\">Heb je overige leningen of kredieten?<br />";
+    // echo "<div id=\"hoeveeloverigeleningenDiv\" style=\"display: none\">";
+    //     echo "<label for=\"hoeveeloverigeleningen\">Hoeveel?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveeloverigeleningen\" />";
+    // echo "</div>";
     
-    echo "<div id=\"resultaat\" style=\"display:none;\">Je maximale hypotheek is : <span id=\"result\"></span></div>";
+    // echo "<div id=\"foutmelding-niet-alles-gevuld\" style=\"display: none; color:red; font-weight: bold;\">Niet alle verplichte velden zijn gevuld</div>";
+    // echo "<input type=\"submit\" class=\"button-primary\" id=\"opvragen\">Opvragen</button>";
+    
+    // echo "<div id=\"resultaat\" style=\"display:none;\">Je maximale hypotheek is : <span id=\"result\"></span></div>";
     
     // <!--<div id=\"debug\"></div>-->
+    
+    $simulatie = true;
+    include_once(dirname(__FILE__) . '/php/stap1/stap1-html.php');
     
     return ob_get_clean();
 }

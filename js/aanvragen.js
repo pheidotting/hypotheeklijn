@@ -196,6 +196,12 @@ jQuery(document).ready(function($) {
             $('#text-benodigde-hypotheek').html('Benodigd bedrag : ' + maakBedragOp($('#benodigdehypotheek').val()));
         }
     });
+    $('#bereken-max-hypotheek').click(function(){
+        if(zijnDeVerplichteVeldenGevuld('stap1')) {
+            $('#rentevasteperiode').val('10');
+            hoogteHypotheek(null, false);
+        }
+    });
     $('#naar-stap3').click(function(){
         if(zijnDeVerplichteVeldenGevuld('stap2')) {
             $('#huidigestap').text('3');
@@ -710,12 +716,36 @@ jQuery(document).ready(function($) {
 	    
         var tekst = '<table>';
 	    //Stap 1
+        tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarEenTekst\']').text(), maakBedragOp($('#inkomenEen').val()));
+        tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarTweeTekst\']').text(), maakBedragOp($('#inkomenTwee').val()));
+        tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarDrieTekst\']').text(), maakBedragOp($('#inkomenDrie').val()));
+
+        tekst = tekst + zetTekst('Je bruto jaarloon uit onderneming', maakBedragOp($('#brutoloon-onderneming').val()));
+
+        tekst = tekst + zetTekst('Je bruto maandloon', maakBedragOp($('#brutomaandloon').val()));
+        var dertiendemaand = $('#dertiendemaand').is(':checked') ? 'Ja' : 'Nee';
+        tekst = tekst + zetTekst('Ontvang je een dertiende maand ?', dertiendemaand);
+        var vakantiegeld = $('#vakantiegeld').is(':checked') ? 'Ja' : 'Nee';
+        tekst = tekst + zetTekst('Ontvang je vakantiegeld ?', vakantiegeld);
+
 	    tekst = tekst + zetTekst('Je bruto jaarloon', maakBedragOp($('#brutoloon').val()));
         tekst = tekst + zetTekst('Je geboortedatum', $('#geboortedatum').val());
 
         var metPartner = $('#partner').is(':checked') ? 'Ja' : 'Nee';
         tekst = tekst + zetTekst('Met partner : ', metPartner);
         if(metPartner === 'Ja') {
+            tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarEenTekst\']').text(), maakBedragOp($('#inkomenEenPartner').val()));
+            tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarTweeTekst\']').text(), maakBedragOp($('#inkomenTweePartner').val()));
+            tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarDrieTekst\']').text(), maakBedragOp($('#inkomenDriePartner').val()));
+    
+            tekst = tekst + zetTekst('Je partners bruto jaarloon uit onderneming', maakBedragOp($('#brutoloon-onderneming-partner').val()));
+
+            tekst = tekst + zetTekst('Je partners bruto maandloon', maakBedragOp($('#brutomaandloonpartner').val()));
+            var dertiendemaand = $('#dertiendemaandpartner').is(':checked') ? 'Ja' : 'Nee';
+            tekst = tekst + zetTekst('Ontvangt je partner een dertiende maand', dertiendemaand);
+            var vakantiegeld = $('#vakantiegeldpartner').is(':checked') ? 'Ja' : 'Nee';
+            tekst = tekst + zetTekst('Ontvangt je partner vakantiegeld ?', vakantiegeld);
+
             tekst = tekst + zetTekst('Bruto jaarloon van je partner : ', maakBedragOp($('#brutoloonpartner').val()));
             tekst = tekst + zetTekst('Geboortedatum van je partner : ', $('#geboortedatumpartner').val());
         }
@@ -751,17 +781,22 @@ jQuery(document).ready(function($) {
         }
 
         //Stap 2
+	    tekst = tekst + zetTekst('Waarde van het huis', maakBedragOp($('#waardehuis').val()));
 	    tekst = tekst + zetTekst('Koopsom van het huis', maakBedragOp($('#koopsom').val()));
         tekst = tekst + zetTekst('Overdrachtsbelasting', maakBedragOp($('#overdrachtsbelasting').val()));
         tekst = tekst + zetTekst('Kosten leveringsakte notaris', maakBedragOp($('#leveringsakte-notaris').val()));
         tekst = tekst + zetTekst('Kosten hypotheekakte notaris', maakBedragOp($('#hypotheekakte-notaris').val()));
         tekst = tekst + zetTekst('Kosten taxatie', maakBedragOp($('#taxatie').val()));
         tekst = tekst + zetTekst('Kosten commissie', maakBedragOp($('#commissie').val()));
+        tekst = tekst + zetTekst('Rentevaste periode', $('#rentevasteperiode').val());
+        tekst = tekst + zetTekst('Soort hypotheek', $('#soorthypotheek').val());
         tekst = tekst + zetTekst('Kosten NHG', maakBedragOp($('#nhgkosten').val()));
         tekst = tekst + zetTekst('Gekozen aanbieder en rente', $("input[name='aanbieders_option']").val().replace('-', 'met') + '%');
         tekst = tekst + zetTekst('Hoeveel hypotheek ben je nodig', maakBedragOp($('#benodigdehypotheek').val()));
         tekst = tekst + zetTekst('Je maximale hypotheek is', $('#result').html());
         tekst = tekst + zetTekst('Dat betekent dat je als eigen middelen moet inbrengen', $('#eigen-middelen-bedrag').html());
+        tekst = tekst + zetTekst('Inbreng eigen geld', maakBedragOp($('#hoeveeleigengeld').val()));
+        tekst = tekst + zetTekst('Te lenen', maakBedragOp($('#telenen').val()));
 
         //Stap 3
         tekst = tekst + zetTekst('Naam', $('#naam').val());
