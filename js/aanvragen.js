@@ -717,11 +717,11 @@ jQuery(document).ready(function($) {
 	    
         var tekst = '<table>';
 	    //Stap 1
-        tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarEenTekst\']').text(), maakBedragOp($('#inkomenEen').val()));
-        tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarTweeTekst\']').text(), maakBedragOp($('#inkomenTwee').val()));
-        tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarDrieTekst\']').text(), maakBedragOp($('#inkomenDrie').val()));
+        tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarEenTekst\']').html(), maakBedragOp($('#inkomenEen').val()));
+        tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarTweeTekst\']').html(), maakBedragOp($('#inkomenTwee').val()));
+        tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarDrieTekst\']').html(), maakBedragOp($('#inkomenDrie').val()));
 
-        tekst = tekst + zetTekst('Je bruto jaarloon uit onderneming', maakBedragOp($('#brutoloon-onderneming').val()));
+        tekst = tekst + zetTekst('Je bruto jaarloon uit onderneming', maakBedragOp($('#brutoloon-onderneming').html()));
 
         tekst = tekst + zetTekst('Je bruto maandloon', maakBedragOp($('#brutomaandloon').val()));
         var dertiendemaand = $('#dertiendemaand').is(':checked') ? 'Ja' : 'Nee';
@@ -735,11 +735,11 @@ jQuery(document).ready(function($) {
         var metPartner = $('#partner').is(':checked') ? 'Ja' : 'Nee';
         tekst = tekst + zetTekst('Met partner : ', metPartner);
         if(metPartner === 'Ja') {
-            tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarEenTekst\']').text(), maakBedragOp($('#inkomenEenPartner').val()));
-            tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarTweeTekst\']').text(), maakBedragOp($('#inkomenTweePartner').val()));
-            tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarDrieTekst\']').text(), maakBedragOp($('#inkomenDriePartner').val()));
+            tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarEenTekst\']').html(), maakBedragOp($('#inkomenEenPartner').val()));
+            tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarTweeTekst\']').html(), maakBedragOp($('#inkomenTweePartner').val()));
+            tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarDrieTekst\']').html(), maakBedragOp($('#inkomenDriePartner').val()));
     
-            tekst = tekst + zetTekst('Je partners bruto jaarloon uit onderneming', maakBedragOp($('#brutoloon-onderneming-partner').val()));
+            tekst = tekst + zetTekst('Je partners bruto jaarloon uit onderneming', maakBedragOp($('#brutoloon-onderneming-partner').html()));
 
             tekst = tekst + zetTekst('Je partners bruto maandloon', maakBedragOp($('#brutomaandloonpartner').val()));
             var dertiendemaand = $('#dertiendemaandpartner').is(':checked') ? 'Ja' : 'Nee';
@@ -790,7 +790,7 @@ jQuery(document).ready(function($) {
         tekst = tekst + zetTekst('Kosten taxatie', maakBedragOp($('#taxatie').val()));
         tekst = tekst + zetTekst('Kosten commissie', maakBedragOp($('#commissie').val()));
         tekst = tekst + zetTekst('Rentevaste periode', $('#rentevasteperiode').val());
-        tekst = tekst + zetTekst('Soort hypotheek', $('#soorthypotheek').val());
+        tekst = tekst + zetTekst('Soort hypotheek', $('#soorthypotheek option:selected').text());
         tekst = tekst + zetTekst('Kosten NHG', maakBedragOp($('#nhgkosten').val()));
         tekst = tekst + zetTekst('Gekozen aanbieder en rente', $("input[name='aanbieders_option']").val().replace('-', 'met') + '%');
         tekst = tekst + zetTekst('Hoeveel hypotheek ben je nodig', maakBedragOp($('#benodigdehypotheek').val()));
@@ -920,7 +920,7 @@ jQuery(document).ready(function($) {
 	    } else if (stap === 'stap6') {
             var beroep = isVeldGevuldEnVeranderRand($('#beroep'));
             var datumindiensttreding = isVeldGevuldEnVeranderRand($('#datumindiensttreding'));
-            var einddatumcontract = isVeldGevuldEnVeranderRand($('#einddatumcontract'));
+            var einddatumcontract = true;//isVeldGevuldEnVeranderRand($('#einddatumcontract'));
             var naamwerkgever = isVeldGevuldEnVeranderRand($('#naamwerkgever'));
             var postcodewerkgever = isVeldGevuldEnVeranderRand($('#postcodewerkgever'));
             var huisnummerwerkgever = isVeldGevuldEnVeranderRand($('#huisnummerwerkgever'));
