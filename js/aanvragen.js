@@ -232,6 +232,7 @@ jQuery(document).ready(function($) {
     });
     $('#naar-bevestigen').click(function(){
         if(zijnDeVerplichteVeldenGevuld('stap6')) {
+            $('#huidigestap').text('7');
             plaatsAllesOpBevestigenScherm();
             $('#stap6').hide();
             $('#bevestigen').show();

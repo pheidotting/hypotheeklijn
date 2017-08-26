@@ -99,7 +99,7 @@ function form_creation_aanvragen($atts = []) {
     echo "<div id=\"apikey\" style=\"display:none;\">".$atts['apikey']."</div>";
     echo "<div id=\"apiurl\" style=\"display:none;\">".$atts['apiurl']."</div>";
 
-    echo "<div class=\"stappenteller\" id=\"stappenteller\">Stap <span id=\"huidigestap\">1</span> van 6</div>";
+    echo "<div class=\"stappenteller\" id=\"stappenteller\">Stap <span id=\"huidigestap\">1</span> van 7</div>";
     
     echo "<div class=\"links\">";
         echo "<div id=\"foutmelding-niet-alles-gevuld\" style=\"display: none; color:red; font-weight: bold;\">Niet alle verplichte velden zijn gevuld</div>";
