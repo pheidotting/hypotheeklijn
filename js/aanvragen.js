@@ -1022,6 +1022,7 @@ jQuery(document).ready(function($) {
 
         opvragenBrutoinkomenOndernemer(jaarEen, jaarTwee, jaarDrie, $('#apikey').html(), $('#apiurl').html()).done(function(result) {
             $('#brutoloon-onderneming').text(result);
+            $('#brutoloon-onderneming-opgemaakt').text(maakBedragOp(result));
         });
 	}
 	
@@ -1041,6 +1042,7 @@ jQuery(document).ready(function($) {
 
         opvragenBrutoinkomenOndernemer(jaarEen, jaarTwee, jaarDrie, $('#apikey').html(), $('#apiurl').html()).done(function(result) {
             $('#brutoloon-onderneming-partner').text(result);
+            $('#brutoloon-onderneming-opgemaakt-partner').text(maakBedragOp(result));
         });
 	}
 });

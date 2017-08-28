@@ -5,7 +5,7 @@
         echo "<label for=\"inkomenTwee\">Inkomen uit <span name=\"jaarTweeTekst\"></span></label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenTwee\" />";
         echo "<label for=\"inkomenDrie\">Inkomen uit <span name=\"jaarDrieTekst\"></span></label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenDrie\" />";
 
-        echo "Je bruto jaarloon uit onderneming :<span id=\"brutoloon-onderneming\"></span><br />";
+        echo "Je bruto jaarloon uit onderneming : <span id=\"brutoloon-onderneming-opgemaakt\"></span><span id=\"brutoloon-onderneming\" style=\"display:none;\"></span><br />";
     echo "</div>";
 
     echo "<input type=\"checkbox\" id=\"loon-uit-loondienst-check\">Loon uit loondienst toevoegen?<br />";
@@ -34,7 +34,7 @@
             echo "<label for=\"inkomenTweePartner\">Inkomen uit <span name=\"jaarTweeTekst\"></span></label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenTweePartner\" />";
             echo "<label for=\"inkomenDriePartner\">Inkomen uit <span name=\"jaarDrieTekst\"></span></label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenDriePartner\" />";
 
-            echo "Je partners bruto jaarloon uit onderneming :<span id=\"brutoloon-onderneming-partner\"></span><br />";
+            echo "Je partners bruto jaarloon uit onderneming : <span id=\"brutoloon-onderneming-opgemaakt-partner\"></span><span id=\"brutoloon-onderneming-partner\ style=\"display:none;\"></span><br />";
         echo "</div>";
 
         echo "<input type=\"checkbox\" id=\"loon-uit-loondienst-partner-check\">Loon uit loondienst toevoegen?<br />";

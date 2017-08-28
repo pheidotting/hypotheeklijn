@@ -10,19 +10,34 @@ License: GPL2
 */
 function scripts_with_jquery() {
     // Register the script like this for a plugin:
-    wp_register_script('max-hypotheek-bepalen', plugins_url('/js/max-hypotheek-bepalen.js', __FILE__ ), array('jquery'));
+    //voor refactoring
+    // wp_register_script('max-hypotheek-bepalen', plugins_url('/js/max-hypotheek-bepalen.js', __FILE__ ), array('jquery'));
     wp_register_script('aanvragen', plugins_url('/js/aanvragen.js', __FILE__ ), array('jquery'));
+
+    //na refactoring
+    // wp_register_script('hulptekstballonnen', plugins_url('/js/common/hulptekstballonnen.js', __FILE__ ), array('jquery'));
+    // wp_register_script('jaarloonberekenen', plugins_url('/js/common/jaarloonberekenen.js', __FILE__ ), array('jquery'));
+    // wp_register_script('triggerStap1', plugins_url('/js/stap1/stap1-trigger.js', __FILE__ ), array('jquery'));
+    
     wp_register_script('moment', plugins_url('/js/moment-with-locales.js', __FILE__ ));
     wp_register_script('underscore', plugins_url('/js/underscore-min.js', __FILE__ ));
     wp_register_script('api-calls', plugins_url('/js/api-calls.js', __FILE__ ), array('jquery'));
     // or
     // Register the script like this for a theme:
-    wp_register_script('max-hypotheek-bepalen.js', get_template_directory_uri() . '/js/max-hypotheek-bepalen.js', array('jquery'));
+    // wp_register_script('max-hypotheek-bepalen.js', get_template_directory_uri() . '/js/max-hypotheek-bepalen.js', array('jquery'));
  
     // For either a plugin or a theme, you can then enqueue the script:
     wp_enqueue_script('moment');
     wp_enqueue_script('underscore');
     wp_enqueue_script('api-calls');
+
+    //voor refactoring
+    wp_enqueue_script('aanvragen');
+
+    //na refactoring
+    // wp_enqueue_script('triggerStap1');
+    // wp_enqueue_script('hulptekstballonnen');
+    // wp_enqueue_script('jaarloonberekenen');
 
     $simulatie = false;
 }
@@ -30,7 +45,7 @@ function scripts_with_jquery() {
 
 function form_creation_max_hypotheek($atts = []){
     // wp_enqueue_script('max-hypotheek-bepalen');
-    wp_enqueue_script('aanvragen');
+    // wp_enqueue_script('aanvragen');
 
     ob_start();
 
@@ -47,7 +62,7 @@ function form_creation_max_hypotheek($atts = []){
 }
 
 function form_creation_aanvragen($atts = []) {
-    wp_enqueue_script('aanvragen');
+    // wp_enqueue_script('aanvragen');
     
     ob_start();
     
@@ -55,7 +70,7 @@ function form_creation_aanvragen($atts = []) {
     echo "<div id=\"apikey\" style=\"display:none;\">".$atts['apikey']."</div>";
     echo "<div id=\"apiurl\" style=\"display:none;\">".$atts['apiurl']."</div>";
 
-    echo "<div class=\"stappenteller\" id=\"stappenteller\">Stap <span id=\"huidigestap\">1</span> van 7</div>";
+    echo "<div class=\"stappenteller\" id=\"stappenteller\">Stap <span id=\"huidigestap\"></span> van 7</div>";
     
     echo "<div class=\"links\">";
         echo "<div id=\"foutmelding-niet-alle-verplichte-velden-gevuld\" style=\"display: none; color:red; font-weight: bold;\">Niet alle verplichte velden zijn gevuld</div>";
