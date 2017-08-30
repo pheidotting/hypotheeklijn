@@ -178,6 +178,12 @@ jQuery(document).ready(function($) {
         // opvragenRentepercentages();
         berekenTeLenen();
     });
+    $('#hoeveeleigengeld-getal').change(function(){
+        // kloptHoeveelEigenGeldWel();
+        // berekenHypotheekBedrag();
+        // opvragenRentepercentages();
+        berekenTeLenen();
+    });
     $('#rentevasteperiode').change(function(){
         zetRentevasteperiodeSidebar();
         opvragenRentepercentages();
@@ -228,6 +234,22 @@ jQuery(document).ready(function($) {
             $('#huidigestap').text('6');
             $('#stap5').hide();
             $('#stap6').show();
+            if($('#soort-inkomsten').val() === 'loondienst' || $('#soort-inkomsten').val() === 'onbepaalde-tijd') {
+                $('#gegevens-indien-loondienst').show();
+                $('#gegevens-indien-eigen-onderneming').hide();
+            } else {
+                $('#gegevens-indien-loondienst').hide();
+                $('#gegevens-indien-eigen-onderneming').show();
+            }
+            if($('#partner').is(':checked')) {
+                if($('#soort-inkomsten-partner').val() === 'loondienst' || $('#soort-inkomsten').val() === 'onbepaalde-tijd') {
+                    $('#gegevens-indien-loondienst-partner').show();
+                    $('#gegevens-indien-eigen-onderneming-partner').hide();
+                } else {
+                    $('#gegevens-indien-loondienst-partner').hide();
+                    $('#gegevens-indien-eigen-onderneming-partner').show();
+                }
+            }
         }
     });
     $('#naar-bevestigen').click(function(){
@@ -319,6 +341,34 @@ jQuery(document).ready(function($) {
 
         $('#iban').val(rek);
     });
+    $('#soort-inkomsten').change(function() {
+        if($('#soort-inkomsten').val() !== '') {
+            if($('#soort-inkomsten').val() === 'loondienst') {
+                $('#loon-uit-loondienst').show();
+                $('#loon-uit-onderneming').hide();
+            } else {
+                $('#loon-uit-loondienst').hide();
+                $('#loon-uit-onderneming').show();
+            }
+        } else {
+            $('#loon-uit-loondienst').hide();
+            $('#loon-uit-onderneming').hide();
+        }
+    });
+    $('#soort-inkomsten-partner').change(function() {
+        if($('#soort-inkomsten-partner').val() !== '') {
+            if($('#soort-inkomsten-partner').val() === 'loondienst') {
+                $('#loon-uit-loondienst-partner').show();
+                $('#loon-uit-onderneming-partner').hide();
+            } else {
+                $('#loon-uit-loondienst-partner').hide();
+                $('#loon-uit-onderneming-partner').show();
+            }
+        } else {
+            $('#loon-uit-loondienst-partner').hide();
+            $('#loon-uit-onderneming-partner').hide();
+        }
+    });
     $('#inkomenEen').change(function() {
         berekenInkomenEigenOnderneming();
     });
@@ -387,6 +437,22 @@ jQuery(document).ready(function($) {
         $('#stap1-overigeleningen-help').show();
         $('#stap1-overigeleningen-question').hide();
     });
+    $('#stap1-soort-inkomsten-kruis').click(function(){
+        $('#stap1-soort-inkomsten-help').hide();
+        $('#stap1-soort-inkomsten-question').show();
+    });
+    $('#stap1-soort-inkomsten-question').click(function(){
+        $('#stap1-soort-inkomsten-help').show();
+        $('#stap1-soort-inkomsten-question').hide();
+    });
+    // $('#stap1-loon-uit-onderneming-kruis').click(function(){
+    //     $('#stap1-loon-uit-onderneming-help').hide();
+    //     $('#stap1-loon-uit-onderneming-question').show();
+    // });
+    // $('#stap1-loon-uit-onderneming-question').click(function(){
+    //     $('#stap1-loon-uit-onderneming-help').show();
+    //     $('#stap1-loon-uit-onderneming-question').hide();
+    // });
     $('#stap2-koopsom-kruis').click(function(){
         $('#stap2-koopsom-help').hide();
         $('#stap2-koopsom-question').show();
@@ -526,18 +592,22 @@ jQuery(document).ready(function($) {
                 if(waardehuis != null && waardehuis != ''){
                     var maxHypotheekKoopsom = waardehuis * 1.01;
     
-                    if(maxHypotheek > maxHypotheekKoopsom) {
-                        $('#result').text('Je kunt maximaal lenen : ' + maakBedragOp(maxHypotheek) + ', maar op basis van de waarde van het huis kun je lenen : ' + maakBedragOp(maxHypotheekKoopsom));
-                        $('#max-hypotheek').text(maxHypotheekKoopsom);
+                    // if(maxHypotheek > maxHypotheekKoopsom) {
+                        $('#result').text(maakBedragOp(maxHypotheek));
+                        $('#result-getal').text(maxHypotheek);
+                        $('#max-hypotheek').text(maakBedragOp(maxHypotheekKoopsom));
+                        $('#max-hypotheek-getal').text(maxHypotheekKoopsom);
                         max = maxHypotheekKoopsom;
-                    } else {
-                        $('#result').text('Je kunt maximaal lenen : ' + maakBedragOp(maxHypotheek));
-                        $('#max-hypotheek').text(maxHypotheek);
-                        max = maxHypotheek;
-                    }
+                    // } else {
+                    //     $('#result').text('Je kunt maximaal lenen : ' + maakBedragOp(maxHypotheek));
+                    //     $('#max-hypotheek').text(maakBedragOp(maxHypotheek));
+                    //     max = maxHypotheek;
+                    // }
                 } else {
                     $('#result').text(maakBedragOp(maxHypotheek));
+                    $('#result-getal').text(maxHypotheek);
                     $('#max-hypotheek').text(maxHypotheek);
+                    $('#max-hypotheek-getal').text(maxHypotheekKoopsom);
                     max = maxHypotheek;
                 }
                 $('#sidebar-max-hypotheek').text(maakBedragOp(maxHypotheek));
@@ -567,13 +637,14 @@ jQuery(document).ready(function($) {
     }
     
     function berekenEigenMiddelen() {
-        var maxHypotheek = parseInt($('#max-hypotheek').html());
-        var benodigd = parseInt($('#benodigdehypotheek').val());
+        var maxHypotheek = parseInt($('#max-hypotheek-getal').text());
+        var benodigd = parseInt($('#benodigdehypotheek-getal').text());
         var eigenmiddelen = benodigd - maxHypotheek;
         
         if(eigenmiddelen > 0) {
             $('#eigen-middelen').show();
             $('#eigen-middelen-bedrag').text(maakBedragOp(eigenmiddelen));
+            $('#eigen-middelen-bedrag-getal').text(eigenmiddelen);
             $('#eigen-middelen-bedrag-backup').text(eigenmiddelen);
             $('#hoeveeleigengeld').val(eigenmiddelen);
         } else {
@@ -606,14 +677,31 @@ jQuery(document).ready(function($) {
 
         ophalenRentepercentages(nhg, $('#rentevasteperiode').val(), $('#apikey').html(), $('#apiurl').html()).done(function(percentage) {
             var elements = [];
+            var pp = '<table>';
             _.each(percentage, function(p){
-                var currentElement = $('<input type="radio" name="aanbieders_option" value="' + p.bank + ' - ' + p.percentage + '">');
-                elements.push(currentElement[0]);
-                elements.push('<span style="height: 50px; display:inline-block; vertical-align: top; margin-bottom: 5px;"><img style="width:75px;" src="' + p.logo + '" />');
-                elements.push(p.bank + ': ' + p.percentage + '%</span>');
-                elements.push('<div style="clear: both;">');
+                // var currentElement = $('<input type="radio" name="aanbieders_option" value="' + p.bank + ' - ' + p.percentage + '">');
+                // pp += '<tr><td>a</td></tr>';
+                pp += '<tr>';
+                pp += '<td>';
+                // pp += currentElement[0]);
+                pp += '<input type="radio" name="aanbieders_option" value="' + p.bank + ' - ' + p.percentage + '">';
+                pp += '</td>';
+                pp += '<td>';
+                pp += '<img style="width:75px;" src="' + p.logo + '" />';
+                pp += '</td>';
+                pp += '<td>';
+                pp += p.bank;
+                pp += '</td>';
+                pp += '<td>';
+                pp += p.percentage + '%';
+                pp += '</td>';
+                pp += '</tr>';
             });
-            $('#aanbieders').append(elements);
+            pp += '</table>';
+            // $('#aanbieders').append('<table style=\'border:1px solid #000000;\'>' + elements + '</table>');
+            // $('#aanbieders').append('<table style=\'border:1px solid #000000;\'>' + elements + '</table>');
+            // $('#aanbieders').append(elements);
+            $('#aanbieders').append(pp);
             $("input[name='aanbieders_option']").on('change', function() {
                 var input = $("input[name='aanbieders_option']:checked")[0].value;
                 console.log(input);
@@ -650,7 +738,7 @@ jQuery(document).ready(function($) {
  //        console.log(totaalBedrag);
         
         var nhgCommissie = 0;
-        var benodigdehypotheek = $('#benodigdehypotheek').val();
+        var benodigdehypotheek = $('#benodigdehypotheek-getal').text();
         
         opvragenNhg(totaalBedrag, $('#apikey').html(), $('#apiurl').html()).done(function(opgehaaldeNhgCommissie) {
             //als marktwaarde < koopsom, dan nhg = over marktwaarde, anders koopsom
@@ -672,8 +760,9 @@ jQuery(document).ready(function($) {
             
             $('#nhgkosten').val(nhgCommissie);
             if(benodigdehypotheek != '' || isNaN(parseInt(benodigdehypotheek)) || parseInt(benodigdehypotheek) > 0) {
-                $('#benodigdehypotheek').val((nhgCommissie + totaalBedrag));
-                $('#hoeveeleigengeld').val(eigengeld);
+                $('#benodigdehypotheek').text(maakBedragOp(nhgCommissie + totaalBedrag));
+                $('#benodigdehypotheek-getal').text(nhgCommissie + totaalBedrag);
+                // $('#hoeveeleigengeld').text(maakBedragOp(eigengeld));
                 verbergOfToonNhgOptie();
             }
             berekenEigenMiddelen();
@@ -896,9 +985,9 @@ jQuery(document).ready(function($) {
 	        allesGevuld = brutoloon && geboortedatum && partnerOk && studieschuldOk && roodstaanOk && creditcardOk && partneralimentatieOk && overigeleningenOk;
 	    } else if (stap === 'stap2') {
 	        var koopsom = isVeldGevuldEnVeranderRand($('#koopsom'));
-	        var benodigdehypotheek = isVeldGevuldEnVeranderRand($('#benodigdehypotheek'));
+	        var waardehuis = isVeldGevuldEnVeranderRand($('#waardehuis'));
 	        
-	        allesGevuld = koopsom && benodigdehypotheek;
+	        allesGevuld = koopsom && waardehuis;
 	    } else if (stap === 'stap3') {
 	        var postcode = isVeldGevuldEnVeranderRand($('#postcode'));
 	        var huisnummer = isVeldGevuldEnVeranderRand($('#huisnummer'));
@@ -980,10 +1069,19 @@ jQuery(document).ready(function($) {
 	}
 	
 	function berekenTeLenen() {
-	    var benodigd = parseInt($('#benodigdehypotheek').val());
-	    var eigengeld = parseInt($('#hoeveeleigengeld').val());
+	    var benodigd = parseInt($('#benodigdehypotheek-getal').text());
+	    var eigengeld = parseInt($('#eigen-middelen-bedrag-getal').text());
+	    var eigengeldZelf = parseInt($('#hoeveeleigengeld-getal').val());
 	    
-	    $('#telenen').text(maakBedragOp(benodigd - eigengeld));
+	    if(isNaN(eigengeld)) {
+	        eigengeld = 0;
+	    }
+	    if(isNaN(eigengeldZelf)) {
+	        eigengeldZelf = 0;
+	    }
+	    
+	    $('#telenen').text(maakBedragOp(benodigd - eigengeld - eigengeldZelf));
+	    $('#telenen-getal').text(benodigd - eigengeld - eigengeldZelf);
 	}
 	
 	function berekenBrutojaarloon() {

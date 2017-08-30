@@ -1,12 +1,12 @@
 <?php
-    echo "<h3>Jouw hypotheek berekening</h3>";
+    echo "<h3>Jouw hypotheekberekening</h3>";
     echo "<table>";
         echo "<tr>";
             echo "<td>Leencapaciteit o.b.v. je financiële situatie</td>";
             echo "<td><span id=\"sidebar-max-hypotheek\">€ 0</span></td>";
         echo "</tr>";
         echo "<tr>";
-            echo "<td>Leencapaciteit o.b.v. de koopprijs</td>";
+            echo "<td>Leencapaciteit o.b.v. de koopsom</td>";
             echo "<td><span id=\"sidebar-max-hypotheek-koopsom\">€ 0</span></td>";
         echo "</tr>";
         echo "<tr>";
@@ -24,7 +24,7 @@
             echo "<td colspan=\"2\"><hr /></td>";
         echo "</tr>";
         echo "<tr>";
-            echo "<td>Rente percentage</td>";
+            echo "<td>Rentepercentage</td>";
             echo "<td><span id=\"rentepercentage-sidebar\">0</span>%</td>";
         echo "</tr>";
         echo "<tr>";
@@ -33,7 +33,7 @@
         echo "</tr>";
         echo "<tr>";
             echo "<td>Soort hypotheek</td>";
-            echo "<td><span id=\"soorthypotheek-sidebar\">Annuïteiten<span></td>";
+            echo "<td><span id=\"soorthypotheek-sidebar\"><span></td>";
         echo "</tr>";
         echo "<tr>";
             echo "<td>Nationale Hypotheek Garantie</td>";

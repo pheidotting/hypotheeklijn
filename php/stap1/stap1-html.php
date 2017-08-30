@@ -1,23 +1,46 @@
 <?php
-    echo "<input type=\"checkbox\" id=\"loon-uit-onderneming-check\">Loon uit eigen onderneming toevoegen?<br />";
-    echo "<div id=\"loon-uit-onderneming\" style=\"display:none;\">";
-        echo "<label for=\"inkomenEen\">Inkomen uit <span name=\"jaarEenTekst\">b</span></label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenEen\" />";
-        echo "<label for=\"inkomenTwee\">Inkomen uit <span name=\"jaarTweeTekst\"></span></label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenTwee\" />";
-        echo "<label for=\"inkomenDrie\">Inkomen uit <span name=\"jaarDrieTekst\"></span></label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenDrie\" />";
+echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  avia-builder-el-no-sibling\"><fieldset>";
+    echo "<label for=\"geboortedatum\">Je geboortedatum</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"geboortedatum\" />";
 
-        echo "Je bruto jaarloon uit onderneming : <span id=\"brutoloon-onderneming-opgemaakt\"></span><span id=\"brutoloon-onderneming\" style=\"display:none;\"></span><br />";
-    echo "</div>";
+    echo "<label for=\"soort-inkomsten\">Kies soort inkomsten</label>";
+    echo "<select id=\"soort-inkomsten\">";
+    echo "<option value=\"\"></option>";
+    echo "<option value=\"loondienst\">Loon uit vast dienstverband</option>";
+    echo "<option value=\"loondienst\">Loon uit tijdelijk dienstverband met intentieverklaring</option>";
+    echo "<option value=\"onbepaalde-tijd\">Loon uit tijdelijk dienstverband zonder intentieverklaring</option>";
+    echo "<option value=\"onderneming\">Loon uit onderneming</option>";
+    echo "</select>";
+    
+    echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap1-soort-inkomsten-question\" />";
+    echo "<div id=\"stap1-soort-inkomsten-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-soort-inkomsten-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+    $tekstStap1SoortInkomsten = $atts['stap1-soort-inkomsten'] == '' ? 'stap1-soort-inkomsten' : $atts['stap1-soort-inkomsten'];
+    echo "<div style=\"padding:15px;\">".$tekstStap1SoortInkomsten."</div></div>";
 
-    echo "<input type=\"checkbox\" id=\"loon-uit-loondienst-check\">Loon uit loondienst toevoegen?<br />";
     echo "<div id=\"loon-uit-loondienst\" style=\"display:none;\">";
-        echo "<label for=\"brutomaandloon\">Je bruto maandloon</label><input class=\"form-breedte250\" type=\"number\" id=\"brutomaandloon\" />";
+        echo "<p class=\"first_form  form_element form_fullwidth\">";
+            echo "<label for=\"brutomaandloon\">Je bruto maandloon</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"brutomaandloon\" />";
+        echo "</p><br />";
         echo "Ontvang je een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaand\" /><br />";
         echo "Ontvang je vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeld\" /><br />";
 
-        echo "<label for=\"brutoloon\">Je bruto jaarloon :</label><input id=\"brutoloon\"class=\"form-breedte250\" type=\"number\" />";
+        echo "<p class=\"first_form  form_element form_fullwidth\">";
+            echo "<label for=\"brutoloon\">Je bruto jaarloon :</label><input id=\"brutoloon\"class=\"form-breedte75-procent text_input is_empty\" type=\"number\" />";
+        echo "<p class=\"first_form  form_element form_fullwidth\">";
     echo "</div>";
-    
-    echo "<label for=\"geboortedatum\">Je geboortedatum</label><input class=\"form-breedte250\" type=\"text\" id=\"geboortedatum\" />";
+
+    echo "<div id=\"loon-uit-onderneming\" style=\"display:none;\">";
+        echo "<p class=\"first_form  form_element form_fullwidth\">";
+            echo "<label for=\"inkomenEen\">Inkomen uit <span name=\"jaarEenTekst\"></span></label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"inkomenEen\" />";
+        echo "</p>";
+        echo "<p class=\"first_form  form_element form_fullwidth\">";
+            echo "<label for=\"inkomenTwee\">Inkomen uit <span name=\"jaarTweeTekst\"></span></label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"inkomenTwee\" />";
+        echo "</p>";
+        echo "<p class=\"first_form  form_element form_fullwidth\">";
+            echo "<label for=\"inkomenDrie\">Inkomen uit <span name=\"jaarDrieTekst\"></span></label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"inkomenDrie\" />";
+        echo "</p>";
+
+        echo "Je bruto jaarloon : <span id=\"brutoloon-onderneming-opgemaakt\"></span><span id=\"brutoloon-onderneming\" style=\"display:none;\"></span><br />";
+    echo "</div>";
     
     echo "<div class=\"form-breedte250\">";
         echo "<input type=\"checkbox\" id=\"partner\">Met partner?";
@@ -28,27 +51,50 @@
     echo "<div style=\"padding:15px;\">".$tekstStap1MetPartner."</div></div>";
 
     echo "<div id=\"metPartner\" style=\"display: none\">";
-        echo "<input type=\"checkbox\" id=\"loon-uit-onderneming-partner-check\">Loon uit eigen onderneming toevoegen?<br />";
-        echo "<div id=\"loon-uit-onderneming-partner\" style=\"display:none;\">";
-            echo "<label for=\"inkomenEenPartner\">Inkomen uit <span name=\"jaarEenTekst\"></span></label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenEenPartner\" />";
-            echo "<label for=\"inkomenTweePartner\">Inkomen uit <span name=\"jaarTweeTekst\"></span></label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenTweePartner\" />";
-            echo "<label for=\"inkomenDriePartner\">Inkomen uit <span name=\"jaarDrieTekst\"></span></label><input class=\"form-breedte250\" type=\"number\" id=\"inkomenDriePartner\" />";
+        echo "<p class=\"first_form  form_element form_fullwidth\">";
+            echo "<label for=\"geboortedatumpartner\">Geboortedatum van je partner</label>";
+            echo "<input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"geboortedatumpartner\" />";
+        echo "</p>";
 
-            echo "Je partners bruto jaarloon uit onderneming : <span id=\"brutoloon-onderneming-opgemaakt-partner\"></span><span id=\"brutoloon-onderneming-partner\ style=\"display:none;\"></span><br />";
-        echo "</div>";
-
-        echo "<input type=\"checkbox\" id=\"loon-uit-loondienst-partner-check\">Loon uit loondienst toevoegen?<br />";
+        echo "<label for=\"soort-inkomsten-partner\">Kies soort inkomsten</label>";
+        echo "<select id=\"soort-inkomsten-partner\">";
+        echo "<option value=\"\"></option>";
+        echo "<option value=\"loondienst\">Loon uit vast dienstverband</option>";
+        echo "<option value=\"loondienst\">Loon uit tijdelijk dienstverband met intentieverklaring</option>";
+        echo "<option value=\"onbepaalde-tijd\">Loon uit tijdelijk dienstverband zonder intentieverklaring</option>";
+        echo "<option value=\"onderneming\">Loon uit onderneming</option>";
+        echo "</select>";
+        
+        // echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap1-soort-inkomsten-question\" />";
+        // echo "<div id=\"stap1-soort-inkomsten-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-soort-inkomsten-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        // $tekstStap1SoortInkomsten = $atts['stap1-soort-inkomsten'] == '' ? 'stap1-soort-inkomsten' : $atts['stap1-soort-inkomsten'];
+        // echo "<div style=\"padding:15px;\">".$tekstStap1SoortInkomsten."</div></div>";
+    
         echo "<div id=\"loon-uit-loondienst-partner\" style=\"display:none;\">";
-            echo "<label for=\"brutomaandloonpartner\">Je partners bruto maandloon</label><input class=\"form-breedte250\" type=\"number\" id=\"brutomaandloonpartner\" />";
-            echo "Ontvangt je partner een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaandpartner\" /><br />";
-            echo "Ontvangt je partner vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeldpartner\" /><br />";
-
-            echo "<label for=\"brutoloonpartner\">Je partners bruto jaarloon :</label><input id=\"brutoloonpartner\"class=\"form-breedte250\" type=\"number\" />";
+            echo "<p class=\"first_form  form_element form_fullwidth\">";
+                echo "<label for=\"brutomaandloon\">Je bruto maandloon</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"brutomaandloonpartner\" />";
+            echo "</p><br />";
+            echo "Ontvang je een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaandpartner\" /><br />";
+            echo "Ontvang je vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeldpartner\" /><br />";
+    
+            echo "<p class=\"first_form  form_element form_fullwidth\">";
+                echo "<label for=\"brutoloon\">Je bruto jaarloon :</label><input id=\"brutoloonpartner\"class=\"form-breedte75-procent text_input is_empty\" type=\"number\" />";
+            echo "<p class=\"first_form  form_element form_fullwidth\">";
         echo "</div>";
-
-        // echo "<label for=\"brutoloonpartner\">Bruto jaarloon van je eventuele partner</label><input class=\"form-breedte250\" type=\"number\" id=\"brutoloonpartner\" />";
-        echo "<label for=\"geboortedatumpartner\">Geboortedatum van je partner</label>";
-        echo "<input class=\"form-breedte250\" type=\"text\" id=\"geboortedatumpartner\" />";
+    
+        echo "<div id=\"loon-uit-onderneming-partner\" style=\"display:none;\">";
+            echo "<p class=\"first_form  form_element form_fullwidth\">";
+                echo "<label for=\"inkomenEen\">Inkomen uit <span name=\"jaarEenTekst\"></span></label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"inkomenEenPartner\" />";
+            echo "</p>";
+            echo "<p class=\"first_form  form_element form_fullwidth\">";
+                echo "<label for=\"inkomenTwee\">Inkomen uit <span name=\"jaarTweeTekst\"></span></label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"inkomenTweePartner\" />";
+            echo "</p>";
+            echo "<p class=\"first_form  form_element form_fullwidth\">";
+                echo "<label for=\"inkomenDrie\">Inkomen uit <span name=\"jaarDrieTekst\"></span></label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"inkomenDriePartner\" />";
+            echo "</p>";
+    
+            echo "Je bruto jaarloon : <span id=\"brutoloon-onderneming-opgemaakt-partner\"></span><span id=\"brutoloon-onderneming-partner\" style=\"display:none;\"></span><br />";
+        echo "</div>";
     echo "</div>";
     
     echo "<div class=\"form-breedte250\">";
@@ -59,7 +105,7 @@
     $tekstStap1Studieschuld = $atts['stap1-studieschuld'] == '' ? 'stap1-studieschuld' : $atts['stap1-studieschuld'];
     echo "<div style=\"padding:15px;\">".$tekstStap1Studieschuld."</div></div>";
     echo "<div id=\"hoeveelstudieschuldDiv\" style=\"display: none\">";
-        echo "<label for=\"hoeveelstudieschuld\">Hoeveel?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveelstudieschuld\" />";
+        echo "<label for=\"hoeveelstudieschuld\">Hoeveel?</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveelstudieschuld\" />";
     echo "</div>";
     
     echo "<div class=\"form-breedte250\">";
@@ -70,7 +116,7 @@
     $tekstStap1Roodstaan = $atts['stap1-roodstaan'] == '' ? 'stap1-roodstaan' : $atts['stap1-roodstaan'];
     echo "<div style=\"padding:15px;\">".$tekstStap1Roodstaan."</div></div>";
     echo "<div id=\"hoeveelroodstaanDiv\" style=\"display: none\">";
-        echo "<label for=\"hoeveelroodstaan\">Hoeveel?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveelroodstaan\" />";
+        echo "<label for=\"hoeveelroodstaan\">Hoeveel?</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveelroodstaan\" />";
     echo "</div>";
     
     echo "<div class=\"form-breedte250\">";
@@ -81,7 +127,7 @@
     $tekstStap1Creditcard = $atts['stap1-creditcard'] == '' ? 'stap1-creditcard' : $atts['stap1-creditcard'];
     echo "<div style=\"padding:15px;\">".$tekstStap1Creditcard."</div></div>";
     echo "<div id=\"hoeveelcreditcardDiv\" style=\"display: none\">";
-        echo "<label for=\"hoeveelcreditcard\">Wat is de limiet?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveelcreditcard\" />";
+        echo "<label for=\"hoeveelcreditcard\">Wat is de limiet?</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveelcreditcard\" />";
     echo "</div>";
     
     echo "<div class=\"form-breedte250\">";
@@ -92,7 +138,7 @@
     $tekstStap1Partneralimentatie = $atts['stap1-partneralimentatie'] == '' ? 'stap1-partneralimentatie' : $atts['stap1-partneralimentatie'];
     echo "<div style=\"padding:15px;\">".$tekstStap1Partneralimentatie."</div></div>";
     echo "<div id=\"hoeveelpartneralimentatieDiv\" style=\"display: none\">";
-        echo "<label for=\"hoeveelpartneralimentatie\">Hoeveel?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveelpartneralimentatie\" />";
+        echo "<label for=\"hoeveelpartneralimentatie\">Hoeveel?</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveelpartneralimentatie\" />";
     echo "</div>";
     
     echo "<div class=\"form-breedte250\">";
@@ -103,13 +149,15 @@
     $tekstStap1Overigeleningen = $atts['stap1-overigeleningen'] == '' ? 'stap1-overigeleningen' : $atts['stap1-overigeleningen'];
     echo "<div style=\"padding:15px;\">".$tekstStap1Overigeleningen."</div></div>";
     echo "<div id=\"hoeveeloverigeleningenDiv\" style=\"display: none\">";
-        echo "<label for=\"hoeveeloverigeleningen\">Hoeveel?</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveeloverigeleningen\" />";
+        echo "<label for=\"hoeveeloverigeleningen\">Hoeveel?</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveeloverigeleningen\" />";
     echo "</div>";
     
+    echo "</fieldset></form>";
     if ($simulatie) {
         echo "<input type=\"submit\" class=\"button-primary\" id=\"bereken-max-hypotheek\" value=\"Bereken mijn maximale hypotheek\" />";
-        echo "<br />";        
-        echo "Jouw maximale hypotheek is : <span id=\"sidebar-max-hypotheek\"></span>";
+        echo "<br />";
+        echo "<br />";
+        echo "<div class=\"stappenteller\" id=\"stappenteller\">Jouw maximale hypotheek is : <span id=\"sidebar-max-hypotheek\"></span></div>";
     } else {
         echo "<input type=\"submit\" class=\"button-primary\" id=\"naar-stap2\" value=\"Naar stap 2\" />";
     }

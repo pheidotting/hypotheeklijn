@@ -1,11 +1,11 @@
 <?php
-    echo "<h3>Hypotheeksom</h3>";
+    echo "<h3>Hypotheek samenstellen</h3>";
     echo "<div class=\"form-breedte250\">";
-        echo "<label for=\"waardehuis\">Waarde van het huis</label><input class=\"form-breedte250\" type=\"number\" id=\"waardehuis\" style=\"display: inline-block; width: 95%;\" />";
+        echo "<label for=\"waardehuis\">Waarde van de woning</label><input class=\"form-breedte250\" type=\"number\" id=\"waardehuis\" style=\"display: inline-block; width: 95%;\" />";
     echo "</div>";
     
     echo "<div class=\"form-breedte250\">";
-        echo "<label for=\"koopsom\">Koopsom van het huis</label><input class=\"form-breedte250\" type=\"number\" id=\"koopsom\" style=\"display: inline-block; width: 95%;\" />";
+        echo "<label for=\"koopsom\">Koopsom van de woning</label><input class=\"form-breedte250\" type=\"number\" id=\"koopsom\" style=\"display: inline-block; width: 95%;\" />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-koopsom-question\" />";
         echo "<div id=\"stap2-koopsom-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-koopsom-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
         $tekstStap2koopsom = $atts['stap2-koopsom'] == '' ? 'stap2-koopsom' : $atts['stap2-koopsom'];
@@ -45,7 +45,7 @@
     echo "</div>";
 
     echo "<div class=\"form-breedte250\">";
-        echo "<label for=\"commissie\">Kosten commissie</label><input class=\"form-breedte250\" type=\"number\" id=\"commissie\" value=\"700\" disabled=\"disabled\" style=\"display: inline-block; width: 95%;\" />";
+        echo "<label for=\"commissie\">Kosten Hypotheeklijn</label><input class=\"form-breedte250\" type=\"number\" id=\"commissie\" value=\"700\" disabled=\"disabled\" style=\"display: inline-block; width: 95%;\" />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-commissie-question\" />";
         echo "<div id=\"stap2-commissie-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-commissie-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
         $tekstStap2Commissie = $atts['stap2-commissie'] == '' ? 'stap2-commissie' : $atts['stap2-commissie'];
@@ -93,35 +93,59 @@
         echo "</div>";
     echo "</div>";
 
-    echo "<div class=\"form-breedte250\">";
+    // echo "<div class=\"form-breedte250\">";
         echo "Kies een aanbieder uit de lijst:";
         echo "<div id=\"aanbieders\"></div>";
-    echo "</div>";
+    // echo "</div>";
+    
+    echo "<table>";
+        echo "<tr>";
+            echo "<td>Leencapaciteit op basis van je loon</td><td><span id=\"result\"></span><span id=\"result-getal\" style=\"display:none;\"></span></td>";
+        echo "</tr>";
+        echo "<tr>";
+            echo "<td>Leencapaciteit op basis van de waarde van de woning</td><td><span id=\"max-hypotheek\"></span><span id=\"max-hypotheek-getal\" style=\"display:none;\"></span></td>";
+        echo "</tr>";
+        echo "<tr>";
+            echo "<td>Hoeveel hypotheek ben je nodig</td><td><span id=\"benodigdehypotheek\"></span><span id=\"benodigdehypotheek-getal\" style=\"display:none;\"></span></td>";
+        echo "</tr>";
+        echo "<tr>";
+            echo "<td>Dat betekent dat je aan eigen middelen moet inbrengen</td><td><span id=\"eigen-middelen-bedrag\"></span><span id=\"eigen-middelen-bedrag-getal\" style=\"display:none;\"></span></td>";
+        echo "</tr>";
+        echo "<tr>";
+            echo "<td>Wil je extra inbrengen</td><td><input class=\"form-breedte250\" type=\"number\" id=\"hoeveeleigengeld-getal\" /></td>";
+        echo "</tr>";
+        echo "<tr>";
+            echo "<td>Te lenen</td><td><span id=\"telenen\"></span><span id=\"telenen-getal\" style=\"display:none;\"></span></td>";
+        echo "</tr>";
+    echo "</table>";
 
-    echo "<div class=\"form-breedte250\">";
-        echo "<div id=\"max-hypotheek\" style=\"display:none;\">0</div>";
-        echo "<div id=\"percentage\" style=\"display:none;\">0</div>";
-        echo "<div id=\"resultaat\" style=\"display:none;\"><span id=\"result\"></span></div>";
+    // echo "<div class=\"form-breedte250\">";
+    //     echo "<div id=\"max-hypotheek\" style=\"display:none;\">0</div>";
+    //     echo "<div id=\"percentage\" style=\"display:none;\">0</div>";
+    //     echo "<div id=\"resultaat\" style=\"display:none;\"><span id=\"result\"></span></div>";
 
-        echo "<label for=\"benodigdehypotheek\">Hoeveel hypotheek ben je nodig</label><input class=\"form-breedte250\" type=\"number\" id=\"benodigdehypotheek\" />";
-    echo "</div>";
+    //     echo "<label for=\"benodigdehypotheek\">Hoeveel hypotheek ben je nodig</label><input class=\"form-breedte250\" type=\"number\" id=\"benodigdehypotheek\" />";
+    // echo "</div>";
+
+    // echo "<td><div id=\"resultaat\" style=\"display:none;\">Je maximale hypotheek is : </td><td><span id=\"result\"></span></div></td>";
+    
 
     // <!--<div id=\"text-benodigde-hypotheek\"></div>-->
-    echo "<div id=\"resultaat\" style=\"display:none;\">Je maximale hypotheek is : <span id=\"result\"></span></div>";
-    echo "<div id=\"eigen-middelen\" style=\"display:none;\">Dat betekent dat je als eigen middelen moet inbrengen : <span id=\"eigen-middelen-bedrag\"></span></div>";
-    echo "<span id=\"eigen-middelen-bedrag-backup\" style=\"display:none;\"></span>";
+    // echo "<div id=\"resultaat\" style=\"display:none;\">Je maximale hypotheek is : <span id=\"result\"></span></div>";
+    // echo "<div id=\"eigen-middelen\" style=\"display:none;\">Dat betekent dat je als eigen middelen moet inbrengen : <span id=\"eigen-middelen-bedrag\"></span></div>";
+    // echo "<span id=\"eigen-middelen-bedrag-backup\" style=\"display:none;\"></span>";
 
     // echo "<div class=\"form-breedte250\">";
     //     echo "<input type=\"checkbox\" id=\"eigengeldinbrengen\">Wil je eigen geld inbrengen?";
     //     echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-eigen-geld-question\" />";
     // echo "</div>";
-    echo "<div id=\"stap2-eigen-geld-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-eigen-geld-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-    $tekstStap2EigenGeld = $atts['eigen-geld'] == '' ? 'eigen-geld' : $atts['eigen-geld'];
-    echo "<div style=\"padding:15px;\">".$tekstStap2EigenGeld."</div></div>";
-    // echo "<div id=\"hoeveeleigengelddiv\">";
-    echo "<label for=\"hoeveeleigengeld\">Inbreng eigen geld</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveeleigengeld\" />";
-    // echo "</div>";
-    echo "<div>Te lenen : <span id=\"telenen\"></span></div>";
+    // echo "<div id=\"stap2-eigen-geld-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-eigen-geld-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+    // $tekstStap2EigenGeld = $atts['eigen-geld'] == '' ? 'eigen-geld' : $atts['eigen-geld'];
+    // echo "<div style=\"padding:15px;\">".$tekstStap2EigenGeld."</div></div>";
+    // // echo "<div id=\"hoeveeleigengelddiv\">";
+    // echo "<label for=\"hoeveeleigengeld\">Inbreng eigen geld</label><input class=\"form-breedte250\" type=\"number\" id=\"hoeveeleigengeld\" />";
+    // // echo "</div>";
+    // echo "<div>Te lenen : <span id=\"telenen\"></span></div>";
 
     // <!--<h3>Hypotheekvorm</h3>-->
     // <!--<input class=\"form-breedte250\" type=\"radio\" id=\"annuiteiten\" name=\"hypotheekvorm\">Annuiteiten-->

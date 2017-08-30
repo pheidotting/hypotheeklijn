@@ -25,6 +25,10 @@ function ophalenMaxHoogteHypotheek(percentage, ophalenHoogteModel, callback, voo
     if(allesGevuld) {
         ophalenHoogteModel.geboortedatum = moment(ophalenHoogteModel.geboortedatum, 'DD-MM-YYYY').format('YYYY-MM-DD');
         ophalenHoogteModel.geboortedatumpartner = moment(ophalenHoogteModel.geboortedatumpartner, 'DD-MM-YYYY').format('YYYY-MM-DD');
+        
+        if(ophalenHoogteModel.geboortedatumpartner === 'Invalid date') {
+            ophalenHoogteModel.geboortedatumpartner = undefined;
+        }
     
         var request = str_apiurl + '/calculation/v1/mortgage/maximum-by-income';
         
@@ -37,13 +41,13 @@ function ophalenMaxHoogteHypotheek(percentage, ophalenHoogteModel, callback, voo
         request += '&person%5B0%5D%5Bincome%5D=' + ophalenHoogteModel.brutoloon;
         request += '&person%5B0%5D%5Bage%5D=' + moment().diff(ophalenHoogteModel.geboortedatum, 'years');
         if(ophalenHoogteModel.partneralimentatie) {
-            request += '&person%5B0%5D%5Balimony%5D=0';
+            request += '&person%5B0%5D%5Balimony%5D=' + ophalenHoogteModel.hoeveelpartneralimentatie;
         }
         if(ophalenHoogteModel.overigeleningen) {
-            request += '&person%5B0%5D%5Bloans%5D=0';
+            request += '&person%5B0%5D%5Bloans%5D=' + ophalenHoogteModel.hoeveeloverigeleningen;
         }
         if(ophalenHoogteModel.studieschuld) {
-            request += '&person%5B0%5D%5BstudentLoans%5D=0';
+            request += '&person%5B0%5D%5BstudentLoans%5D=' + ophalenHoogteModel.hoeveelstudieschuld;
         }
         if(ophalenHoogteModel.partner) {
             request += '&person%5B1%5D%5Bincome%5D=' + ophalenHoogteModel.brutoloonpartner;
