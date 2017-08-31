@@ -212,6 +212,7 @@ jQuery(document).ready(function($) {
         if(zijnDeVerplichteVeldenGevuld('stap2')) {
             $('#huidigestap').text('3');
             $('#stap2').hide();
+            $('#sidebar').hide();
             $('#stap3').show();
         }
     });
@@ -242,6 +243,7 @@ jQuery(document).ready(function($) {
                 $('#gegevens-indien-eigen-onderneming').show();
             }
             if($('#partner').is(':checked')) {
+                $('#werkgegevens-partner-h3').show();
                 if($('#soort-inkomsten-partner').val() === 'loondienst' || $('#soort-inkomsten').val() === 'onbepaalde-tijd') {
                     $('#gegevens-indien-loondienst-partner').show();
                     $('#gegevens-indien-eigen-onderneming-partner').hide();
@@ -249,14 +251,25 @@ jQuery(document).ready(function($) {
                     $('#gegevens-indien-loondienst-partner').hide();
                     $('#gegevens-indien-eigen-onderneming-partner').show();
                 }
+            } else {
+                $('#werkgegevens-partner-h3').hide();
+                $('#gegevens-indien-loondienst-partner').hide();
+                $('#gegevens-indien-eigen-onderneming-partner').hide();
             }
+        }
+    });
+    $('#naar-stap7').click(function(){
+        if(zijnDeVerplichteVeldenGevuld('stap6')) {
+            $('#huidigestap').text('7');
+            $('#stap6').hide();
+            $('#stap7').show();
         }
     });
     $('#naar-bevestigen').click(function(){
         if(zijnDeVerplichteVeldenGevuld('stap6')) {
-            $('#huidigestap').text('7');
+            $('#huidigestap').text('8');
             plaatsAllesOpBevestigenScherm();
-            $('#stap6').hide();
+            $('#stap7').hide();
             $('#bevestigen').show();
             $('#stappenteller').hide();
         }
@@ -270,6 +283,7 @@ jQuery(document).ready(function($) {
         $('#huidigestap').text('2');
         $('#stap3').hide();
         $('#stap2').show();
+        $('#sidebar').show();
     });
     $('#terug-naar-stap3').click(function(){
         $('#huidigestap').text('3');
@@ -304,6 +318,20 @@ jQuery(document).ready(function($) {
             $('#straatnaam').val(adres.straat);
             $('#woonplaats').val(adres.plaats);
             $('#postcode').val(adres.postcode);
+        });
+    });
+    $('#postcodewoning').change(function(){
+        ophalenAdres($('#postcodewoning').val(), $('#huisnummerwoning').val()).done(function(adres) {
+            $('#adreswoning').val(adres.straat);
+            $('#plaatswoning').val(adres.plaats);
+            $('#postcodewoning').val(adres.postcode);
+        });
+    });
+    $('#huisnummerwoning').change(function(){
+        ophalenAdres($('#postcodewoning').val(), $('#huisnummerwoning').val()).done(function(adres) {
+            $('#adreswoning').val(adres.straat);
+            $('#plaatswoning').val(adres.plaats);
+            $('#postcodewoning').val(adres.postcode);
         });
     });
     $('#postcodewerkgever').change(function(){
@@ -806,6 +834,7 @@ jQuery(document).ready(function($) {
 	    
         var tekst = '<table>';
 	    //Stap 1
+	    tekst = tekst + '<h3>Stap 1</h3>';
         tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarEenTekst\']').html(), maakBedragOp($('#inkomenEen').val()));
         tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarTweeTekst\']').html(), maakBedragOp($('#inkomenTwee').val()));
         tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarDrieTekst\']').html(), maakBedragOp($('#inkomenDrie').val()));
@@ -871,6 +900,7 @@ jQuery(document).ready(function($) {
         }
 
         //Stap 2
+	    tekst = tekst + '<h3>Stap 2</h3>';
 	    tekst = tekst + zetTekst('Waarde van het huis', maakBedragOp($('#waardehuis').val()));
 	    tekst = tekst + zetTekst('Koopsom van het huis', maakBedragOp($('#koopsom').val()));
         tekst = tekst + zetTekst('Overdrachtsbelasting', maakBedragOp($('#overdrachtsbelasting').val()));
@@ -889,6 +919,7 @@ jQuery(document).ready(function($) {
         tekst = tekst + zetTekst('Te lenen', maakBedragOp($('#telenen').val()));
 
         //Stap 3
+	    tekst = tekst + '<h3>Stap 3</h3>';
         tekst = tekst + zetTekst('Naam', $('#naam').val());
         tekst = tekst + zetTekst('Postcode', $('#postcode').val());
         tekst = tekst + zetTekst('Huisnummer', $('#huisnummer').val());
@@ -898,6 +929,7 @@ jQuery(document).ready(function($) {
         tekst = tekst + zetTekst('E-mail adres', $('#emailadres').val());
 
         //Stap 4
+	    tekst = tekst + '<h3>Stap 4</h3>';
         tekst = tekst + zetTekst('Burgerservicenummer', $('#bsn').val());
         tekst = tekst + zetTekst('Documentnummer identificatie', $('#documentnummer').val());
         tekst = tekst + zetTekst('Datum geldigheid identificatie', $('#datumgeldigheid').val());
@@ -905,9 +937,11 @@ jQuery(document).ready(function($) {
         tekst = tekst + zetTekst('Geboorteplaats', $('#geboorteplaats').val());
 
         //Stap 5
+	    tekst = tekst + '<h3>Stap 5</h3>';
         tekst = tekst + zetTekst('Iban', $('#iban').val());
 
         //Stap 6
+	    tekst = tekst + '<h3>Stap 6</h3>';
         tekst = tekst + zetTekst('Beroep/Functie', $('#beroep').val());
         tekst = tekst + zetTekst('Datum indiensttreding', $('#datumindiensttreding').val());
         tekst = tekst + zetTekst('Einddatum contract', $('#einddatumcontract').val());
@@ -916,6 +950,42 @@ jQuery(document).ready(function($) {
         tekst = tekst + zetTekst('Huisnummer werkgever', $('#huisnummerwerkgever').val());
         tekst = tekst + zetTekst('Straatnaam werkgever', $('#straatnaamwerkgever').val());
         tekst = tekst + zetTekst('Plaats werkgever', $('#plaatswerkgever').val());
+        
+        tekst = tekst + zetTekst('Beroep/Functie', $('#beroep').val());
+        tekst = tekst + zetTekst('Datum indiensttreding', $('#datumindiensttreding').val());
+        tekst = tekst + zetTekst('Einddatum contract', $('#einddatumcontract').val());
+        tekst = tekst + zetTekst('Naam werkgever', $('#naamwerkgever').val());
+        tekst = tekst + zetTekst('Postcode werkgever', $('#postcodewerkgever').val());
+        tekst = tekst + zetTekst('Huisnummer werkgever', $('#huisnummerwerkgever').val());
+        tekst = tekst + zetTekst('Straatnaam werkgever', $('#straatnaamwerkgever').val());
+        tekst = tekst + zetTekst('Plaats werkgever', $('#plaatswerkgever').val());
+        tekst = tekst + zetTekst('Naam onderneming', $('#naam-onderneming').val());
+        tekst = tekst + zetTekst('Soort onderneming', $('#soort-onderneming').val());
+        tekst = tekst + zetTekst('Kvk-nummer', $('#kvk-nummer').val());
+        tekst = tekst + zetTekst('Datum van oprichting', $('#datum-oprichting').val());
+        tekst = tekst + zetTekst('Beroep/Functie', $('#beroep-partner').val());
+        tekst = tekst + zetTekst('Datum indiensttreding', $('#datumindiensttreding-partner').val());
+        tekst = tekst + zetTekst('Einddatum contract', $('#einddatumcontract-partner').val());
+        tekst = tekst + zetTekst('Naam werkgever', $('#naamwerkgever-partner').val());
+        tekst = tekst + zetTekst('Postcode werkgever', $('#postcodewerkgever-partner').val());
+        tekst = tekst + zetTekst('Huisnummer werkgever', $('#huisnummerwerkgever-partner').val());
+        tekst = tekst + zetTekst('Straatnaam werkgever', $('#straatnaamwerkgever-partner').val());
+        tekst = tekst + zetTekst('Plaats werkgever', $('#plaatswerkgever-partner').val());
+        tekst = tekst + zetTekst('Naam onderneming', $('#naam-onderneming-partner').val());
+        tekst = tekst + zetTekst('Soort onderneming', $('#soort-onderneming-partner').val());
+        tekst = tekst + zetTekst('Kvk-nummer', $('#kvk-nummer-partner').val());
+        tekst = tekst + zetTekst('Datum van oprichting', $('#datum-oprichting-partner').val());
+        
+	    tekst = tekst + '<h3>Stap 7</h3>';
+        tekst = tekst + zetTekst('Soort woning', $('#soortwoning').val());
+        tekst = tekst + zetTekst('Postcode', $('#postcodewoning').val());
+        tekst = tekst + zetTekst('Huisnummer', $('#huisnummerwoning').val());
+        tekst = tekst + zetTekst('Adres', $('#adreswoning').val());
+        tekst = tekst + zetTekst('Plaats', $('#plaatswoning').val());
+        tekst = tekst + zetTekst('Bouwjaar', $('#bouwjaarwoning').val());
+        tekst = tekst + zetTekst('Kadastrale gemeente', $('#kadastralegemeentewoning').val());
+        tekst = tekst + zetTekst('Kadastrale sectie', $('#kadastralesectiewoning').val());
+        tekst = tekst + zetTekst('Kadastrale nummer', $('#kadastralenummerwoning').val());
 
         tekst = tekst + '</table>';
         
@@ -924,7 +994,7 @@ jQuery(document).ready(function($) {
 	}
 	
 	function zetTekst(voorTekst, tekst) {
-	    if(tekst != null && tekst != '' && tekst != '0'  && tekst != '\u20AC 0,00') {
+	    if(tekst != null && tekst != '' && tekst != '0'  && tekst != '\u20AC 0,00' && tekst != '\u20AC ,00') {
 	       return '<tr><td>' + voorTekst + '</td><td>' + tekst + '</td></tr>';
 	    } else {
 	        return '';
@@ -986,8 +1056,9 @@ jQuery(document).ready(function($) {
 	    } else if (stap === 'stap2') {
 	        var koopsom = isVeldGevuldEnVeranderRand($('#koopsom'));
 	        var waardehuis = isVeldGevuldEnVeranderRand($('#waardehuis'));
+	        var soorthypotheek = isVeldGevuldEnVeranderRand($('#soorthypotheek'));
 	        
-	        allesGevuld = koopsom && waardehuis;
+	        allesGevuld = koopsom && waardehuis && soorthypotheek;
 	    } else if (stap === 'stap3') {
 	        var postcode = isVeldGevuldEnVeranderRand($('#postcode'));
 	        var huisnummer = isVeldGevuldEnVeranderRand($('#huisnummer'));

@@ -113,7 +113,7 @@ function ophalenRentepercentages(blnNhg, rentevasteperiode, str_apikey, str_apiu
     var rvp = '&period=' + rentevasteperiode;
     //period
 
-    $.get(str_apiurl + '/interest/v1/interest-top-5?api_key=' + str_apikey + nhg + rvp, null ,function(result){
+    $.get(str_apiurl + '/interest/v1/interest-top-5?onlyUseIncludedLabels=true&api_key=' + str_apikey + nhg + rvp, null ,function(result){
         console.log('ophalen rentepercentages');
         console.log(result);
         

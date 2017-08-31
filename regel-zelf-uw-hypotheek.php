@@ -70,7 +70,7 @@ function form_creation_aanvragen($atts = []) {
     echo "<div id=\"apikey\" style=\"display:none;\">".$atts['apikey']."</div>";
     echo "<div id=\"apiurl\" style=\"display:none;\">".$atts['apiurl']."</div>";
 
-    echo "<div class=\"stappenteller\" id=\"stappenteller\">Stap <span id=\"huidigestap\"></span> van 7</div>";
+    echo "<div class=\"stappenteller\" id=\"stappenteller\">Stap <span id=\"huidigestap\"></span> van 8</div>";
     
     echo "<div class=\"links\">";
         echo "<div id=\"foutmelding-niet-alle-verplichte-velden-gevuld\" style=\"display: none; color:red; font-weight: bold;\">Niet alle verplichte velden zijn gevuld</div>";
@@ -93,15 +93,20 @@ function form_creation_aanvragen($atts = []) {
         echo "<div id=\"stap6\" style=\"display:none;\">";
             include_once(dirname(__FILE__) . '/php/stap6/stap6-html.php');
         echo "</div>";
-        echo "<div id=\"bevestigen\" style=\"display:none;\">";
+        echo "<div id=\"stap7\" style=\"display:none;\">";
             include_once(dirname(__FILE__) . '/php/stap7/stap7-html.php');
+        echo "</div>";
+        echo "<div id=\"bevestigen\" style=\"display:none;\">";
+            include_once(dirname(__FILE__) . '/php/stap8/stap8-html.php');
         echo "</div>";
         echo "<div id=\"ontvangen\" style=\"display:none;\">";
             echo "We hebben uw aanvraag ontvangen.";
         echo "</div>";
     echo "</div>";//links
     echo "<div class=\"rechts\">";
-        include_once(dirname(__FILE__) . '/php/hypotheek-berekening/hypotheek-berekening-html.php');
+        echo "<div id=\"sidebar\">";
+            include_once(dirname(__FILE__) . '/php/hypotheek-berekening/hypotheek-berekening-html.php');
+        echo "</div>";
     echo "</div>";//rechts
     
     // <!--<div id=\"debug\"></div>-->
