@@ -83,7 +83,7 @@
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<div id=\"nhg-vraag\">";
-            echo "<input type=\"checkbox\" id=\"nhg\">Nationale Hypotheek Garantie?";
+            echo "<input type=\"checkbox\" id=\"nhg\">Wil je een hypotheek met Nationale Hypotheek Garantie, ja of nee?";
             echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-nhg-question\" />";
             echo "<div id=\"stap2-nhg-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-nhg-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
             $tekstStap2nhg = $atts['stap2-nhg'] == '' ? 'stap2-nhg' : $atts['stap2-nhg'];
@@ -98,6 +98,44 @@
         echo "Kies een aanbieder uit de lijst:";
         echo "<div id=\"aanbieders\"></div>";
     // echo "</div>";
+    
+    echo "<div id=\"orv-gegevens\">";
+        echo "Je hebt een hypotheek aangevraagd van <span id=\"telenen-orv\"></span> met Nationale Hypotheek Garantie. ";
+        echo "Aangezien de hypotheek hoger is dan 80% van de waarde van de woning, moet je dit gedeelte afdekken met een overlijdensrisicoverzekering (orv). ";
+        echo "Het minimaal te verzekeren bedrag betreft: <span name=\"orv-bedrag\"></span>. Heb je een partner ingevoerd, dan dient dit bedrag tevens voor de partner te zijn afgedekt. ";
+        echo "Heb je al een orv afgesloten?<br />";
+        echo "<input type=\"radio\" name=\"orv-ja-nee\" value=\"ja\">Ja<br />";
+        echo "<input type=\"radio\" name=\"orv-ja-nee\" value=\"nee\">Nee<br />";
+        echo "<div id=\"orv-ja\" style=\"display:none;\">";
+            echo "Is het bedrag wat je hebt verzekerd minimaal <span name=\"orv-bedrag\"></span>";
+            echo "<input type=\"radio\" name=\"orv-ja-minimaal-bedrag-ja-nee\" value=\"ja\">Ja<br />";
+            echo "<input type=\"radio\" name=\"orv-ja-minimaal-bedrag-ja-nee\" value=\"nee\">Nee<br />";
+            echo "<div id=\"orv-ja-minimaal-bedrag-ja\" style=\"display:none;\">";
+                echo "We zullen een kopie polis bij je opvragen nadat de aanvraag bij ons in behandeling is genomen.";
+            echo "</div>";
+        echo "</div>";
+        echo "<div id=\"orv-ja-minimaal-bedrag-nee\" style=\"display:none;\">";
+            echo "Hypotheeklijn kan voor jou kijken wat de goedkoopste premie is bij een verzekerd kapitaal van <span name=\"orv-bedrag\"></span> met gelijkblijvende dekking. Wens je dit?<br />";
+            echo "<input type=\"radio\" name=\"orv-ja-minimaal-bedrag-nee-wens-ja-nee\" value=\"ja\">Ja<br />";
+            echo "<input type=\"radio\" name=\"orv-ja-minimaal-bedrag-nee-wens-ja-nee\" value=\"nee\">Nee<br />";
+            echo "<div id=\"orv-ja-minimaal-bedrag-nee-wens-ja\" style=\"display:none;\">";
+                echo "Wij verzekeren minimaal het bedrag van <span name=\"orv-bedrag\"></span>, echter kan het zijn dat je meer wilt verzekeren. ";
+                echo "In dat geval kan je opgeven hoeveel je wilt verzekeren. Wij zullen je een premievoorstel doen.<br />";
+                echo "<input type=\"radio\" name=\"orv-ja-minimaal-bedrag-nee-wens-ja-minimum-bedrag\" value=\"minimum-bedrag\">Ik wil het minimale bedrag verzekeren<br />";
+                echo "<input type=\"radio\" name=\"orv-ja-minimaal-bedrag-nee-wens-ja-hoger-bedrag\" value=\"hoger-bedrag\">Ik wil een hoger bedrag verzekeren, namelijk : <br />";
+                echo "<input type=\"number\" id=\"hoger-bedrag-verzekeren\" class=\"form-breedte75-procent text_input is_empty\" />";
+                echo "<div class=\"first_form form_element form_fullwidth\">";
+                    echo "<label for=\"soorthypotheek\">1 of 2 levens verzekeren</label>";
+                    echo "<select class=\"form-breedte75-procent text_input is_empty\" id=\"een-of-twee-levens\" />";
+                        echo "<option value=\"\"></option>";
+                        echo "<option value=\"1\">1</option>";
+                        echo "<option value=\"2\">2</option>";
+                    echo "</select>";
+                echo "</div>";
+            echo "</div>";
+        echo "</div";
+        echo "<br />";
+    echo "</div>";
     
     echo "<table>";
         echo "<tr>";

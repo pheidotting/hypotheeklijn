@@ -191,6 +191,34 @@ jQuery(document).ready(function($) {
     $('#soorthypotheek').change(function(){
         zetSoorthypotheekSidebar();
     });
+    $('[name=\'orv-ja-nee\']').change(function(){
+        if($('[name=\'orv-ja-nee\']:checked').val() === 'ja') {
+            $('#orv-ja').show();
+            $('#orv-ja-minimaal-bedrag-nee').hide();
+        }
+        if($('[name=\'orv-ja-nee\']:checked').val() === 'nee') {
+            $('#orv-ja').hide();
+            $('#orv-ja-minimaal-bedrag-nee').show();
+        }
+    });
+    $('[name=\'orv-ja-minimaal-bedrag-ja-nee\']').change(function(){
+        if($('[name=\'orv-ja-minimaal-bedrag-ja-nee\']:checked').val() === 'ja') {
+            $('#orv-ja-minimaal-bedrag-ja').show();
+            $('#orv-ja-minimaal-bedrag-nee').hide();
+        }
+        if($('[name=\'orv-ja-minimaal-bedrag-ja-nee\']:checked').val() === 'nee') {
+            $('#orv-ja-minimaal-bedrag-ja').hide();
+            $('#orv-ja-minimaal-bedrag-nee').show();
+        }
+    });
+    $('[name=\'orv-ja-minimaal-bedrag-nee-wens-ja-nee\']').change(function(){
+        if($('[name=\'orv-ja-minimaal-bedrag-nee-wens-ja-nee\']:checked').val() === 'ja') {
+            $('#orv-ja-minimaal-bedrag-nee-wens-ja').show();
+        }
+        if($('[name=\'orv-ja-minimaal-bedrag-nee-wens-ja-nee\']:checked').val() === 'nee') {
+            $('#orv-ja-minimaal-bedrag-nee-wens-ja').hide();
+        }
+    });
     $('#naar-stap2').click(function(){
         if(zijnDeVerplichteVeldenGevuld('stap1')) {
             $('#huidigestap').text('2');
@@ -354,9 +382,14 @@ jQuery(document).ready(function($) {
     		'mail-tekst': $('#tekst-mail').html(),
     		'emailadres': $('#emailadresbeheerder').html()
     	};
-    	$.post('../../wp-admin/admin-ajax.php', data, function(response) {
-    		console.log('Got this from the server: ' + response);
-    	});
+    	$.post(
+            '../../wp-admin/admin-ajax.php', 
+            data,
+            function(response){
+                console.log('The server responded: ' + response);
+            }
+        );
+    	
         $('#bevestigen').hide();
         $('#ontvangen').show();
     });
@@ -834,7 +867,7 @@ jQuery(document).ready(function($) {
 	    
         var tekst = '<table>';
 	    //Stap 1
-	    tekst = tekst + '<h3>Stap 1</h3>';
+	    tekst = tekst + zetTekst('', '<h3>Stap 1</h3>');
         tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarEenTekst\']').html(), maakBedragOp($('#inkomenEen').val()));
         tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarTweeTekst\']').html(), maakBedragOp($('#inkomenTwee').val()));
         tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarDrieTekst\']').html(), maakBedragOp($('#inkomenDrie').val()));
@@ -900,7 +933,7 @@ jQuery(document).ready(function($) {
         }
 
         //Stap 2
-	    tekst = tekst + '<h3>Stap 2</h3>';
+	    tekst = tekst + zetTekst('', '<h3>Stap 2</h3>');
 	    tekst = tekst + zetTekst('Waarde van het huis', maakBedragOp($('#waardehuis').val()));
 	    tekst = tekst + zetTekst('Koopsom van het huis', maakBedragOp($('#koopsom').val()));
         tekst = tekst + zetTekst('Overdrachtsbelasting', maakBedragOp($('#overdrachtsbelasting').val()));
@@ -919,7 +952,7 @@ jQuery(document).ready(function($) {
         tekst = tekst + zetTekst('Te lenen', maakBedragOp($('#telenen').val()));
 
         //Stap 3
-	    tekst = tekst + '<h3>Stap 3</h3>';
+	    tekst = tekst + zetTekst('', '<h3>Stap 3</h3>');
         tekst = tekst + zetTekst('Naam', $('#naam').val());
         tekst = tekst + zetTekst('Postcode', $('#postcode').val());
         tekst = tekst + zetTekst('Huisnummer', $('#huisnummer').val());
@@ -929,7 +962,7 @@ jQuery(document).ready(function($) {
         tekst = tekst + zetTekst('E-mail adres', $('#emailadres').val());
 
         //Stap 4
-	    tekst = tekst + '<h3>Stap 4</h3>';
+	    tekst = tekst + zetTekst('', '<h3>Stap 4</h3>');
         tekst = tekst + zetTekst('Burgerservicenummer', $('#bsn').val());
         tekst = tekst + zetTekst('Documentnummer identificatie', $('#documentnummer').val());
         tekst = tekst + zetTekst('Datum geldigheid identificatie', $('#datumgeldigheid').val());
@@ -937,11 +970,11 @@ jQuery(document).ready(function($) {
         tekst = tekst + zetTekst('Geboorteplaats', $('#geboorteplaats').val());
 
         //Stap 5
-	    tekst = tekst + '<h3>Stap 5</h3>';
+	    tekst = tekst + zetTekst('', '<h3>Stap 5</h3>');
         tekst = tekst + zetTekst('Iban', $('#iban').val());
 
         //Stap 6
-	    tekst = tekst + '<h3>Stap 6</h3>';
+	    tekst = tekst + zetTekst('', '<h3>Stap 6</h3>');
         tekst = tekst + zetTekst('Beroep/Functie', $('#beroep').val());
         tekst = tekst + zetTekst('Datum indiensttreding', $('#datumindiensttreding').val());
         tekst = tekst + zetTekst('Einddatum contract', $('#einddatumcontract').val());
@@ -976,7 +1009,7 @@ jQuery(document).ready(function($) {
         tekst = tekst + zetTekst('Kvk-nummer', $('#kvk-nummer-partner').val());
         tekst = tekst + zetTekst('Datum van oprichting', $('#datum-oprichting-partner').val());
         
-	    tekst = tekst + '<h3>Stap 7</h3>';
+	    tekst = tekst + zetTekst('', '<h3>Stap 7</h3>');
         tekst = tekst + zetTekst('Soort woning', $('#soortwoning').val());
         tekst = tekst + zetTekst('Postcode', $('#postcodewoning').val());
         tekst = tekst + zetTekst('Huisnummer', $('#huisnummerwoning').val());
@@ -1152,7 +1185,14 @@ jQuery(document).ready(function($) {
 	    }
 	    
 	    $('#telenen').text(maakBedragOp(benodigd - eigengeld - eigengeldZelf));
+	    $('#telenen-orv').text(maakBedragOp(benodigd - eigengeld - eigengeldZelf));
 	    $('#telenen-getal').text(benodigd - eigengeld - eigengeldZelf);
+	                
+        if(bepalenOfOrvNodigIs()) {
+            $('#orv-gegevens').show();
+        } else {
+            $('#orv-gegevens').hide();
+        }
 	}
 	
 	function berekenBrutojaarloon() {
@@ -1213,5 +1253,23 @@ jQuery(document).ready(function($) {
             $('#brutoloon-onderneming-partner').text(result);
             $('#brutoloon-onderneming-opgemaakt-partner').text(maakBedragOp(result));
         });
+	}
+	
+	function bepalenOfOrvNodigIs() {
+	    var waardehuis = parseInt($('#waardehuis').val());
+	    var waardehuis80Procent = waardehuis * 0.8;
+	    var telenen = parseInt($('#telenen-getal').text());
+	    
+	    if(telenen > waardehuis80Procent) {
+	        berekenOrvBedrag();
+	        return true;
+	    }
+	}
+	
+	function berekenOrvBedrag() {
+	    var waardehuis = parseInt($('#waardehuis').val());
+	    var afTeDekkenBedrag = waardehuis * 0.2;
+	    
+	    $('[name=\'orv-bedrag\']').text(maakBedragOp(afTeDekkenBedrag));
 	}
 });
