@@ -1,7 +1,7 @@
 <?php
     echo "<h3>Gegevens van het onderpand</h3>";
     echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<label for=\"soortwoning\">Soort woning</label>";
+        echo "<label for=\"soortwoning\">Wat voor soort woning heb je gekocht</label>";
         echo "<select class=\"form-breedte75-procent text_input is_empty\" id=\"soortwoning\">";
         echo "<option value=\"eengezinswoning\">Eengezinswoning</option>";
         echo "<option value=\"appartement\">Appartement</option>";
@@ -29,7 +29,7 @@
         echo "<label for=\"kadastralesectiewoning\">Kadastrale sectie</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"kadastralesectiewoning\" />";
     echo "</div>";
     echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<label for=\"kadastralenummerwoning\">Kadastrale nummer</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"kadastralenummerwoning\" />";
+        echo "<label for=\"kadastralenummerwoning\">Kadastraal nummer</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"kadastralenummerwoning\" />";
     echo "</div>";
     
     echo "<input type=\"submit\" class=\"button-primary\" id=\"terug-naar-stap6\" value=\"Terug\" />";

@@ -6,23 +6,28 @@ jQuery(document).ready(function($) {
     $('[name=\'jaarTweeTekst\']').text(moment().clone().subtract(2, 'years').format('YYYY'));
     $('[name=\'jaarDrieTekst\']').text(moment().clone().subtract(1, 'years').format('YYYY'));
     
-    $('#brutomaandloon').change(function(){
-        berekenBrutojaarloon($('#brutomaandloon'), $('#dertiendemaand'), $('#vakantiegeld'), $('#brutoloon'));
+    $('#brutomaandloon').click(function() {
+        $('#brutomaandloon').val(stripBedragOpmaak($('#brutomaandloon').val()));
+    });
+    $('#brutomaandloon').blur(function(){
+        berekenBrutojaarloon($('#brutomaandloon'), $('#dertiendemaand'), $('#vakantiegeld'), $('#brutoloon'), $('#apikey').html(), $('#apiurl').html());
+
+        $('#brutomaandloon').val(maakBedragOp($('#brutomaandloon').val()));
     });
     $('#dertiendemaand').change(function(){
-        berekenBrutojaarloon($('#brutomaandloon'), $('#dertiendemaand'), $('#vakantiegeld'), $('#brutoloon'));
+        berekenBrutojaarloon($('#brutomaandloon'), $('#dertiendemaand'), $('#vakantiegeld'), $('#brutoloon'), $('#apikey').html(), $('#apiurl').html());
     });
     $('#vakantiegeld').change(function(){
-        berekenBrutojaarloon($('#brutomaandloon'), $('#dertiendemaand'), $('#vakantiegeld'), $('#brutoloon'));
+        berekenBrutojaarloon($('#brutomaandloon'), $('#dertiendemaand'), $('#vakantiegeld'), $('#brutoloon'), $('#apikey').html(), $('#apiurl').html());
     });
     $('#brutomaandloonpartner').change(function(){
-        berekenBrutojaarloonPartner();
+        berekenBrutojaarloon($('#brutomaandloonpartner'), $('#dertiendemaandpartner'), $('#vakantiegeldpartner'), $('#brutoloonpartner'), $('#apikey').html(), $('#apiurl').html());
     });
     $('#dertiendemaandpartner').change(function(){
-        berekenBrutojaarloonPartner();
+        berekenBrutojaarloon($('#brutomaandloonpartner'), $('#dertiendemaandpartner'), $('#vakantiegeldpartner'), $('#brutoloonpartner'), $('#apikey').html(), $('#apiurl').html());
     });
     $('#vakantiegeldpartner').change(function(){
-        berekenBrutojaarloonPartner();
+        berekenBrutojaarloon($('#brutomaandloonpartner'), $('#dertiendemaandpartner'), $('#vakantiegeldpartner'), $('#brutoloonpartner'), $('#apikey').html(), $('#apiurl').html());
     });
     $('#loon-uit-onderneming-check').click(function(){
         if($('#loon-uit-onderneming-check').is(':checked')) {
@@ -106,21 +111,71 @@ jQuery(document).ready(function($) {
         }
     });
     $('#inkomenEen').change(function() {
-        berekenInkomenEigenOnderneming();
+        berekenInkomenEigenOnderneming($('#inkomenEen'), $('#inkomenTwee'), $('#inkomenDrie'), $('#brutoloon-onderneming'), $('#brutoloon-onderneming-opgemaakt'), $('#apikey').html(), $('#apiurl').html());
     });
     $('#inkomenTwee').change(function() {
-        berekenInkomenEigenOnderneming();
+        berekenInkomenEigenOnderneming($('#inkomenEen'), $('#inkomenTwee'), $('#inkomenDrie'), $('#brutoloon-onderneming'), $('#brutoloon-onderneming-opgemaakt'), $('#apikey').html(), $('#apiurl').html());
     });
     $('#inkomenDrie').change(function() {
-        berekenInkomenEigenOnderneming();
+        berekenInkomenEigenOnderneming($('#inkomenEen'), $('#inkomenTwee'), $('#inkomenDrie'), $('#brutoloon-onderneming'), $('#brutoloon-onderneming-opgemaakt'), $('#apikey').html(), $('#apiurl').html());
     });
     $('#inkomenEenPartner').change(function() {
-        berekenInkomenEigenOndernemingPartner();
+        berekenInkomenEigenOnderneming($('#inkomenEenPartner'), $('#inkomenTweePartner'), $('#inkomenDriePartner'), $('#brutoloon-onderneming-partner'), $('#brutoloon-onderneming-opgemaakt-partner'), $('#apikey').html(), $('#apiurl').html());
     });
     $('#inkomenTweePartner').change(function() {
-        berekenInkomenEigenOndernemingPartner();
+        berekenInkomenEigenOnderneming($('#inkomenEenPartner'), $('#inkomenTweePartner'), $('#inkomenDriePartner'), $('#brutoloon-onderneming-partner'), $('#brutoloon-onderneming-opgemaakt-partner'), $('#apikey').html(), $('#apiurl').html());
     });
     $('#inkomenDriePartner').change(function() {
-        berekenInkomenEigenOndernemingPartner();
+        berekenInkomenEigenOnderneming($('#inkomenEenPartner'), $('#inkomenTweePartner'), $('#inkomenDriePartner'), $('#brutoloon-onderneming-partner'), $('#brutoloon-onderneming-opgemaakt-partner'), $('#apikey').html(), $('#apiurl').html());
+    });
+    $('#geboortedatum').change(function(){
+        var input = $('#geboortedatum').val();
+        
+        geboortedatum = moment(input, 'DD-MM-YYYY');
+        
+        if(!geboortedatum._isValid) {
+            $('#geboortedatum').val('');
+        }
+        
+        $('#geboortedatum').val(geboortedatum.format('DD-MM-YYYY'));
+    });
+    $('#geboortedatumpartner').change(function(){
+        var input = $('#geboortedatumpartner').val();
+        
+        geboortedatum = moment(input, 'DD-MM-YYYY');
+        
+        if(!geboortedatum._isValid) {
+            $('#geboortedatumpartner').val('');
+        }
+        
+        $('#geboortedatumpartner').val(geboortedatum.format('DD-MM-YYYY'));
+    });
+    $('#soort-inkomsten').change(function() {
+        if($('#soort-inkomsten').val() !== '') {
+            if($('#soort-inkomsten').val() === 'loondienst') {
+                $('#loon-uit-loondienst').show();
+                $('#loon-uit-onderneming').hide();
+            } else {
+                $('#loon-uit-loondienst').hide();
+                $('#loon-uit-onderneming').show();
+            }
+        } else {
+            $('#loon-uit-loondienst').hide();
+            $('#loon-uit-onderneming').hide();
+        }
+    });
+    $('#soort-inkomsten-partner').change(function() {
+        if($('#soort-inkomsten-partner').val() !== '') {
+            if($('#soort-inkomsten-partner').val() === 'loondienst') {
+                $('#loon-uit-loondienst-partner').show();
+                $('#loon-uit-onderneming-partner').hide();
+            } else {
+                $('#loon-uit-loondienst-partner').hide();
+                $('#loon-uit-onderneming-partner').show();
+            }
+        } else {
+            $('#loon-uit-loondienst-partner').hide();
+            $('#loon-uit-onderneming-partner').hide();
+        }
     });
 });

@@ -11,12 +11,14 @@ License: GPL2
 function scripts_with_jquery() {
     // Register the script like this for a plugin:
     //voor refactoring
-    // wp_register_script('max-hypotheek-bepalen', plugins_url('/js/max-hypotheek-bepalen.js', __FILE__ ), array('jquery'));
+    wp_register_script('max-hypotheek-bepalen', plugins_url('/js/max-hypotheek-bepalen.js', __FILE__ ), array('jquery'));
     wp_register_script('aanvragen', plugins_url('/js/aanvragen.js', __FILE__ ), array('jquery'));
 
     //na refactoring
     // wp_register_script('hulptekstballonnen', plugins_url('/js/common/hulptekstballonnen.js', __FILE__ ), array('jquery'));
     // wp_register_script('jaarloonberekenen', plugins_url('/js/common/jaarloonberekenen.js', __FILE__ ), array('jquery'));
+    // wp_register_script('berekenInkomenEigenOnderneming', plugins_url('/js/common/berekenInkomenEigenOnderneming.js', __FILE__ ), array('jquery'));
+    // wp_register_script('bedragopmaak', plugins_url('/js/common/bedragopmaak.js', __FILE__ ), array('jquery'));
     // wp_register_script('triggerStap1', plugins_url('/js/stap1/stap1-trigger.js', __FILE__ ), array('jquery'));
     
     wp_register_script('moment', plugins_url('/js/moment-with-locales.js', __FILE__ ));
@@ -35,9 +37,11 @@ function scripts_with_jquery() {
     wp_enqueue_script('aanvragen');
 
     //na refactoring
+    // wp_enqueue_script('jaarloonberekenen');
+    // wp_enqueue_script('bedragopmaak');
+    // wp_enqueue_script('berekenInkomenEigenOnderneming');
     // wp_enqueue_script('triggerStap1');
     // wp_enqueue_script('hulptekstballonnen');
-    // wp_enqueue_script('jaarloonberekenen');
 
     $simulatie = false;
 }

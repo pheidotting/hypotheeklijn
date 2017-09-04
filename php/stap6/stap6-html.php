@@ -20,7 +20,7 @@
             echo "<label for=\"huisnummerwerkgever\">Huisnummer werkgever</label><input class=\"form-breedte250\" type=\"text\" id=\"huisnummerwerkgever\" />";
         echo "</div>";
         echo "<div class=\"first_form form_element form_fullwidth\">";
-            echo "<label for=\"straatnaamwerkgever\">Straatnaam werkgever</label><input class=\"form-breedte250\" type=\"text\" id=\"straatnaamwerkgever\" />";
+            echo "<label for=\"Adreswerkgever\">Adres werkgever</label><input class=\"form-breedte250\" type=\"text\" id=\"Adreswerkgever\" />";
         echo "</div>";
         echo "<div class=\"first_form form_element form_fullwidth\">";
             echo "<label for=\"plaatswerkgever\">Plaats werkgever</label><input class=\"form-breedte250\" type=\"text\" id=\"plaatswerkgever\" />";
@@ -66,7 +66,7 @@
             echo "<label for=\"huisnummerwerkgever\">Huisnummer werkgever</label><input class=\"form-breedte250\" type=\"text\" id=\"huisnummerwerkgever-partner\" />";
         echo "</div>";
         echo "<div class=\"first_form form_element form_fullwidth\">";
-            echo "<label for=\"straatnaamwerkgever\">Straatnaam werkgever</label><input class=\"form-breedte250\" type=\"text\" id=\"straatnaamwerkgever-partner\" />";
+            echo "<label for=\"Adreswerkgever\">Adres werkgever</label><input class=\"form-breedte250\" type=\"text\" id=\"Adreswerkgever-partner\" />";
         echo "</div>";
         echo "<div class=\"first_form form_element form_fullwidth\">";
             echo "<label for=\"plaatswerkgever\">Plaats werkgever</label><input class=\"form-breedte250\" type=\"text\" id=\"plaatswerkgever-partner\" />";

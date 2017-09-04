@@ -1,5 +1,5 @@
 <?php
-    echo "<h3>NAW gegevens</h3>";
+    echo "<h3>Persoonlijke gegevens</h3>";
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<label for=\"naam\">Naam</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"naam\" />";
     echo "</div>";

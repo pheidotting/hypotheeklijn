@@ -163,9 +163,11 @@ jQuery(document).ready(function($) {
         var nhg;
         if($('#nhg').is(':checked')) {
             $('#metNHG').show();
+            $('#orv-met-nhg').show();
             nhg = true;
         } else {
             $('#metNHG').hide();
+            $('#orv-met-nhg').hide();
             nhg = false;
         }
         berekenHypotheekBedrag();
@@ -190,6 +192,14 @@ jQuery(document).ready(function($) {
     });
     $('#soorthypotheek').change(function(){
         zetSoorthypotheekSidebar();
+    });
+    $('[name=\'verbouwen-ja-nee\']').change(function(){
+        if($('[name=\'verbouwen-ja-nee\']:checked').val() === 'ja') {
+            $('#verbouwen-ja').show();
+        }
+        if($('[name=\'verbouwen-ja-nee\']:checked').val() === 'nee') {
+            $('#verbouwen-ja').hide();
+        }
     });
     $('[name=\'orv-ja-nee\']').change(function(){
         if($('[name=\'orv-ja-nee\']:checked').val() === 'ja') {
@@ -332,6 +342,11 @@ jQuery(document).ready(function($) {
         $('#huidigestap').text('6');
         $('#bevestigen').hide();
         $('#stap6').show();
+    });
+    $('#terug-naar-stap7').click(function(){
+        $('#huidigestap').text('7');
+        $('#bevestigen').hide();
+        $('#stap7').show();
         $('#stappenteller').show();
     });
     $('#postcode').change(function(){
@@ -1193,6 +1208,8 @@ jQuery(document).ready(function($) {
         } else {
             $('#orv-gegevens').hide();
         }
+        
+        $('#risico-percentage').text(Math.round(berekenRisicoPercentage()));
 	}
 	
 	function berekenBrutojaarloon() {
@@ -1267,9 +1284,23 @@ jQuery(document).ready(function($) {
 	}
 	
 	function berekenOrvBedrag() {
-	    var waardehuis = parseInt($('#waardehuis').val());
+	   // var waardehuis = parseInt($('#waardehuis').val());
+	    var waardehuis = parseInt($('#telenen-getal').text());
 	    var afTeDekkenBedrag = waardehuis * 0.2;
 	    
 	    $('[name=\'orv-bedrag\']').text(maakBedragOp(afTeDekkenBedrag));
+	}
+	
+	function berekenRisicoPercentage() {
+        if(!$('#nhg').is(':checked')) {
+    	    var koopsom = parseInt($('#koopsom').val());
+    	    var hypotheek = parseInt($('#telenen-getal').text());
+    	    
+    	    if(isNaN(koopsom) || isNaN(hypotheek)) {
+    	        return 100;
+    	    } else {
+        	    return (hypotheek / koopsom)  * 100;
+    	    }
+        }
 	}
 });

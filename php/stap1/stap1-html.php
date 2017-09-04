@@ -22,7 +22,7 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
     
     echo "<div id=\"loon-uit-loondienst\" style=\"display:none;\">";
         echo "<div class=\"first_form form_element form_fullwidth\">";
-            echo "<label for=\"brutomaandloon\">Je bruto maandloon</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"brutomaandloon\" />";
+            echo "<label for=\"brutomaandloon\">Je bruto maandloon</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"brutomaandloon\" />";
         echo "</div><br />";
         echo "Ontvang je een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaand\" /><br />";
         echo "Ontvang je vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeld\" /><br />";

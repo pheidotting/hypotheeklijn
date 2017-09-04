@@ -1,9 +1,6 @@
 <?php
     echo "<h3>Hypotheek samenstellen</h3>";
-    echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<label for=\"waardehuis\">Waarde van de woning</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"waardehuis\" />";
-    echo "</div>";
-    
+    echo "<h2>Risicopercentage <span id=\"risico-percentage\"></span></h2>";
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<label for=\"koopsom\">Koopsom van de woning</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"koopsom\" />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-koopsom-question\" />";
@@ -12,6 +9,20 @@
         echo "<div style=\"padding:15px;\">".$tekstStap2koopsom."</div></div>";
     echo "</div>";
 
+    echo "<div class=\"first_form form_element form_fullwidth\">";
+        echo "<label for=\"verbouwen-ja-nee\">Wil je gaan verbouwen in de nieuwe woning</label><br />";
+        echo "<input type=\"radio\" name=\"verbouwen-ja-nee\" value=\"ja\">Ja<br />";
+        echo "<input type=\"radio\" name=\"verbouwen-ja-nee\" value=\"nee\">Nee<br />";
+        echo "<div id=\"verbouwen-ja\" style=\"display:none;\">";
+            echo "Om te kunnen bepalen of je een bouwdepot mee kunt nemen in je aanvraag is het van belang dat je even gaat sparren met onze specialisten. Zij kunnen je vertellen of dit kunt opgeven in de aanvraag. ";
+            echo "<label for=\"verbouwingskosten\">Wat zijn de geschatte verbouwingskosten</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"verbouwingskosten\" />";
+        echo "</div>";
+    echo "</div>";
+
+    echo "<div class=\"first_form form_element form_fullwidth\">";
+        echo "<label for=\"waardehuis\">Waarde van de woning</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"waardehuis\" />";
+    echo "</div>";
+    
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<label for=\"overdrachtsbelasting\">Overdrachtsbelasting</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"overdrachtsbelasting\" disabled=\"disabled\" />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-overdrachtsbelasting-question\" />";
@@ -95,19 +106,42 @@
     echo "</div>";
 
     // echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "Kies een aanbieder uit de lijst:";
+        echo "Kies een geldverstrekker uit de lijst:";
+        echo "<br />";
         echo "<div id=\"aanbieders\"></div>";
     // echo "</div>";
     
+    echo "<table>";
+        echo "<tr>";
+            echo "<td>Leencapaciteit op basis van je loon</td><td><span id=\"result\"></span><span id=\"result-getal\" style=\"display:none;\"></span></td>";
+        echo "</tr>";
+        echo "<tr>";
+            echo "<td>Leencapaciteit op basis van de waarde van de woning</td><td><span id=\"max-hypotheek\"></span><span id=\"max-hypotheek-getal\" style=\"display:none;\"></span></td>";
+        echo "</tr>";
+        echo "<tr>";
+            echo "<td>Hoeveel hypotheek heb je nodig om je woning te kunnen financieren? </td><td><span id=\"benodigdehypotheek\"></span><span id=\"benodigdehypotheek-getal\" style=\"display:none;\"></span></td>";
+        echo "</tr>";
+        echo "<tr>";
+            echo "<td>Dat betekent dat je aan eigen middelen moet inbrengen</td><td><span id=\"eigen-middelen-bedrag\"></span><span id=\"eigen-middelen-bedrag-getal\" style=\"display:none;\"></span></td>";
+        echo "</tr>";
+        echo "<tr>";
+            echo "<td>Wil je meer dan het verplichte bedrag inbrengen?</td><td><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveeleigengeld-getal\" /></td>";
+        echo "</tr>";
+        echo "<tr>";
+            echo "<td>Jouw hypotheek wordt</td><td><span id=\"telenen\"></span><span id=\"telenen-getal\" style=\"display:none;\"></span></td>";
+        echo "</tr>";
+    echo "</table>";
+
     echo "<div id=\"orv-gegevens\">";
-        echo "Je hebt een hypotheek aangevraagd van <span id=\"telenen-orv\"></span> met Nationale Hypotheek Garantie. ";
+        echo "<h3>Overlijdensrisicoverzekering</h3>";
+        echo "Je hebt een hypotheek aangevraagd van <span id=\"telenen-orv\"></span><span id=\"orv-met-nhg\" style=\"display:none;\"> met Nationale Hypotheek Garantie</span>. ";
         echo "Aangezien de hypotheek hoger is dan 80% van de waarde van de woning, moet je dit gedeelte afdekken met een overlijdensrisicoverzekering (orv). ";
         echo "Het minimaal te verzekeren bedrag betreft: <span name=\"orv-bedrag\"></span>. Heb je een partner ingevoerd, dan dient dit bedrag tevens voor de partner te zijn afgedekt. ";
         echo "Heb je al een orv afgesloten?<br />";
         echo "<input type=\"radio\" name=\"orv-ja-nee\" value=\"ja\">Ja<br />";
         echo "<input type=\"radio\" name=\"orv-ja-nee\" value=\"nee\">Nee<br />";
         echo "<div id=\"orv-ja\" style=\"display:none;\">";
-            echo "Is het bedrag wat je hebt verzekerd minimaal <span name=\"orv-bedrag\"></span>";
+            echo "Is het bedrag wat je hebt verzekerd minimaal <span name=\"orv-bedrag\"></span><br />";
             echo "<input type=\"radio\" name=\"orv-ja-minimaal-bedrag-ja-nee\" value=\"ja\">Ja<br />";
             echo "<input type=\"radio\" name=\"orv-ja-minimaal-bedrag-ja-nee\" value=\"nee\">Nee<br />";
             echo "<div id=\"orv-ja-minimaal-bedrag-ja\" style=\"display:none;\">";
@@ -133,30 +167,10 @@
                     echo "</select>";
                 echo "</div>";
             echo "</div>";
-        echo "</div";
+        echo "</div>";
         echo "<br />";
     echo "</div>";
     
-    echo "<table>";
-        echo "<tr>";
-            echo "<td>Leencapaciteit op basis van je loon</td><td><span id=\"result\"></span><span id=\"result-getal\" style=\"display:none;\"></span></td>";
-        echo "</tr>";
-        echo "<tr>";
-            echo "<td>Leencapaciteit op basis van de waarde van de woning</td><td><span id=\"max-hypotheek\"></span><span id=\"max-hypotheek-getal\" style=\"display:none;\"></span></td>";
-        echo "</tr>";
-        echo "<tr>";
-            echo "<td>Hoeveel hypotheek ben je nodig</td><td><span id=\"benodigdehypotheek\"></span><span id=\"benodigdehypotheek-getal\" style=\"display:none;\"></span></td>";
-        echo "</tr>";
-        echo "<tr>";
-            echo "<td>Dat betekent dat je aan eigen middelen moet inbrengen</td><td><span id=\"eigen-middelen-bedrag\"></span><span id=\"eigen-middelen-bedrag-getal\" style=\"display:none;\"></span></td>";
-        echo "</tr>";
-        echo "<tr>";
-            echo "<td>Wil je extra inbrengen</td><td><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveeleigengeld-getal\" /></td>";
-        echo "</tr>";
-        echo "<tr>";
-            echo "<td>Te lenen</td><td><span id=\"telenen\"></span><span id=\"telenen-getal\" style=\"display:none;\"></span></td>";
-        echo "</tr>";
-    echo "</table>";
 
     // echo "<div class=\"first_form form_element form_fullwidth\">";
     //     echo "<div id=\"max-hypotheek\" style=\"display:none;\">0</div>";
