@@ -4,7 +4,7 @@
         echo "<label for=\"iban\">Wat is je IBAN rekeningnummer</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"iban\" maxlength=\"18\" />";
     echo "</div>";
     echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<label for=\"gezamenlijke-rekening-ja-nee\">Betreft dit een gezamenlijke rekening</label>";
+        echo "<label for=\"gezamenlijke-rekening-ja-nee\">Betreft dit een gezamenlijke rekening</label><br />";
         echo "<input type=\"radio\" name=\"gezamenlijke-rekening-ja-nee\" value=\"ja\">Ja<br />";
         echo "<input type=\"radio\" name=\"gezamenlijke-rekening-ja-nee\" value=\"nee\">Nee<br />";
     echo "</div>";
