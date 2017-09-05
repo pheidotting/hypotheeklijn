@@ -1,6 +1,5 @@
 <?php
     echo "<h3>Hypotheek samenstellen</h3>";
-    echo "<h2>Risicopercentage <span id=\"risico-percentage\"></span></h2>";
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<label for=\"koopsom\">Koopsom van de woning</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"koopsom\" />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-koopsom-question\" />";
