@@ -109,6 +109,7 @@ jQuery(document).ready(function($) {
         ophalenWaardeWoonhuis(null, null, $('#apikey').html(), $('#apiurl').html());
     });
     $('#waardehuis').change(function(){
+        verbergOfToonNhgOptie();
         berekenHypotheekBedrag();
         hoogteHypotheek($('#percentage').val());
     });
@@ -132,11 +133,10 @@ jQuery(document).ready(function($) {
         berekenHypotheekBedrag();
         berekenEigenMiddelen();
     });
-    $('#benodigdehypotheek').change(function(){
-        verbergOfToonNhgOptie();
-        berekenEigenMiddelen();
-        berekenTeLenen();
-    });
+    // $('#benodigdehypotheek').change(function(){
+    //     berekenEigenMiddelen();
+    //     berekenTeLenen();
+    // });
     $('#geboortedatum').change(function(){
         var input = $('#geboortedatum').val();
         
@@ -751,7 +751,7 @@ jQuery(document).ready(function($) {
             nhg = true;
         }
 
-        ophalenRentepercentages(nhg, $('#rentevasteperiode').val(), $('#apikey').html(), $('#apiurl').html()).done(function(percentage) {
+        ophalenRentepercentages(nhg, $('#rentevasteperiode').val(), berekenRisicoPercentage(), $('#apikey').html(), $('#apiurl').html()).done(function(percentage) {
             var elements = [];
             var pp = '<table>';
             _.each(percentage, function(p){
@@ -1208,8 +1208,6 @@ jQuery(document).ready(function($) {
         } else {
             $('#orv-gegevens').hide();
         }
-        
-        $('#risico-percentage').text(Math.round(berekenRisicoPercentage()));
 	}
 	
 	function berekenBrutojaarloon() {
@@ -1284,9 +1282,11 @@ jQuery(document).ready(function($) {
 	}
 	
 	function berekenOrvBedrag() {
-	   // var waardehuis = parseInt($('#waardehuis').val());
-	    var waardehuis = parseInt($('#telenen-getal').text());
-	    var afTeDekkenBedrag = waardehuis * 0.2;
+	    var waardehuis = parseInt($('#waardehuis').val());
+	    var waardehuis80Procent = waardehuis * 0.8;
+	    var telenen = parseInt($('#telenen-getal').text());
+
+	    var afTeDekkenBedrag = telenen - waardehuis80Procent;
 	    
 	    $('[name=\'orv-bedrag\']').text(maakBedragOp(afTeDekkenBedrag));
 	}
@@ -1299,7 +1299,7 @@ jQuery(document).ready(function($) {
     	    if(isNaN(koopsom) || isNaN(hypotheek)) {
     	        return 100;
     	    } else {
-        	    return (hypotheek / koopsom)  * 100;
+        	    return Math.round((hypotheek / koopsom)  * 100);
     	    }
         }
 	}

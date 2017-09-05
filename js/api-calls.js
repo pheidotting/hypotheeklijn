@@ -103,7 +103,7 @@ function ophalenAdresCall(postcode, huisnummer, str_apikey, str_apiurl) {
     return deferred.promise();
 }
 
-function ophalenRentepercentages(blnNhg, rentevasteperiode, str_apikey, str_apiurl) {
+function ophalenRentepercentages(blnNhg, rentevasteperiode, risicopercentage, str_apikey, str_apiurl) {
     var deferred = $.Deferred();
     var nhg = '';
     if(blnNhg) {
@@ -118,8 +118,8 @@ function ophalenRentepercentages(blnNhg, rentevasteperiode, str_apikey, str_apiu
     var loantovaluepercentage = (koopsom / waarde) * 100;
     
     var lvp = '';
-    if(!(isNaN(loantovaluepercentage))) {
-        lvp = '&loantovaluepercentage=' + loantovaluepercentage;
+    if(!(isNaN(risicopercentage))) {
+        lvp = '&loantovaluepercentage=' + risicopercentage;
     }
 
     $.get(str_apiurl + '/interest/v1/interest-top-5?onlyUseIncludedLabels=true&api_key=' + str_apikey + nhg + rvp + lvp, null ,function(result){
