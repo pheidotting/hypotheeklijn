@@ -1,11 +1,11 @@
 <?php
 echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  avia-builder-el-no-sibling\"><fieldset>";
     echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<label for=\"geboortedatum\">Je geboortedatum</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"geboortedatum\" />";
+        echo "<label for=\"geboortedatum\">Wat is je geboortedatum</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"geboortedatum\" />";
     echo "</div>";
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<label for=\"soort-inkomsten\">Kies soort inkomsten</label>";
+        echo "<label for=\"soort-inkomsten\">Waaruit ontvang je inkomsten</label>";
         echo "<select id=\"soort-inkomsten\" class=\"form-breedte75-procent text_input is_empty\">";
         echo "<option value=\"\"></option>";
         echo "<option value=\"loondienst\">Loon uit vast dienstverband</option>";
@@ -22,13 +22,13 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
     
     echo "<div id=\"loon-uit-loondienst\" style=\"display:none;\">";
         echo "<div class=\"first_form form_element form_fullwidth\">";
-            echo "<label for=\"brutomaandloon\">Je bruto maandloon</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"brutomaandloon\" />";
+            echo "<label for=\"brutomaandloon\">Wat is je bruto maandsalaris</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"brutomaandloon\" />";
         echo "</div><br />";
         echo "Ontvang je een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaand\" /><br />";
         echo "Ontvang je vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeld\" /><br />";
 
         echo "<div class=\"first_form form_element form_fullwidth\">";
-            echo "<label for=\"brutoloon\">Je bruto jaarloon :</label><input id=\"brutoloon\"class=\"form-breedte75-procent text_input is_empty\" type=\"number\" />";
+            echo "<label for=\"brutoloon\">Je bruto jaarsalaris bedraagt</label><input id=\"brutoloon\"class=\"form-breedte75-procent text_input is_empty\" type=\"number\" />";
         echo "</div>";
     echo "</div>";
 
@@ -45,6 +45,9 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
 
         echo "Je bruto jaarloon : <span id=\"brutoloon-onderneming-opgemaakt\"></span><span id=\"brutoloon-onderneming\" style=\"display:none;\"></span><br />";
     echo "</div>";
+    
+    echo "<br />";
+    echo "<br />";
     
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<input type=\"checkbox\" id=\"partner\">Met partner?";
@@ -79,13 +82,13 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
     
         echo "<div id=\"loon-uit-loondienst-partner\" style=\"display:none;\">";
             echo "<div class=\"first_form form_element form_fullwidth\">";
-                echo "<label for=\"brutomaandloon\">Je bruto maandloon</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"brutomaandloonpartner\" />";
+                echo "<label for=\"brutomaandloon\">Wat is je partners bruto maandsalaris</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"brutomaandloonpartner\" />";
             echo "</div><br />";
             echo "Ontvang je een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaandpartner\" /><br />";
             echo "Ontvang je vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeldpartner\" /><br />";
     
             echo "<div class=\"first_form form_element form_fullwidth\">";
-                echo "<label for=\"brutoloon\">Je bruto jaarloon :</label><input id=\"brutoloonpartner\"class=\"form-breedte75-procent text_input is_empty\" type=\"number\" />";
+                echo "<label for=\"brutoloon\">Je partner bruto jaarsalaris bedraagt</label><input id=\"brutoloonpartner\"class=\"form-breedte75-procent text_input is_empty\" type=\"number\" />";
             echo "</div>";
         echo "</div>";
     
@@ -103,6 +106,9 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
             echo "Je bruto jaarloon : <span id=\"brutoloon-onderneming-opgemaakt-partner\"></span><span id=\"brutoloon-onderneming-partner\" style=\"display:none;\"></span><br />";
         echo "</div>";
     echo "</div>";
+
+    echo "<br />";
+    echo "<br />";
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<input type=\"checkbox\" id=\"studieschuld\">Heb je een studieschuld?";
