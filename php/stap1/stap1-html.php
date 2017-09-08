@@ -28,6 +28,10 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
         echo "Ontvang je vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeld\" /><br />";
 
         echo "<div class=\"first_form form_element form_fullwidth\">";
+            echo "<label for=\"andereinkomsten\">Ontvang je andere vaste inkomsten</label><input id=\"andereinkomsten\"class=\"form-breedte75-procent text_input is_empty\" type=\"number\" />";
+        echo "</div>";
+
+        echo "<div class=\"first_form form_element form_fullwidth\">";
             echo "<label for=\"brutoloon\">Je bruto jaarsalaris bedraagt</label><input id=\"brutoloon\"class=\"form-breedte75-procent text_input is_empty\" type=\"number\" />";
         echo "</div>";
     echo "</div>";
@@ -46,9 +50,6 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
         echo "Je bruto jaarloon : <span id=\"brutoloon-onderneming-opgemaakt\"></span><span id=\"brutoloon-onderneming\" style=\"display:none;\"></span><br />";
     echo "</div>";
     
-    echo "<br />";
-    echo "<br />";
-    
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<input type=\"checkbox\" id=\"partner\">Met partner?";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:2px; cursor: pointer;\" id=\"stap1-met-partner-question\" />";
@@ -59,6 +60,8 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
     echo "</div>";
 
     echo "<div id=\"metPartner\" style=\"display: none\">";
+        echo "<br />";
+    
         echo "<div class=\"first_form form_element form_fullwidth\">";
             echo "<label for=\"geboortedatumpartner\">Geboortedatum van je partner</label>";
             echo "<input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"geboortedatumpartner\" />";
@@ -86,6 +89,10 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
             echo "</div><br />";
             echo "Ontvang je een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaandpartner\" /><br />";
             echo "Ontvang je vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeldpartner\" /><br />";
+
+            echo "<div class=\"first_form form_element form_fullwidth\">";
+                echo "<label for=\"andereinkomstenpartner\">Ontvangt je partner andere vaste inkomsten</label><input id=\"andereinkomstenpartner\"class=\"form-breedte75-procent text_input is_empty\" type=\"number\" />";
+            echo "</div>";
     
             echo "<div class=\"first_form form_element form_fullwidth\">";
                 echo "<label for=\"brutoloon\">Je partner bruto jaarsalaris bedraagt</label><input id=\"brutoloonpartner\"class=\"form-breedte75-procent text_input is_empty\" type=\"number\" />";
@@ -105,10 +112,8 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
     
             echo "Je bruto jaarloon : <span id=\"brutoloon-onderneming-opgemaakt-partner\"></span><span id=\"brutoloon-onderneming-partner\" style=\"display:none;\"></span><br />";
         echo "</div>";
+        echo "<br />";
     echo "</div>";
-
-    echo "<br />";
-    echo "<br />";
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<input type=\"checkbox\" id=\"studieschuld\">Heb je een studieschuld?";

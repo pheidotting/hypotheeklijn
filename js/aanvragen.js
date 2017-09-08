@@ -15,6 +15,9 @@ jQuery(document).ready(function($) {
     $('#vakantiegeld').change(function(){
         berekenBrutojaarloon();
     });
+    $('#andereinkomsten').change(function(){
+        berekenBrutojaarloon();
+    });
     $('#brutomaandloonpartner').change(function(){
         berekenBrutojaarloonPartner();
     });
@@ -22,6 +25,9 @@ jQuery(document).ready(function($) {
         berekenBrutojaarloonPartner();
     });
     $('#vakantiegeldpartner').change(function(){
+        berekenBrutojaarloonPartner();
+    });
+    $('#andereinkomstenpartner').change(function(){
         berekenBrutojaarloonPartner();
     });
     
@@ -1214,9 +1220,13 @@ jQuery(document).ready(function($) {
 	    var brutomaandloon = parseInt($('#brutomaandloon').val());
 	    var dertiendemaand = $('#dertiendemaand').is(':checked');
 	    var vakantiegeld = $('#vakantiegeld').is(':checked');
+	    var andereinkomsten = parseInt($('#andereinkomsten').val());
+	    if(isNaN(andereinkomsten)) {
+	        andereinkomsten = 0;
+	    }
 
         opvragenBrutoinkomen(brutomaandloon, dertiendemaand, vakantiegeld, $('#apikey').html(), $('#apiurl').html()).done(function(result) {
-            $('#brutoloon').val(result);
+            $('#brutoloon').val(result + andereinkomsten);
         });
 	}
 	
@@ -1224,9 +1234,13 @@ jQuery(document).ready(function($) {
 	    var brutomaandloonpartner = parseInt($('#brutomaandloonpartner').val());
 	    var dertiendemaandpartner = $('#dertiendemaandpartner').is(':checked');
 	    var vakantiegeldpartner = $('#vakantiegeldpartner').is(':checked');
+	    var andereinkomstenpartner = parseInt($('#andereinkomstenpartner').val());
+	    if(isNaN(andereinkomstenpartner)) {
+	        andereinkomstenpartner = 0;
+	    }
 
         opvragenBrutoinkomen(brutomaandloonpartner, dertiendemaandpartner, vakantiegeldpartner, $('#apikey').html(), $('#apiurl').html()).done(function(result) {
-            $('#brutoloonpartner').val(result);
+            $('#brutoloonpartner').val(result + andereinkomstenpartner);
         });
 	}
 	
