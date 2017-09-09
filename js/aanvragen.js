@@ -180,13 +180,15 @@ jQuery(document).ready(function($) {
         opvragenRentepercentages();
         zetNhgSidebar(nhg);
     });
-    $('#hoeveeleigengeld').change(function(){
-        kloptHoeveelEigenGeldWel();
-        // berekenHypotheekBedrag();
-        // opvragenRentepercentages();
-        berekenTeLenen();
-    });
+    // $('#hoeveeleigengeld').change(function(){
+    //     kloptHoeveelEigenGeldWel();
+    //     opvragenRentepercentages();
+    //     // berekenHypotheekBedrag();
+    //     // opvragenRentepercentages();
+    //     berekenTeLenen();
+    // });
     $('#hoeveeleigengeld-getal').change(function(){
+        opvragenRentepercentages();
         // kloptHoeveelEigenGeldWel();
         // berekenHypotheekBedrag();
         // opvragenRentepercentages();
