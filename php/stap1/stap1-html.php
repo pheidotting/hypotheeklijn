@@ -1,11 +1,11 @@
 <?php
 echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  avia-builder-el-no-sibling\"><fieldset>";
     echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<label for=\"geboortedatum\">Wat is je geboortedatum</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"geboortedatum\" />";
+        echo "<label for=\"geboortedatum\">Wat is je geboortedatum?</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"geboortedatum\" />";
     echo "</div>";
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<label for=\"soort-inkomsten\">Waaruit ontvang je inkomsten</label>";
+        echo "<label for=\"soort-inkomsten\">Waaruit ontvang je inkomsten?</label>";
         echo "<select id=\"soort-inkomsten\" class=\"form-breedte75-procent text_input is_empty\">";
         echo "<option value=\"\"></option>";
         echo "<option value=\"loondienst\">Loon uit vast dienstverband</option>";
@@ -22,13 +22,13 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
     
     echo "<div id=\"loon-uit-loondienst\" style=\"display:none;\">";
         echo "<div class=\"first_form form_element form_fullwidth\">";
-            echo "<label for=\"brutomaandloon\">Wat is je bruto maandsalaris</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"brutomaandloon\" />";
+            echo "<label for=\"brutomaandloon\">Wat is je bruto maandsalaris?</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"brutomaandloon\" />";
         echo "</div><br />";
         echo "Ontvang je een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaand\" /><br />";
         echo "Ontvang je vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeld\" /><br />";
 
         echo "<div class=\"first_form form_element form_fullwidth\">";
-            echo "<label for=\"andereinkomsten\">Ontvang je andere vaste inkomsten</label><input id=\"andereinkomsten\"class=\"form-breedte75-procent text_input is_empty\" type=\"number\" />";
+            echo "<label for=\"andereinkomsten\">Ontvang je andere vaste inkomsten?</label><input id=\"andereinkomsten\"class=\"form-breedte75-procent text_input is_empty\" type=\"number\" />";
         echo "</div>";
 
         echo "<div class=\"first_form form_element form_fullwidth\">";
@@ -50,8 +50,11 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
         echo "Je bruto jaarloon : <span id=\"brutoloon-onderneming-opgemaakt\"></span><span id=\"brutoloon-onderneming\" style=\"display:none;\"></span><br />";
     echo "</div>";
     
+    echo "<br />";
     echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<input type=\"checkbox\" id=\"partner\">Met partner?";
+        echo "<label for=\"partner\">Ga je een woning aankopen met je partner?</label>";
+        echo "<input type=\"radio\" name=\"partner\" value=\"ja\">Ja<br />";
+        echo "<input type=\"radio\" name=\"partner\" value=\"nee\">Nee<br />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:2px; cursor: pointer;\" id=\"stap1-met-partner-question\" />";
         
         echo "<div id=\"stap1-met-partner-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-met-partner-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
@@ -85,13 +88,13 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
     
         echo "<div id=\"loon-uit-loondienst-partner\" style=\"display:none;\">";
             echo "<div class=\"first_form form_element form_fullwidth\">";
-                echo "<label for=\"brutomaandloon\">Wat is je partners bruto maandsalaris</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"brutomaandloonpartner\" />";
+                echo "<label for=\"brutomaandloon\">Wat is je partners bruto maandsalaris?</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"brutomaandloonpartner\" />";
             echo "</div><br />";
-            echo "Ontvang je een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaandpartner\" /><br />";
-            echo "Ontvang je vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeldpartner\" /><br />";
+            echo "Ontvangt je partner een dertiende maand ?&nbsp;<input type=\"checkbox\" id=\"dertiendemaandpartner\" /><br />";
+            echo "Ontvangt je partner vakantiegeld ?&nbsp;<input type=\"checkbox\" id=\"vakantiegeldpartner\" /><br />";
 
             echo "<div class=\"first_form form_element form_fullwidth\">";
-                echo "<label for=\"andereinkomstenpartner\">Ontvangt je partner andere vaste inkomsten</label><input id=\"andereinkomstenpartner\"class=\"form-breedte75-procent text_input is_empty\" type=\"number\" />";
+                echo "<label for=\"andereinkomstenpartner\">Ontvangt je partner andere vaste inkomsten?</label><input id=\"andereinkomstenpartner\"class=\"form-breedte75-procent text_input is_empty\" type=\"number\" />";
             echo "</div>";
     
             echo "<div class=\"first_form form_element form_fullwidth\">";
@@ -116,8 +119,9 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
     echo "</div>";
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<input type=\"checkbox\" id=\"studieschuld\">Heb je een studieschuld?";
-        
+        echo "<label for=\"studieschuld\">Heb je een studieschuld?</label>";
+        echo "<input type=\"radio\" name=\"studieschuld\" value=\"ja\">Ja<br />";
+        echo "<input type=\"radio\" name=\"studieschuld\" value=\"nee\">Nee<br />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:2px; cursor: pointer;\" id=\"stap1-studieschuld-question\" />";
         echo "<div id=\"stap1-studieschuld-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-studieschuld-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
         $tekstStap1Studieschuld = $atts['stap1-studieschuld'] == '' ? 'stap1-studieschuld' : $atts['stap1-studieschuld'];
@@ -128,8 +132,9 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
     echo "</div>";
     
     echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<input type=\"checkbox\" id=\"roodstaan\">Mag je rood staan?";
-
+        echo "<label for=\"roodstaan\">Mag je rood staan?</label>";
+        echo "<input type=\"radio\" name=\"roodstaan\" value=\"ja\">Ja<br />";
+        echo "<input type=\"radio\" name=\"roodstaan\" value=\"nee\">Nee<br />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:2px; cursor: pointer;\" id=\"stap1-roodstaan-question\" />";
         echo "<div id=\"stap1-roodstaan-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-roodstaan-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
         $tekstStap1Roodstaan = $atts['stap1-roodstaan'] == '' ? 'stap1-roodstaan' : $atts['stap1-roodstaan'];
@@ -140,8 +145,9 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
     echo "</div>";
     
     echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<input type=\"checkbox\" id=\"creditcard\">Heb je een creditcard?";
-
+        echo "<label for=\"creditcard\">Heb je een creditcard?</label>";
+        echo "<input type=\"radio\" name=\"creditcard\" value=\"ja\">Ja<br />";
+        echo "<input type=\"radio\" name=\"creditcard\" value=\"nee\">Nee<br />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:2px; cursor: pointer;\" id=\"stap1-creditcard-question\" />";
         echo "<div id=\"stap1-creditcard-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-creditcard-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
         $tekstStap1Creditcard = $atts['stap1-creditcard'] == '' ? 'stap1-creditcard' : $atts['stap1-creditcard'];
@@ -152,8 +158,9 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
     echo "</div>";
     
     echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<input type=\"checkbox\" id=\"partneralimentatie\">Betaal je partneralimentatie?";
-
+        echo "<label for=\"partneralimentatie\">Betaal je partneralimentatie?</label>";
+        echo "<input type=\"radio\" name=\"partneralimentatie\" value=\"ja\">Ja<br />";
+        echo "<input type=\"radio\" name=\"partneralimentatie\" value=\"nee\">Nee<br />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:2px; cursor: pointer;\" id=\"stap1-partneralimentatie-question\" />";
         echo "<div id=\"stap1-partneralimentatie-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-partneralimentatie-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
         $tekstStap1Partneralimentatie = $atts['stap1-partneralimentatie'] == '' ? 'stap1-partneralimentatie' : $atts['stap1-partneralimentatie'];
@@ -164,8 +171,9 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
     echo "</div>";
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<input type=\"checkbox\" id=\"overigeleningen\">Heb je overige leningen of kredieten?";
-
+        echo "<label for=\"overigeleningen\">Heb je overige leningen of kredieten?</label>";
+        echo "<input type=\"radio\" name=\"overigeleningen\" value=\"ja\">Ja<br />";
+        echo "<input type=\"radio\" name=\"overigeleningen\" value=\"nee\">Nee<br />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:2px; cursor: pointer;\" id=\"stap1-overigeleningen-question\" />";
         echo "<div id=\"stap1-overigeleningen-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-overigeleningen-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
         $tekstStap1Overigeleningen = $atts['stap1-overigeleningen'] == '' ? 'stap1-overigeleningen' : $atts['stap1-overigeleningen'];

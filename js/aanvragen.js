@@ -59,43 +59,43 @@ jQuery(document).ready(function($) {
             $('#loon-uit-loondienst-partner').hide();
         }
     });
-    $('#partner').click(function(){
-        if($('#partner').is(':checked')) {
+    $('[name=\'partner\']').click(function(){
+        if($('[name=\'partner\']:checked').val() === 'ja') {
             $('#metPartner').show();
         } else {
             $('#metPartner').hide();
         }
     });
-    $('#studieschuld').click(function(){
-        if($('#studieschuld').is(':checked')) {
+    $('[name=\'studieschuld\']').click(function(){
+        if($('[name=\'studieschuld\']:checked').val() === 'ja') {
             $('#hoeveelstudieschuldDiv').show();
         } else {
             $('#hoeveelstudieschuldDiv').hide();
         }
     });
-    $('#roodstaan').click(function(){
-        if($('#roodstaan').is(':checked')) {
+    $('[name=\'roodstaan\']').click(function(){
+        if($('[name=\'roodstaan\']:checked').val() === 'ja') {
             $('#hoeveelroodstaanDiv').show();
         } else {
             $('#hoeveelroodstaanDiv').hide();
         }
     });
-    $('#creditcard').click(function(){
-        if($('#creditcard').is(':checked')) {
+    $('[name=\'creditcard\']').click(function(){
+        if($('[name=\'creditcard\']:checked').val() === 'ja') {
             $('#hoeveelcreditcardDiv').show();
         } else {
             $('#hoeveelcreditcardDiv').hide();
         }
     });
-    $('#partneralimentatie').click(function(){
-        if($('#partneralimentatie').is(':checked')) {
+    $('[name=\'partneralimentatie\']').click(function(){
+        if($('[name=\'partneralimentatie\']:checked').val() === 'ja') {
             $('#hoeveelpartneralimentatieDiv').show();
         } else {
             $('#hoeveelpartneralimentatieDiv').hide();
         }
     });
-    $('#overigeleningen').click(function(){
-        if($('#overigeleningen').is(':checked')) {
+    $('[name=\'overigeleningen\']').click(function(){
+        if($('[name=\'overigeleningen\']:checked').val() === 'ja') {
             $('#hoeveeloverigeleningenDiv').show();
         } else {
             $('#hoeveeloverigeleningenDiv').hide();
@@ -288,7 +288,7 @@ jQuery(document).ready(function($) {
                 $('#gegevens-indien-loondienst').hide();
                 $('#gegevens-indien-eigen-onderneming').show();
             }
-            if($('#partner').is(':checked')) {
+            if($('[name=\'partner\']:checked').val() === 'ja') {
                 $('#werkgegevens-partner-h3').show();
                 if($('#soort-inkomsten-partner').val() === 'loondienst' || $('#soort-inkomsten').val() === 'onbepaalde-tijd') {
                     $('#gegevens-indien-loondienst-partner').show();
@@ -629,26 +629,26 @@ jQuery(document).ready(function($) {
                 loan : $('#loan').val(),
                 vakantiegeld : $('#vakantiegeld').is(':checked'),
                 dertiendemaand : $('#dertiendemaand').is(':checked'),
-                partner : $('#partner').is(':checked'),
+                partner : $('[name=\'partner\']:checked').val() === 'ja',
                 brutoloon : loon,
                 geboortedatum : $('#geboortedatum').val(),
                 brutoloonpartner : loonPartner,
                 geboortedatumpartner : $('#geboortedatumpartner').val(),
-                studieschuld : $('#studieschuld').is(':checked'),
+                studieschuld : $('[name=\'studieschuld\']:checked').val() === 'ja',
                 hoeveelstudieschuld : $('#hoeveelstudieschuld').val(),
-                roodstaan : $('#roodstaan').is(':checked'),
+                roodstaan : $('[name=\'roodstaan\']:checked').val() === 'ja',
                 hoeveelroodstaan : $('#hoeveelroodstaan').val(),
-                creditcard : $('#creditcard').is(':checked'),
+                creditcard : $('[name=\'creditcard\']:checked').val() === 'ja',
                 hoeveelcreditcard : $('#hoeveelcreditcard').val(),
-                partneralimentatie : $('#partneralimentatie').is(':checked'),
+                partneralimentatie : $('[name=\'partneralimentatie\']:checked').val() === 'ja',
                 hoeveelpartneralimentatie : $('#hoeveelpartneralimentatie').val(),
-                overigeleningen : $('#overigeleningen').is(':checked'),
+                overigeleningen : $('[name=\'overigeleningen\']:checked').val() === 'ja',
                 hoeveeloverigeleningen : $('#hoeveeloverigeleningen').val(),
                 nhg : $('#nhg').is(':checked'),
                 percentage : percentage
         }
         if(percentage == null || percentage == '') {
-            $.when(ophalenRentepercentages(request.nhg, $('#rentevasteperiode').val(), $('#apikey').html(), $('#apiurl').html())).then(function(result) {
+            $.when(ophalenRentepercentages(request.nhg, $('#rentevasteperiode').val(), berekenRisicoPercentage(), $('#apikey').html(), $('#apiurl').html())).then(function(result) {
                 percentage = result[0].percentage;
 
                 $('#rentepercentage-sidebar').text(percentage);
@@ -855,6 +855,12 @@ jQuery(document).ready(function($) {
     
     function verbergOfToonNhgOptie(){
         var benodigdehypotheek = parseInt($('#benodigdehypotheek').val());
+        if(isNaN(benodigdehypotheek)) {
+            benodigdehypotheek = parseInt($('#koopsom').val());
+        }
+        if(isNaN(benodigdehypotheek)) {
+            benodigdehypotheek = parseInt($('#waardehuis').val());
+        }
         
         if(benodigdehypotheek > 247500) {
             $('#nhg-vraag').hide();
@@ -906,7 +912,7 @@ jQuery(document).ready(function($) {
 	    tekst = tekst + zetTekst('Je bruto jaarloon', maakBedragOp($('#brutoloon').val()));
         tekst = tekst + zetTekst('Je geboortedatum', $('#geboortedatum').val());
 
-        var metPartner = $('#partner').is(':checked') ? 'Ja' : 'Nee';
+        var metPartner = $('[name=\'partner\']:checked').val() === 'ja' ? 'Ja' : 'Nee';
         tekst = tekst + zetTekst('Met partner : ', metPartner);
         if(metPartner === 'Ja') {
             tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarEenTekst\']').html(), maakBedragOp($('#inkomenEenPartner').val()));
@@ -925,31 +931,31 @@ jQuery(document).ready(function($) {
             tekst = tekst + zetTekst('Geboortedatum van je partner : ', $('#geboortedatumpartner').val());
         }
 
-        var studieschuld = $('#studieschuld').is(':checked') ? 'Ja' : 'Nee';
+        var studieschuld = $('[name=\'studieschuld\']:checked').val() === 'ja' ? 'Ja' : 'Nee';
         tekst = tekst + zetTekst('Heb je een studieschuld?', studieschuld);
         if(studieschuld === 'Ja') {
             tekst = tekst + zetTekst('Hoeveel studieschuld : ', maakBedragOp($('#hoeveelstudieschuld').val()));
         }
 
-        var roodstaan = $('#roodstaan').is(':checked') ? 'Ja' : 'Nee';
+        var roodstaan = $('[name=\'roodstaan\']:checked').val() === 'ja' ? 'Ja' : 'Nee';
         tekst = tekst + zetTekst('Mag je rood staan?', roodstaan);
         if(roodstaan === 'Ja') {
             tekst = tekst + zetTekst('Hoeveel mag je roodstaan : ', maakBedragOp($('#hoeveelroodstaan').val()));
         }
 
-        var creditcard = $('#creditcard').is(':checked') ? 'Ja' : 'Nee';
+        var creditcard = $('[name=\'creditcard\']:checked').val() === 'ja' ? 'Ja' : 'Nee';
         tekst = tekst + zetTekst('Heb je een creditcard?', creditcard);
         if(creditcard === 'Ja') {
             tekst = tekst + zetTekst('Wat is de limiet : ', maakBedragOp($('#hoeveelcreditcard').val()));
         }
 
-        var partneralimentatie = $('#partneralimentatie').is(':checked') ? 'Ja' : 'Nee';
+        var partneralimentatie = $('[name=\'partneralimentatie\']:checked').val() === 'ja' ? 'Ja' : 'Nee';
         tekst = tekst + zetTekst('Betaal je partneralimentatie?', partneralimentatie);
         if(partneralimentatie === 'Ja') {
             tekst = tekst + zetTekst('Hoeveel betaal je aan partneralimentatie : ', maakBedragOp($('#hoeveelpartneralimentatie').val()));
         }
 
-        var overigeleningen = $('#overigeleningen').is(':checked') ? 'Ja' : 'Nee';
+        var overigeleningen = $('[name=\'overigeleningen\']:checked').val() === 'ja' ? 'Ja' : 'Nee';
         tekst = tekst + zetTekst('Heb je overige leningen of kredieten?', overigeleningen);
         if(overigeleningen === 'Ja') {
             tekst = tekst + zetTekst('Hoeveel : ', maakBedragOp($('#hoeveeloverigeleningen').val()));
@@ -1070,7 +1076,7 @@ jQuery(document).ready(function($) {
 	        var geboortedatum = isVeldGevuldEnVeranderRand($('#geboortedatum'));
 	        
 	        var partnerOk = true;
-            if($('#partner').is(':checked')) {
+            if($('[name=\'partner\']:checked').val() === 'ja') {
                 var brutoloonpartner = true;
 	            var ondernemingPartner = $('#loon-uit-onderneming-partner-check').is(':checked');
     	        if(ondernemingPartner) {
@@ -1084,27 +1090,27 @@ jQuery(document).ready(function($) {
             }
             
             var studieschuldOk = true;
-            if($('#studieschuld').is(':checked')) {
+            if($('[name=\'studieschuld\']:checked').val() === 'ja') {
                 studieschuldOk = isVeldGevuldEnVeranderRand($('#hoeveelstudieschuld'));
             }
             
             var roodstaanOk = true;
-            if($('#roodstaan').is(':checked')) {
+            if($('[name=\'roodstaan\']:checked').val() === 'ja') {
                 roodstaanOk = isVeldGevuldEnVeranderRand($('#hoeveelroodstaan'));
             }
             
             var creditcardOk = true;
-            if($('#creditcard').is(':checked')) {
+            if($('[name=\'creditcard\']:checked').val() === 'ja') {
                 creditcardOk = isVeldGevuldEnVeranderRand($('#hoeveelcreditcard'));
             }
             
             var partneralimentatieOk = true;
-            if($('#partneralimentatie').is(':checked')) {
+            if($('[name=\'partneralimentatie\']:checked').val() === 'ja') {
                 partneralimentatieOk = isVeldGevuldEnVeranderRand($('#hoeveelpartneralimentatie'));
             }
             
             var overigeleningenOk = true;
-            if($('#overigeleningen').is(':checked')) {
+            if($('[name=\'overigeleningen\']:checked').val() === 'ja') {
                 overigeleningenOk = isVeldGevuldEnVeranderRand($('#hoeveeloverigeleningen'));
             }
 	        
