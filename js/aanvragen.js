@@ -165,9 +165,9 @@ jQuery(document).ready(function($) {
         
         $('#geboortedatumpartner').val(geboortedatum.format('DD-MM-YYYY'));
     });
-    $('#nhg').click(function(){
+    $('[name=\'nhg\']').change(function(){
         var nhg;
-        if($('#nhg').is(':checked')) {
+        if($('[name=\'nhg\']:checked').val() === 'ja') {
             $('#metNHG').show();
             $('#orv-met-nhg').show();
             nhg = true;
@@ -644,7 +644,7 @@ jQuery(document).ready(function($) {
                 hoeveelpartneralimentatie : $('#hoeveelpartneralimentatie').val(),
                 overigeleningen : $('[name=\'overigeleningen\']:checked').val() === 'ja',
                 hoeveeloverigeleningen : $('#hoeveeloverigeleningen').val(),
-                nhg : $('#nhg').is(':checked'),
+                nhg : $('[name=\'nhg\']:checked').val() === 'ja',
                 percentage : percentage
         }
         if(percentage == null || percentage == '') {
@@ -755,7 +755,7 @@ jQuery(document).ready(function($) {
         berekenEigenMiddelen();
 
 	    var nhg = false;
-        if($('#nhg').is(':checked')) {
+        if($('[name=\'nhg\']:checked').val() === 'ja') {
             nhg = true;
         }
 
@@ -826,7 +826,7 @@ jQuery(document).ready(function($) {
         
         opvragenNhg(totaalBedrag, $('#apikey').html(), $('#apiurl').html()).done(function(opgehaaldeNhgCommissie) {
             //als marktwaarde < koopsom, dan nhg = over marktwaarde, anders koopsom
-            if($('#nhg').is(':checked')) {
+            if($('[name=\'nhg\']:checked').val() === 'ja') {
                 var marktwaarde = parseInt($('#waardehuis').val());
                 // var nhgCommissie = 0;
                 // if(marktwaarde < koopsom) {
@@ -1314,7 +1314,7 @@ jQuery(document).ready(function($) {
 	}
 	
 	function berekenRisicoPercentage() {
-        if(!$('#nhg').is(':checked')) {
+        if(!$('[name=\'nhg\']:checked').val() === 'ja') {
     	    var koopsom = parseInt($('#koopsom').val());
     	    var hypotheek = parseInt($('#telenen-getal').text());
     	    

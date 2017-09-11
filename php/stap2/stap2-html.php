@@ -93,7 +93,9 @@
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<div id=\"nhg-vraag\">";
-            echo "<input type=\"checkbox\" id=\"nhg\">Wil je een hypotheek met Nationale Hypotheek Garantie, ja of nee?";
+            echo "<label for=\"verbouwen-ja-nee\">Wil je een hypotheek met Nationale Hypotheek Garantie?</label><br />";
+            echo "<input type=\"radio\" name=\"nhg\" value=\"ja\">Ja<br />";
+            echo "<input type=\"radio\" name=\"nhg\" value=\"nee\">Nee<br />";
             echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-nhg-question\" />";
             echo "<div id=\"stap2-nhg-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-nhg-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
             $tekstStap2nhg = $atts['stap2-nhg'] == '' ? 'stap2-nhg' : $atts['stap2-nhg'];
