@@ -171,6 +171,10 @@ function ophalenWaardeWoonhuis(postcode, huisnummer, str_apikey, str_apiurl) {
 }
 
 function ophalenMaandelijkeBetalingen(hoogteHypotheek, rentevasteperiode, soortHypotheek, rentepercentage, geboortedatum1, inkomen1, geboortedatum2, inkomen2, woz, callback, str_apikey, str_apiurl){
+    if(soortHypotheek == null || soortHypotheek == '') {
+        soortHypotheek = 'ANNUITY';
+    }
+    
     var people = [{
         "dob": geboortedatum1,
         "grossIncome": parseInt(inkomen1)
