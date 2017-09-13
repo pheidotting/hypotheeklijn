@@ -1322,13 +1322,15 @@ jQuery(document).ready(function($) {
 	}
 	
 	function berekenRisicoPercentage() {
-        if(!$('[name=\'nhg\']:checked').val() === 'ja') {
+        if(!$('#nhg-vraag').is(':visible') || !$('[name=\'nhg\']:checked').val() === 'ja') {
     	    var koopsom = parseInt($('#koopsom').val());
     	    var hypotheek = parseInt($('#telenen-getal').text());
     	    
     	    if(isNaN(koopsom) || isNaN(hypotheek)) {
+    	        $('#schuldmarktwaardeverhouding-sidebar').text('100 %');
     	        return 100;
     	    } else {
+    	        $('#schuldmarktwaardeverhouding-sidebar').text(Math.round((hypotheek / koopsom)  * 100) + ' %');
         	    return Math.round((hypotheek / koopsom)  * 100);
     	    }
         }

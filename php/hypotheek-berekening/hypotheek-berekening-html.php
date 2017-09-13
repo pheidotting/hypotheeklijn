@@ -25,6 +25,10 @@
             echo "<td><span id=\"nettomaandlast-sidebar\">€ 0</span></td>";
         echo "</tr>";
         echo "<tr>";
+            echo "<td>Schuldmarktwaardeverhouding</td>";
+            echo "<td><span id=\"schuldmarktwaardeverhouding-sidebar\">100 %</span></td>";
+        echo "</tr>";
+        echo "<tr>";
             echo "<td colspan=\"2\"><hr /></td>";
         echo "</tr>";
         echo "<tr>";
