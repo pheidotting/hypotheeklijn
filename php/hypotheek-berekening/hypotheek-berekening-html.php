@@ -13,6 +13,10 @@
             echo "<td colspan=\"2\"><hr /></td>";
         echo "</tr>";
         echo "<tr>";
+            echo "<td>Jouw hypotheek wordt</td>";
+            echo "<td><span id=\"telenen-sidebar\">€ 0</span></td>";
+        echo "</tr>";
+        echo "<tr>";
             echo "<td>Bruto maandlast</td>";
             echo "<td><span id=\"brutomaandlast-sidebar\">€ 0</span></td>";
         echo "</tr>";

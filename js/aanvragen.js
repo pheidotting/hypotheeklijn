@@ -120,6 +120,7 @@ jQuery(document).ready(function($) {
         hoogteHypotheek($('#percentage').val());
     });
     $('#koopsom').change(function(){
+        verbergOfToonNhgOptie();
         berekenHypotheekBedrag();
         hoogteHypotheek($('#percentage').val());
     });
@@ -190,7 +191,8 @@ jQuery(document).ready(function($) {
     $('#hoeveeleigengeld-getal').change(function(){
         opvragenRentepercentages();
         // kloptHoeveelEigenGeldWel();
-        // berekenHypotheekBedrag();
+        hoogteHypotheek($('#percentage').val());
+        hoogteHypotheek($('#percentage').val(), true);
         // opvragenRentepercentages();
         berekenTeLenen();
     });
@@ -705,7 +707,11 @@ jQuery(document).ready(function($) {
             var soortHypotheek = $('#soorthypotheek').val();
 
             if(!isNaN(waardehuis)) {
-                ophalenMaandelijkeBetalingen(max, rentevasteperiode, soortHypotheek, percentage, request.geboortedatum, request.brutoloon, request.geboortedatumpartner, request.brutoloonpartner, waardehuis, verwerkMaandelijkeBetalingen, $('#apikey').html(), $('#apiurl').html());
+                var hypo = parseInt($('#telenen-getal').text());
+                if(isNaN(hypo) || hypo == '' || hypo == 0) {
+                    hypo = max;
+                }
+                ophalenMaandelijkeBetalingen(hypo, rentevasteperiode, soortHypotheek, percentage, request.geboortedatum, request.brutoloon, request.geboortedatumpartner, request.brutoloonpartner, waardehuis, verwerkMaandelijkeBetalingen, $('#apikey').html(), $('#apiurl').html());
             }
             
             function verwerkMaandelijkeBetalingen(result) {
@@ -864,9 +870,10 @@ jQuery(document).ready(function($) {
         
         if(benodigdehypotheek > 247500) {
             $('#nhg-vraag').hide();
-            $('#nhg').prop('checked', false);
+            return false;
         } else {
             $('#nhg-vraag').show();
+            return true;
         }
     }
 
@@ -1214,6 +1221,7 @@ jQuery(document).ready(function($) {
 	    }
 	    
 	    $('#telenen').text(maakBedragOp(benodigd - eigengeld - eigengeldZelf));
+	    $('#telenen-sidebar').text(maakBedragOp(benodigd - eigengeld - eigengeldZelf));
 	    $('#telenen-orv').text(maakBedragOp(benodigd - eigengeld - eigengeldZelf));
 	    $('#telenen-getal').text(benodigd - eigengeld - eigengeldZelf);
 	                

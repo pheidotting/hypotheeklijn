@@ -106,8 +106,8 @@ function ophalenAdresCall(postcode, huisnummer, str_apikey, str_apiurl) {
 function ophalenRentepercentages(blnNhg, rentevasteperiode, risicopercentage, str_apikey, str_apiurl) {
     var deferred = $.Deferred();
     var nhg = '';
-    if(blnNhg) {
-        nhg = '&ngh=true';
+    if(blnNhg && $('#nhg-vraag').is(':visible')) {
+        nhg = '&nhg=true';
     }
     //loanToValuePercentage
     var rvp = '&period=' + rentevasteperiode;
