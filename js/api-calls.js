@@ -56,7 +56,6 @@ function ophalenMaxHoogteHypotheek(percentage, ophalenHoogteModel, callback, voo
             request += '&person%5B1%5D%5Bloans%5D=0';
             request += '&person%5B1%5D%5BstudentLoans%5D=0'
         }
-        $('#debug').html(replaceAll(request, '\&', '<br />'));
         $.get(request + '&api_key=' + str_apikey, null ,function(result){
             callback(result.data.result, percentage, voorsidebar);
         });
@@ -108,6 +107,8 @@ function ophalenRentepercentages(blnNhg, rentevasteperiode, risicopercentage, st
     var nhg = '';
     if(blnNhg && $('#nhg-vraag').is(':visible')) {
         nhg = '&nhg=true';
+    } else {
+        nhg = '&nhg=false';
     }
     //loanToValuePercentage
     var rvp = '&period=' + rentevasteperiode;
@@ -122,6 +123,7 @@ function ophalenRentepercentages(blnNhg, rentevasteperiode, risicopercentage, st
         lvp = '&loantovaluepercentage=' + risicopercentage;
     }
 
+    $('#debug').text(str_apiurl + '/interest/v1/interest-top-5?onlyUseIncludedLabels=true&api_key=' + str_apikey + nhg + rvp + lvp);
     $.get(str_apiurl + '/interest/v1/interest-top-5?onlyUseIncludedLabels=true&api_key=' + str_apikey + nhg + rvp + lvp, null ,function(result){
         console.log('ophalen rentepercentages');
         console.log(result);

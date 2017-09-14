@@ -904,6 +904,7 @@ jQuery(document).ready(function($) {
         var tekst = '<table>';
 	    //Stap 1
 	    tekst = tekst + zetTekst('', '<h3>Stap 1</h3>');
+        tekst = tekst + zetTekst('Je geboortedatum', $('#geboortedatum').val());
         tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarEenTekst\']').html(), maakBedragOp($('#inkomenEen').val()));
         tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarTweeTekst\']').html(), maakBedragOp($('#inkomenTwee').val()));
         tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarDrieTekst\']').html(), maakBedragOp($('#inkomenDrie').val()));
@@ -915,13 +916,14 @@ jQuery(document).ready(function($) {
         tekst = tekst + zetTekst('Ontvang je een dertiende maand ?', dertiendemaand);
         var vakantiegeld = $('#vakantiegeld').is(':checked') ? 'Ja' : 'Nee';
         tekst = tekst + zetTekst('Ontvang je vakantiegeld ?', vakantiegeld);
+        tekst = tekst + zetTekst('Ontvang je andere vaste inkomsten?', $('#andereinkomsten').val());
 
 	    tekst = tekst + zetTekst('Je bruto jaarloon', maakBedragOp($('#brutoloon').val()));
-        tekst = tekst + zetTekst('Je geboortedatum', $('#geboortedatum').val());
 
         var metPartner = $('[name=\'partner\']:checked').val() === 'ja' ? 'Ja' : 'Nee';
         tekst = tekst + zetTekst('Met partner : ', metPartner);
         if(metPartner === 'Ja') {
+            tekst = tekst + zetTekst('Geboortedatum van je partner : ', $('#geboortedatumpartner').val());
             tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarEenTekst\']').html(), maakBedragOp($('#inkomenEenPartner').val()));
             tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarTweeTekst\']').html(), maakBedragOp($('#inkomenTweePartner').val()));
             tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarDrieTekst\']').html(), maakBedragOp($('#inkomenDriePartner').val()));
@@ -933,9 +935,9 @@ jQuery(document).ready(function($) {
             tekst = tekst + zetTekst('Ontvangt je partner een dertiende maand', dertiendemaand);
             var vakantiegeld = $('#vakantiegeldpartner').is(':checked') ? 'Ja' : 'Nee';
             tekst = tekst + zetTekst('Ontvangt je partner vakantiegeld ?', vakantiegeld);
+            tekst = tekst + zetTekst('Ontvangt je partner andere vaste inkomsten?', $('#andereinkomstenpartner').val());
 
             tekst = tekst + zetTekst('Bruto jaarloon van je partner : ', maakBedragOp($('#brutoloonpartner').val()));
-            tekst = tekst + zetTekst('Geboortedatum van je partner : ', $('#geboortedatumpartner').val());
         }
 
         var studieschuld = $('[name=\'studieschuld\']:checked').val() === 'ja' ? 'Ja' : 'Nee';
@@ -971,6 +973,7 @@ jQuery(document).ready(function($) {
         //Stap 2
 	    tekst = tekst + zetTekst('', '<h3>Stap 2</h3>');
 	    tekst = tekst + zetTekst('Waarde van het huis', maakBedragOp($('#waardehuis').val()));
+	    tekst = tekst + zetTekst('Wil je gaan verbouwen in de nieuwe woning?', $('[name=\'verbouwen-ja-nee\']:checked').val() === 'ja' ? 'Ja' : 'Nee');
 	    tekst = tekst + zetTekst('Koopsom van het huis', maakBedragOp($('#koopsom').val()));
         tekst = tekst + zetTekst('Overdrachtsbelasting', maakBedragOp($('#overdrachtsbelasting').val()));
         tekst = tekst + zetTekst('Kosten leveringsakte notaris', maakBedragOp($('#leveringsakte-notaris').val()));
@@ -986,6 +989,21 @@ jQuery(document).ready(function($) {
         tekst = tekst + zetTekst('Dat betekent dat je als eigen middelen moet inbrengen', $('#eigen-middelen-bedrag').html());
         tekst = tekst + zetTekst('Inbreng eigen geld', maakBedragOp($('#hoeveeleigengeld').val()));
         tekst = tekst + zetTekst('Te lenen', maakBedragOp($('#telenen').val()));
+        
+	    tekst = tekst + zetTekst('', '<h4>Overlijdensrisicoverzekering</h4>');
+	    tekst = tekst + zetTekst('ORV bedrag', maakBedragOp($('[name=\'orv-bedrag\']').text()));
+	    tekst = tekst + zetTekst('Heb je al een orv afgesloten?', $('[name=\'orv-ja-nee\']:checked').val() === 'ja' ? 'Ja' : 'Nee');
+
+	    tekst = tekst + zetTekst('Is het bedrag wat je hebt verzekerd minimaal orv bedrag', $('[name=\'orv-ja-minimaal-bedrag-ja-nee\']:checked').val() === 'ja' ? 'Ja' : 'Nee');
+	    tekst = tekst + zetTekst('Wil je dat Hypotheeklijn een aanbod doet voor een orv?', $('[name=\'orv-ja-minimaal-bedrag-nee-wens-ja-nee\']:checked').val() === 'ja' ? 'Ja' : 'Nee');
+	   // tekst = tekst + zetTekst('
+	   //         echo "<input type=\"radio\" name=\"orv-ja-minimaal-bedrag-nee-wens-ja-minimum-bedrag\" value=\"minimum-bedrag\">Ik wil het minimale bedrag verzekeren<br />";
+
+	   // tekst = tekst + zetTekst('
+	   //         echo "<input type=\"radio\" name=\"orv-ja-minimaal-bedrag-nee-wens-ja-hoger-bedrag\" value=\"hoger-bedrag\">Ik wil een hoger bedrag verzekeren, namelijk : <br />";
+
+        tekst = tekst + zetTekst('Ik wil een hoger bedrag verzekeren, namelijk :', maakBedragOp($('#hoger-bedrag-verzekeren').val()));
+        tekst = tekst + zetTekst('1 of 2 levens verzekeren', maakBedragOp($('#een-of-twee-levens').val()));
 
         //Stap 3
 	    tekst = tekst + zetTekst('', '<h3>Stap 3</h3>');
