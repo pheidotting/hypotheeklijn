@@ -9,7 +9,7 @@
     echo "</div>";
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<label for=\"verbouwen-ja-nee\">Wil je gaan verbouwen in de nieuwe woning</label><br />";
+        echo "<label for=\"verbouwen-ja-nee\">Wil je gaan verbouwen in de nieuwe woning?</label><br />";
         echo "<input type=\"radio\" name=\"verbouwen-ja-nee\" value=\"ja\">Ja<br />";
         echo "<input type=\"radio\" name=\"verbouwen-ja-nee\" value=\"nee\">Nee<br />";
         echo "<div id=\"verbouwen-ja\" style=\"display:none;\">";
@@ -93,7 +93,7 @@
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<div id=\"nhg-vraag\">";
-            echo "<label for=\"verbouwen-ja-nee\">Wil je een hypotheek met Nationale Hypotheek Garantie?</label><br />";
+            echo "<label for=\"nhg\">Wil je een hypotheek met Nationale Hypotheek Garantie?</label><br />";
             echo "<input type=\"radio\" name=\"nhg\" value=\"ja\">Ja<br />";
             echo "<input type=\"radio\" name=\"nhg\" value=\"nee\">Nee<br />";
             echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-nhg-question\" />";
@@ -135,8 +135,10 @@
 
     echo "<div id=\"orv-gegevens\">";
         echo "<h3>Overlijdensrisicoverzekering</h3>";
+        echo "<br />";
         echo "Je hebt een hypotheek aangevraagd van <span id=\"telenen-orv\"></span><span id=\"orv-met-nhg\" style=\"display:none;\"> met Nationale Hypotheek Garantie</span>. ";
         echo "Aangezien de hypotheek hoger is dan 80% van de waarde van de woning, moet je dit gedeelte afdekken met een overlijdensrisicoverzekering (orv). ";
+        echo "<br />";
         echo "Het minimaal te verzekeren bedrag betreft: <span name=\"orv-bedrag\"></span>. Heb je een partner ingevoerd, dan dient dit bedrag tevens voor de partner te zijn afgedekt. ";
         echo "Heb je al een orv afgesloten?<br />";
         echo "<input type=\"radio\" name=\"orv-ja-nee\" value=\"ja\">Ja<br />";
@@ -169,7 +171,6 @@
                 echo "</div>";
             echo "</div>";
         echo "</div>";
-        echo "<br />";
     echo "</div>";
     
 
