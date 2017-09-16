@@ -139,8 +139,11 @@
         echo "Je hebt een hypotheek aangevraagd van <span id=\"telenen-orv\"></span><span id=\"orv-met-nhg\" style=\"display:none;\"> met Nationale Hypotheek Garantie</span>. ";
         echo "Aangezien de hypotheek hoger is dan 80% van de waarde van de woning, moet je dit gedeelte afdekken met een overlijdensrisicoverzekering (orv). ";
         echo "<br />";
+        echo "<br />";
         echo "Het minimaal te verzekeren bedrag betreft: <span name=\"orv-bedrag\"></span>. Heb je een partner ingevoerd, dan dient dit bedrag tevens voor de partner te zijn afgedekt. ";
-        echo "Heb je al een orv afgesloten?<br />";
+        echo "Heb je al een orv afgesloten?";
+        echo "<br />";
+        echo "<br />";
         echo "<input type=\"radio\" name=\"orv-ja-nee\" value=\"ja\">Ja<br />";
         echo "<input type=\"radio\" name=\"orv-ja-nee\" value=\"nee\">Nee<br />";
         echo "<div id=\"orv-ja\" style=\"display:none;\">";
