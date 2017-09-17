@@ -901,9 +901,11 @@ jQuery(document).ready(function($) {
 	function plaatsAllesOpBevestigenScherm(){
 	    $('#tekst-mail').text('');
 	    
-        var tekst = '<table>';
+        var tekst = '';
 	    //Stap 1
-	    tekst = tekst + zetTekst('', '<h3>Stap 1</h3>');
+        tekst = tekst + '<div class=\"blauwe-rand\">';
+        tekst = tekst + '<table>';
+	    tekst = tekst + '<h3>Stap 1</h3>';
         tekst = tekst + zetTekst('Je geboortedatum', $('#geboortedatum').val());
         tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarEenTekst\']').html(), maakBedragOp($('#inkomenEen').val()));
         tekst = tekst + zetTekst('Inkomen uit ' + $('[name=\'jaarTweeTekst\']').html(), maakBedragOp($('#inkomenTwee').val()));
@@ -969,9 +971,14 @@ jQuery(document).ready(function($) {
         if(overigeleningen === 'Ja') {
             tekst = tekst + zetTekst('Hoeveel : ', maakBedragOp($('#hoeveeloverigeleningen').val()));
         }
+	    tekst = tekst + '</table>';
+	    tekst = tekst + '</div>';
+
 
         //Stap 2
-	    tekst = tekst + zetTekst('', '<h3>Stap 2</h3>');
+        tekst = tekst + '<div class=\"blauwe-rand\">';
+        tekst = tekst + '<table>';
+	    tekst = tekst + '<h3>Stap 2</h3>';
 	    tekst = tekst + zetTekst('Waarde van het huis', maakBedragOp($('#waardehuis').val()));
 	    tekst = tekst + zetTekst('Wil je gaan verbouwen in de nieuwe woning?', $('[name=\'verbouwen-ja-nee\']:checked').val() === 'ja' ? 'Ja' : 'Nee');
 	    tekst = tekst + zetTekst('Koopsom van het huis', maakBedragOp($('#koopsom').val()));
@@ -1004,9 +1011,13 @@ jQuery(document).ready(function($) {
 
         tekst = tekst + zetTekst('Ik wil een hoger bedrag verzekeren, namelijk :', maakBedragOp($('#hoger-bedrag-verzekeren').val()));
         tekst = tekst + zetTekst('1 of 2 levens verzekeren', maakBedragOp($('#een-of-twee-levens').val()));
+	    tekst = tekst + '</table>';
+	    tekst = tekst + '</div>';
 
         //Stap 3
-	    tekst = tekst + zetTekst('', '<h3>Stap 3</h3>');
+        tekst = tekst + '<div class=\"blauwe-rand\">';
+        tekst = tekst + '<table>';
+	    tekst = tekst + '<h3>Stap 3</h3>';
         tekst = tekst + zetTekst('Naam', $('#naam').val());
         tekst = tekst + zetTekst('Postcode', $('#postcode').val());
         tekst = tekst + zetTekst('Huisnummer', $('#huisnummer').val());
@@ -1014,21 +1025,33 @@ jQuery(document).ready(function($) {
         tekst = tekst + zetTekst('Woonplaats', $('#woonplaats').val());
         tekst = tekst + zetTekst('Telefoonnummer', $('#telefoonnummer').val());
         tekst = tekst + zetTekst('E-mail adres', $('#emailadres').val());
+	    tekst = tekst + '</table>';
+	    tekst = tekst + '</div>';
 
         //Stap 4
-	    tekst = tekst + zetTekst('', '<h3>Stap 4</h3>');
+        tekst = tekst + '<div class=\"blauwe-rand\">';
+        tekst = tekst + '<table>';
+	    tekst = tekst + '<h3>Stap 4</h3>';
         tekst = tekst + zetTekst('Burgerservicenummer', $('#bsn').val());
         tekst = tekst + zetTekst('Documentnummer identificatie', $('#documentnummer').val());
         tekst = tekst + zetTekst('Datum geldigheid identificatie', $('#datumgeldigheid').val());
         tekst = tekst + zetTekst('Gemeente afgifte identificatie', $('#gemeente').val());
         tekst = tekst + zetTekst('Geboorteplaats', $('#geboorteplaats').val());
+	    tekst = tekst + '</table>';
+	    tekst = tekst + '</div>';
 
         //Stap 5
-	    tekst = tekst + zetTekst('', '<h3>Stap 5</h3>');
+        tekst = tekst + '<div class=\"blauwe-rand\">';
+        tekst = tekst + '<table>';
+	    tekst = tekst + '<h3>Stap 5</h3>';
         tekst = tekst + zetTekst('Iban', $('#iban').val());
+	    tekst = tekst + '</table>';
+	    tekst = tekst + '</div>';
 
         //Stap 6
-	    tekst = tekst + zetTekst('', '<h3>Stap 6</h3>');
+        tekst = tekst + '<div class=\"blauwe-rand\">';
+        tekst = tekst + '<table>';
+	    tekst = tekst + '<h3>Stap 6</h3>';
         tekst = tekst + zetTekst('Beroep/Functie', $('#beroep').val());
         tekst = tekst + zetTekst('Datum indiensttreding', $('#datumindiensttreding').val());
         tekst = tekst + zetTekst('Einddatum contract', $('#einddatumcontract').val());
@@ -1062,8 +1085,12 @@ jQuery(document).ready(function($) {
         tekst = tekst + zetTekst('Soort onderneming', $('#soort-onderneming-partner').val());
         tekst = tekst + zetTekst('Kvk-nummer', $('#kvk-nummer-partner').val());
         tekst = tekst + zetTekst('Datum van oprichting', $('#datum-oprichting-partner').val());
+	    tekst = tekst + '</table>';
+	    tekst = tekst + '</div>';
         
-	    tekst = tekst + zetTekst('', '<h3>Stap 7</h3>');
+        tekst = tekst + '<div class=\"blauwe-rand\">';
+        tekst = tekst + '<table>';
+	    tekst = tekst + '<h3>Stap 7</h3>';
         tekst = tekst + zetTekst('Soort woning', $('#soortwoning').val());
         tekst = tekst + zetTekst('Postcode', $('#postcodewoning').val());
         tekst = tekst + zetTekst('Huisnummer', $('#huisnummerwoning').val());
@@ -1073,8 +1100,8 @@ jQuery(document).ready(function($) {
         tekst = tekst + zetTekst('Kadastrale gemeente', $('#kadastralegemeentewoning').val());
         tekst = tekst + zetTekst('Kadastrale sectie', $('#kadastralesectiewoning').val());
         tekst = tekst + zetTekst('Kadastrale nummer', $('#kadastralenummerwoning').val());
-
-        tekst = tekst + '</table>';
+	    tekst = tekst + '</table>';
+	    tekst = tekst + '</div>';
         
         $('#tekst-mail').html(tekst);
         $('#tekst-mail').show();

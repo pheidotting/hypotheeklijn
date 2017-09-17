@@ -133,7 +133,7 @@
         echo "</tr>";
     echo "</table>";
 
-    echo "<div id=\"orv-gegevens\">";
+    echo "<div id=\"orv-gegevens\" class=\blauwe-rand\">";
         echo "<h3>Overlijdensrisicoverzekering</h3>";
         echo "<br />";
         echo "Je hebt een hypotheek aangevraagd van <span id=\"telenen-orv\"></span><span id=\"orv-met-nhg\" style=\"display:none;\"> met Nationale Hypotheek Garantie</span>. ";
