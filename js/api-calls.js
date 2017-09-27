@@ -123,7 +123,6 @@ function ophalenRentepercentages(blnNhg, rentevasteperiode, risicopercentage, st
         lvp = '&loantovaluepercentage=' + risicopercentage;
     }
 
-    $('#debug').text(str_apiurl + '/interest/v1/interest-top-5?onlyUseIncludedLabels=true&api_key=' + str_apikey + nhg + rvp + lvp);
     $.get(str_apiurl + '/interest/v1/interest-top-5?onlyUseIncludedLabels=true&api_key=' + str_apikey + nhg + rvp + lvp, null ,function(result){
         console.log('ophalen rentepercentages');
         console.log(result);

@@ -1,6 +1,15 @@
 <?php
     echo "<h3>Hypotheek samenstellen</h3>";
     echo "<div class=\"first_form form_element form_fullwidth\">";
+        echo "<label for=\"soortwoning\">Wat voor soort woning ga je kopen?</label>";
+        echo "<select class=\"form-breedte75-procent text_input is_empty\" id=\"soortwoning\">";
+        echo "<option value=\"bestaandewoning\">Bestaande woning</option>";
+        echo "<option value=\"nieuwbouwwoning\">Nieuwbouw woning</option>";
+        echo "<option value=\"bestaandappartement\">Bestaand appartement</option>";
+        echo "<option value=\"nieuwbouwappartement\">Niewbouw appartement</option>";
+        echo "</select>";
+    echo "</div>";
+    echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<label for=\"koopsom\">Koopsom van de woning</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"koopsom\" />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-koopsom-question\" />";
         echo "<div id=\"stap2-koopsom-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-koopsom-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
@@ -133,7 +142,7 @@
         echo "</tr>";
     echo "</table>";
 
-    echo "<div id=\"orv-gegevens\" class=\blauwe-rand\">";
+    echo "<div id=\"orv-gegevens\" class=\"blauwe-rand\">";
         echo "<h3>Overlijdensrisicoverzekering</h3>";
         echo "<br />";
         echo "Je hebt een hypotheek aangevraagd van <span id=\"telenen-orv\"></span><span id=\"orv-met-nhg\" style=\"display:none;\"> met Nationale Hypotheek Garantie</span>. ";

@@ -727,8 +727,14 @@ jQuery(document).ready(function($) {
     }
     
     function berekenEigenMiddelen() {
-        var maxHypotheek = parseInt($('#max-hypotheek-getal').text());
+        var maxHypotheekWoning = parseInt($('#max-hypotheek-getal').text());
+        var maxHypotheekLoon = parseInt($('#result-getal').text());
         var benodigd = parseInt($('#benodigdehypotheek-getal').text());
+        
+        var maxHypotheek = maxHypotheekWoning;
+        if(maxHypotheekLoon < maxHypotheekWoning) {
+            maxHypotheek = maxHypotheekLoon;
+        }
         var eigenmiddelen = benodigd - maxHypotheek;
         
         if(eigenmiddelen > 0) {
@@ -979,6 +985,7 @@ jQuery(document).ready(function($) {
         tekst = tekst + '<div class=\"blauwe-rand\">';
         tekst = tekst + '<table>';
 	    tekst = tekst + '<h3>Stap 2</h3>';
+        tekst = tekst + zetTekst('Soort woning', $('#soortwoning').val());
 	    tekst = tekst + zetTekst('Waarde van het huis', maakBedragOp($('#waardehuis').val()));
 	    tekst = tekst + zetTekst('Wil je gaan verbouwen in de nieuwe woning?', $('[name=\'verbouwen-ja-nee\']:checked').val() === 'ja' ? 'Ja' : 'Nee');
 	    tekst = tekst + zetTekst('Koopsom van het huis', maakBedragOp($('#koopsom').val()));
@@ -1091,7 +1098,6 @@ jQuery(document).ready(function($) {
         tekst = tekst + '<div class=\"blauwe-rand\">';
         tekst = tekst + '<table>';
 	    tekst = tekst + '<h3>Stap 7</h3>';
-        tekst = tekst + zetTekst('Soort woning', $('#soortwoning').val());
         tekst = tekst + zetTekst('Postcode', $('#postcodewoning').val());
         tekst = tekst + zetTekst('Huisnummer', $('#huisnummerwoning').val());
         tekst = tekst + zetTekst('Adres', $('#adreswoning').val());

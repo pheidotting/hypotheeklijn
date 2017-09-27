@@ -69,7 +69,6 @@ function form_creation_aanvragen($atts = []) {
     // wp_enqueue_script('aanvragen');
     
     ob_start();
-    echo "<div id=\"debug\"></div>";
     echo "<div id=\"emailadresbeheerder\" style=\"display:none;\">".$atts['adres']."</div>";
     echo "<div id=\"apikey\" style=\"display:none;\">".$atts['apikey']."</div>";
     echo "<div id=\"apiurl\" style=\"display:none;\">".$atts['apiurl']."</div>";
