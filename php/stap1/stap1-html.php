@@ -16,8 +16,21 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
 
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:2px; cursor: pointer;\" id=\"stap1-soort-inkomsten-question\" />";
         echo "<div id=\"stap1-soort-inkomsten-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-soort-inkomsten-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-        $tekstStap1SoortInkomsten = $atts['stap1-soort-inkomsten'] == '' ? 'stap1-soort-inkomsten' : $atts['stap1-soort-inkomsten'];
-        echo "<div style=\"padding:15px;\">".$tekstStap1SoortInkomsten."</div></div>";
+        echo "<div style=\"padding:15px;\">";
+            echo "<b><u>Werk je in loondienst?</u></b>";
+            echo "<br />";
+            echo "<br />";
+            echo "Maak dan de keuze uit het dienstverband. Dit moet overeenkomen met de werkgeversverklaring. Verdien je per maand, 4 weken of in een ander tijdvak? Deel dan het bedrag van het bruto jaarsalaris op de werkgeversverklaring door 12 maanden. Vul dit bedrag in bij het bruto maandsalaris.";
+            echo "<br />";
+            echo "<br />";
+            echo "Ontvang je vakantiegeld en/ of 13emaanddan kan je dit aanvinken. Ontvang je ander inkomen dan deze inkomensbestandsdelen, vul dan het totaal van deze bestandsdelen in bij het veld “Ontvang je andere vaste inkomsten?”. Let op: Dit inkomen dient vast te zijn en kan worden overgenomen van de werkgeversverklaring.";
+            echo "<br />";
+            echo "<br />";
+            echo "<b><u>Ben je ondernemer?</u></b>";
+            echo "<br />";
+            echo "<br />";
+            echo "Vul danhet <b><u>saldo fiscale winst</u></b> uit de inkomstenbelastingaangifte in. Let op: vul van de afgelopen 3 hele jaren het saldo fiscale winst apart in. Bijvoorbeeld 2014, 2015, 2016. Heb je vragen over de jaarrekeningen en IB aangiften en weet je niet waar je de fiscale winst kunt vinden? Onze hypotheekspecialisten helpen je graag verder.";
+        echo "</div></div>";
     echo "</div>";
     
     echo "<div id=\"loon-uit-loondienst\" style=\"display:none;\">";
@@ -58,8 +71,7 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:2px; cursor: pointer;\" id=\"stap1-met-partner-question\" />";
         
         echo "<div id=\"stap1-met-partner-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-met-partner-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-        $tekstStap1MetPartner = $atts['stap1-met-partner'] == '' ? 'stap1-met-partner' : $atts['stap1-met-partner'];
-        echo "<div style=\"padding:15px;\">".$tekstStap1MetPartner."</div></div>";
+        echo "<div style=\"padding:15px;\">Als je een woning gaat aankopen met je partner dan kan je zeer waarschijnlijk meer lenen als je partner ook inkomen heeft. Het inkomen van je partner heeft dus invloed op de maximale hypotheek.</div></div>";
     echo "</div>";
 
     echo "<div id=\"metPartner\" style=\"display: none\">";
@@ -124,8 +136,7 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
         echo "<input type=\"radio\" name=\"studieschuld\" value=\"nee\">Nee<br />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:2px; cursor: pointer;\" id=\"stap1-studieschuld-question\" />";
         echo "<div id=\"stap1-studieschuld-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-studieschuld-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-        $tekstStap1Studieschuld = $atts['stap1-studieschuld'] == '' ? 'stap1-studieschuld' : $atts['stap1-studieschuld'];
-        echo "<div style=\"padding:15px;\">".$tekstStap1Studieschuld."</div></div>";
+        echo "<div style=\"padding:15px;\">Als je een studieschuld hebt, wordt dit momenteel niet geregistreerd bij het Bureau Krediet Registratie (BKR). Echter heeft dit wel invloed op je financiële situatie en daarom ben je verplicht deze aan ons te melden. Dit zal ook van invloed zijn op de maximale hypotheek wat je kunt lenen. De hoogte van de oorspronkelijke studieschuld kan je invullen, echter zal een acceptant hierover contact met je opnemen.</div></div>";
         echo "<div id=\"hoeveelstudieschuldDiv\" style=\"display: none\">";
             echo "<label for=\"hoeveelstudieschuld\">Hoeveel?</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveelstudieschuld\" />";
         echo "</div>";
@@ -137,8 +148,7 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
         echo "<input type=\"radio\" name=\"roodstaan\" value=\"nee\">Nee<br />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:2px; cursor: pointer;\" id=\"stap1-roodstaan-question\" />";
         echo "<div id=\"stap1-roodstaan-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-roodstaan-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-        $tekstStap1Roodstaan = $atts['stap1-roodstaan'] == '' ? 'stap1-roodstaan' : $atts['stap1-roodstaan'];
-        echo "<div style=\"padding:15px;\">".$tekstStap1Roodstaan."</div></div>";
+        echo "<div style=\"padding:15px;\">Als je rood mag staan op je betaalrekening, dan heb je een soort van krediet. Immers is het een lening bij de bank waar je debetrente over betaald. Daarom weegt roodstand mee in de berekening van je maximale hypotheek. Deze roodstand wordt ook geregistreerd bij het Bureau Krediet Registratie (BKR).Vul daarom het bedrag in dat je rood mag staan.</div></div>";
         echo "<div id=\"hoeveelroodstaanDiv\" style=\"display: none\">";
             echo "<label for=\"hoeveelroodstaan\">Hoeveel?</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveelroodstaan\" />";
         echo "</div>";
@@ -150,8 +160,7 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
         echo "<input type=\"radio\" name=\"creditcard\" value=\"nee\">Nee<br />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:2px; cursor: pointer;\" id=\"stap1-creditcard-question\" />";
         echo "<div id=\"stap1-creditcard-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-creditcard-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-        $tekstStap1Creditcard = $atts['stap1-creditcard'] == '' ? 'stap1-creditcard' : $atts['stap1-creditcard'];
-        echo "<div style=\"padding:15px;\">".$tekstStap1Creditcard."</div></div>";
+        echo "<div style=\"padding:15px;\">Heb je een creditcard waarbij je de mogelijkheid hebt om het openstaande saldo gespreid te betalen, geef dan het limiet op. Een creditcard waarbij gespreid betalen mogelijk is, heeft invloed op de maximale hypotheek die je kan lenen. Heb je een creditcard waarbij het uitstaande saldo ineens wordt geïncasseerd, bijv. maandelijks dan hoef je dit <u>niet</u> op te geven in de aanvraag. </div></div>";
         echo "<div id=\"hoeveelcreditcardDiv\" style=\"display: none\">";
             echo "<label for=\"hoeveelcreditcard\">Wat is de limiet?</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveelcreditcard\" />";
         echo "</div>";
@@ -163,8 +172,7 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
         echo "<input type=\"radio\" name=\"partneralimentatie\" value=\"nee\">Nee<br />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:2px; cursor: pointer;\" id=\"stap1-partneralimentatie-question\" />";
         echo "<div id=\"stap1-partneralimentatie-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-partneralimentatie-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-        $tekstStap1Partneralimentatie = $atts['stap1-partneralimentatie'] == '' ? 'stap1-partneralimentatie' : $atts['stap1-partneralimentatie'];
-        echo "<div style=\"padding:15px;\">".$tekstStap1Partneralimentatie."</div></div>";
+        echo "<div style=\"padding:15px;\">Betaal je op dit moment alimentatie  voor je ex-partner, geef dan het bedrag dat je per jaar betaald op in de aanvraag. Partneralimentatie heeft invloed op de maximale hypotheek die je kan lenen. Let op: kinderalimentatie hoeft niet te worden opgegeven.</div></div>";
         echo "<div id=\"hoeveelpartneralimentatieDiv\" style=\"display: none\">";
             echo "<label for=\"hoeveelpartneralimentatie\">Hoeveel?</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveelpartneralimentatie\" />";
         echo "</div>";
@@ -176,8 +184,7 @@ echo "<form class=\"avia_ajax_form av-form-labels-visible   avia-builder-el-11  
         echo "<input type=\"radio\" name=\"overigeleningen\" value=\"nee\">Nee<br />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:2px; cursor: pointer;\" id=\"stap1-overigeleningen-question\" />";
         echo "<div id=\"stap1-overigeleningen-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap1-overigeleningen-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-        $tekstStap1Overigeleningen = $atts['stap1-overigeleningen'] == '' ? 'stap1-overigeleningen' : $atts['stap1-overigeleningen'];
-        echo "<div style=\"padding:15px;\">".$tekstStap1Overigeleningen."</div></div>";
+        echo "<div style=\"padding:15px;\">Het kan zijn dat je een lening of krediet hebt wat hierboven nietgenoemd wordt. Denk hierbij aan bijv. een persoonlijke lening, doorlopend krediet, autolease (private lease), telefoon op afbetaling, etc. Neem van de lening of het krediet de oorspronkelijke kredietsom en vul deze in. Heb je meerdere leningen of kredieten tel dan de kredietsommen bij elkaar op en geef het totaal op in de aanvraag. Deze leningen of kredieten worden ook geregistreerd bij het Bureau Krediet Registratie (BKR).</div></div>";
         echo "<div id=\"hoeveeloverigeleningenDiv\" style=\"display: none\">";
             echo "<label for=\"hoeveeloverigeleningen\">Hoeveel?</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveeloverigeleningen\" />";
         echo "</div>";
