@@ -571,6 +571,14 @@ jQuery(document).ready(function($) {
         $('#stap2-soorthypotheek-help').show();
         $('#stap2-soorthypotheek-question').hide();
     });
+    $('#stap2-leencapobvloon-kruis').click(function(){
+        $('#stap2-leencapobvloon-help').hide();
+        $('#stap2-leencapobvloon-question').show();
+    });
+    $('#stap2-leencapobvloon-question').click(function(){
+        $('#stap2-leencapobvloon-help').show();
+        $('#stap2-leencapobvloon-question').hide();
+    });
     $('#stap2-overdrachtsbelasting-kruis').click(function(){
         $('#stap2-overdrachtsbelasting-help').hide();
         $('#stap2-overdrachtsbelasting-question').show();

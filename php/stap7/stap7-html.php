@@ -1,13 +1,6 @@
 <?php
     echo "<h3>Gegevens van het onderpand</h3>";
     echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "<label for=\"soortwoning\">Wat voor soort woning heb je gekocht</label>";
-        echo "<select class=\"form-breedte75-procent text_input is_empty\" id=\"soortwoning\">";
-        echo "<option value=\"eengezinswoning\">Eengezinswoning</option>";
-        echo "<option value=\"appartement\">Appartement</option>";
-        echo "</select>";
-    echo "</div>";
-    echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<label for=\"postcodewoning\">Postcode</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"text\" id=\"postcodewoning\" />";
     echo "</div>";
     echo "<div class=\"first_form form_element form_fullwidth\">";

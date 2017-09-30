@@ -177,7 +177,15 @@
     
     echo "<table>";
         echo "<tr>";
-            echo "<td>Leencapaciteit op basis van je loon</td><td><span id=\"result\"></span><span id=\"result-getal\" style=\"display:none;\"></span></td>";
+            echo "<td>Leencapaciteit op basis van je loon</td>";
+            echo "<td>";
+                echo "<span id=\"result\"></span><span id=\"result-getal\" style=\"display:none;\"></span>";
+                echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-leencapobvloon-question\" />";
+                echo "<div id=\"stap2-leencapobvloon-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-leencapobvloon-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+                echo "<div style=\"padding:15px;\">";
+                echo "Dit is het bedrag wat je maximaal kunt lenen op het inkomen dat je hebt ingevuld van jou en je eventuele partner.";
+                echo "</div></div>";
+            echo "</td>";
         echo "</tr>";
         echo "<tr>";
             echo "<td>Leencapaciteit op basis van de waarde van de woning</td><td><span id=\"max-hypotheek\"></span><span id=\"max-hypotheek-getal\" style=\"display:none;\"></span></td>";
