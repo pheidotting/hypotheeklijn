@@ -579,6 +579,46 @@ jQuery(document).ready(function($) {
         $('#stap2-leencapobvloon-help').show();
         $('#stap2-leencapobvloon-question').hide();
     });
+    $('#stap2-leencapobvwoning-kruis').click(function(){
+        $('#stap2-leencapobvwoning-help').hide();
+        $('#stap2-leencapobvwoning-question').show();
+    });
+    $('#stap2-leencapobvwoning-question').click(function(){
+        $('#stap2-leencapobvwoning-help').show();
+        $('#stap2-leencapobvwoning-question').hide();
+    });
+    $('#stap2-hoeveelhypotheek-kruis').click(function(){
+        $('#stap2-hoeveelhypotheek-help').hide();
+        $('#stap2-hoeveelhypotheek-question').show();
+    });
+    $('#stap2-hoeveelhypotheek-question').click(function(){
+        $('#stap2-hoeveelhypotheek-help').show();
+        $('#stap2-hoeveelhypotheek-question').hide();
+    });
+    $('#stap2-eigenmiddelen-kruis').click(function(){
+        $('#stap2-eigenmiddelen-help').hide();
+        $('#stap2-eigenmiddelen-question').show();
+    });
+    $('#stap2-eigenmiddelen-question').click(function(){
+        $('#stap2-eigenmiddelen-help').show();
+        $('#stap2-eigenmiddelen-question').hide();
+    });
+    $('#stap2-eigenmiddelenzelf-kruis').click(function(){
+        $('#stap2-eigenmiddelenzelf-help').hide();
+        $('#stap2-eigenmiddelenzelf-question').show();
+    });
+    $('#stap2-eigenmiddelenzelf-question').click(function(){
+        $('#stap2-eigenmiddelenzelf-help').show();
+        $('#stap2-eigenmiddelenzelf-question').hide();
+    });
+    $('#stap2-hypotheekbedrag-kruis').click(function(){
+        $('#stap2-hypotheekbedrag-help').hide();
+        $('#stap2-hypotheekbedrag-question').show();
+    });
+    $('#stap2-hypotheekbedrag-question').click(function(){
+        $('#stap2-hypotheekbedrag-help').show();
+        $('#stap2-hypotheekbedrag-question').hide();
+    });
     $('#stap2-overdrachtsbelasting-kruis').click(function(){
         $('#stap2-overdrachtsbelasting-help').hide();
         $('#stap2-overdrachtsbelasting-question').show();
