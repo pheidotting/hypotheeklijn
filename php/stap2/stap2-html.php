@@ -190,7 +190,7 @@
         echo "<tr>";
             echo "<td>Leencapaciteit op basis van de waarde van de woning</td>";
             echo "<td>";
-                echo "<span id=\"max-hypotheek\"></span><span id=\"max-hypotheek-getal\" style=\"display:none;\"></span></td>";
+                echo "<span id=\"max-hypotheek\"></span><span id=\"max-hypotheek-getal\" style=\"display:none;\"></span>";
                 echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-leencapobvwoning-question\" />";
                 echo "<div id=\"stap2-leencapobvwoning-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-leencapobvwoning-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
                 echo "<div style=\"padding:15px;\">";
@@ -201,7 +201,7 @@
         echo "<tr>";
             echo "<td>Hoeveel hypotheek heb je nodig om je woning te kunnen financieren? </td>";
             echo "<td>";
-                echo "<span id=\"benodigdehypotheek\"></span><span id=\"benodigdehypotheek-getal\" style=\"display:none;\"></span></td>";
+                echo "<span id=\"benodigdehypotheek\"></span><span id=\"benodigdehypotheek-getal\" style=\"display:none;\"></span>";
                 echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-hoeveelhypotheek-question\" />";
                 echo "<div id=\"stap2-hoeveelhypotheek-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-hoeveelhypotheek-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
                 echo "<div style=\"padding:15px;\">";
@@ -212,7 +212,7 @@
         echo "<tr>";
             echo "<td>Dat betekent dat je aan eigen middelen moet inbrengen</td>";
             echo "<td>";
-                echo "<span id=\"eigen-middelen-bedrag\"></span><span id=\"eigen-middelen-bedrag-getal\" style=\"display:none;\"></span></td>";
+                echo "<span id=\"eigen-middelen-bedrag\"></span><span id=\"eigen-middelen-bedrag-getal\" style=\"display:none;\"></span>";
                 echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-eigenmiddelen-question\" />";
                 echo "<div id=\"stap2-eigenmiddelen-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-eigenmiddelen-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
                 echo "<div style=\"padding:15px;\">";
@@ -223,7 +223,7 @@
         echo "<tr>";
             echo "<td>Wil je meer dan het verplichte bedrag inbrengen?</td>";
             echo "<td>";
-                echo "<input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveeleigengeld-getal\" /></td>";
+                echo "<input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveeleigengeld-getal\" />";
                 echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-eigenmiddelenzelf-question\" />";
                 echo "<div id=\"stap2-eigenmiddelenzelf-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-eigenmiddelenzelf-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
                 echo "<div style=\"padding:15px;\">";
@@ -234,7 +234,7 @@
         echo "<tr>";
             echo "<td>Jouw hypotheek wordt</td>";
             echo "<td>";
-                echo "<span id=\"telenen\"></span><span id=\"telenen-getal\" style=\"display:none;\"></span></td>";
+                echo "<span id=\"telenen\"></span><span id=\"telenen-getal\" style=\"display:none;\"></span>";
                 echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-hypotheekbedrag-question\" />";
                 echo "<div id=\"stap2-hypotheekbedrag-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-hypotheekbedrag-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
                 echo "<div style=\"padding:15px;\">";
