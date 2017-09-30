@@ -102,6 +102,11 @@
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<label for=\"rentevasteperiode\">Rentevaste periode</label>";
+        echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-rentevasteperiode-question\" />";
+        echo "<div id=\"stap2-rentevasteperiode-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-rentevasteperiode-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        echo "<div style=\"padding:15px;\">";
+        echo "Heb je bepaald welke hypotheekvorm je wilt? Dan kun je daar nu een rentevaste periode bij kiezen. Ben je iemand die zekerheid zoekt, dan kan een langere termijn beter bij je passen, echter ligt de rente dan meestal wat hoger. Vind je zekerheid minder belangrijk en kun je schommelingen in je financiële situatie opvangen, dan kan een kortere periode zinvol zijn.";
+        echo "</div></div>";
         echo "<select class=\"form-breedte75-procent text_input is_empty\" id=\"rentevasteperiode\" />";
             echo "<option value=\"1\">1</option>";
             echo "<option value=\"5\">5</option>";
@@ -118,6 +123,22 @@
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<label for=\"soorthypotheek\">Soort hypotheek</label>";
+        echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-soorthypotheek-question\" />";
+        echo "<div id=\"stap2-soorthypotheek-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-soorthypotheek-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        echo "<div style=\"padding:15px;\">";
+        echo "<b>Annuïteitenhypotheek</b><br /><br>";
+        echo "Bij een annuïteitenhypotheek betaal je -zolang de rente niet wordt aangepast -elke maand hetzelfde bruto bedrag. In het begin van de looptijd bestaat dit bedrag vooral uit rente, aan het einde van de looptijd vooral uit aflossing.";
+        echo "<br />";
+        echo "<br />";
+        echo "Omdat de rente fiscaalaftrekbaar is, maar de aflossing niet, nemen de netto hypotheeklasten elk maand toe. Immers kun je gedurende de looptijd van je hypotheek steeds minder rente aftrekken, waardoor de netto maandlasten oplopen.";
+        echo "<br />";
+        echo "<br />";
+        echo "<b>Lineaire hypotheek</b><br /><br>";
+        echo "Bij de lineaire hypotheek los je, uitgaande van een looptijd van 30 jaar, elke maand 1/360 van de oorspronkelijke lening af. Naast de aflossing betaal je rente over de openstaande schuld.Hypotheekschuld daalt snel.";
+        echo "<br />";
+        echo "<br />";
+        echo "Omdat je hypotheekschuld aan het begin van de looptijd het hoogstis, heb je in het begin ook de hoogte lasten. Hier staat tegenover dat je hypotheekschuld elkemaand een stukje kleiner wordt; je bruto én netto hypotheeklasten worden hierdoor dus ook elke maand iets lager. Omdat je de hypotheekschuld met een lineaire hypotheek snel omlaag brengt, is dit een zeer veilige hypotheekvorm.";
+        echo "</div></div>";
         echo "<select class=\"form-breedte75-procent text_input is_empty\" id=\"soorthypotheek\" />";
             echo "<option value=\"\"></option>";
             echo "<option value=\"annuity\">Annuïteiten</option>";
@@ -136,8 +157,12 @@
             echo "<input type=\"radio\" name=\"nhg\" value=\"nee\">Nee<br />";
             echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-nhg-question\" />";
             echo "<div id=\"stap2-nhg-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-nhg-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-            $tekstStap2nhg = $atts['stap2-nhg'] == '' ? 'stap2-nhg' : $atts['stap2-nhg'];
-            echo "<div style=\"padding:15px;\">".$tekstStap2nhg."</div></div>";
+            echo "<div style=\"padding:15px;\">";
+            echo "Als de koopsom van jouw huislager is dan € 245.000,-, dan komt je in aanmerking voor Nationale Hypotheek Garantie (NHG). Een hypotheek met NHG biedt extra zekerheid voor de hypotheekverstrekker en in ruil hiervoor geeft de hypotheekverstrekker jou een lagere rente. Als de koopsom hoger is dan € 245.000,-, dan kom je niet aanmerking voor Nationale Hypotheek Garantie.";
+            echo "<br />";
+            echo "<br />";
+            echo "Als je NHG wenst betaal je 1% kosten van de hypotheeksom aan NHG.";
+            echo "</div></div>";
             echo "<div id=\"metNHG\" style=\"display:none;\">";
                 echo "<label for=\"nhgkosten\">Kosten NHG</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"nhgkosten\" disabled=\"disabled\" />";
             echo "</div><br />";
@@ -145,7 +170,7 @@
     echo "</div>";
 
     // echo "<div class=\"first_form form_element form_fullwidth\">";
-        echo "Kies een geldverstrekker uit de lijst:";
+        echo "Hieronder zie je de aanbieders waar je een keuze uit kunt maken. Elke aanbieder hanteert andere voorwaarden. Om de voorwaarde te vergelijken, klik hier: <a href=\"http://www.ikregelzelfmijnhypotheek.nl/voorwaarden/\" target=\"_blank\">http://www.ikregelzelfmijnhypotheek.nl/voorwaarden/</a>";
         echo "<br />";
         echo "<div id=\"aanbieders\"></div>";
     // echo "</div>";
@@ -214,40 +239,6 @@
         echo "</div>";
     echo "</div>";
     
-
-    // echo "<div class=\"first_form form_element form_fullwidth\">";
-    //     echo "<div id=\"max-hypotheek\" style=\"display:none;\">0</div>";
-    //     echo "<div id=\"percentage\" style=\"display:none;\">0</div>";
-    //     echo "<div id=\"resultaat\" style=\"display:none;\"><span id=\"result\"></span></div>";
-
-    //     echo "<label for=\"benodigdehypotheek\">Hoeveel hypotheek ben je nodig</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"benodigdehypotheek\" />";
-    // echo "</div>";
-
-    // echo "<td><div id=\"resultaat\" style=\"display:none;\">Je maximale hypotheek is : </td><td><span id=\"result\"></span></div></td>";
-    
-
-    // <!--<div id=\"text-benodigde-hypotheek\"></div>-->
-    // echo "<div id=\"resultaat\" style=\"display:none;\">Je maximale hypotheek is : <span id=\"result\"></span></div>";
-    // echo "<div id=\"eigen-middelen\" style=\"display:none;\">Dat betekent dat je als eigen middelen moet inbrengen : <span id=\"eigen-middelen-bedrag\"></span></div>";
-    // echo "<span id=\"eigen-middelen-bedrag-backup\" style=\"display:none;\"></span>";
-
-    // echo "<div class=\"first_form form_element form_fullwidth\">";
-    //     echo "<input type=\"checkbox\" id=\"eigengeldinbrengen\">Wil je eigen geld inbrengen?";
-    //     echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-eigen-geld-question\" />";
-    // echo "</div>";
-    // echo "<div id=\"stap2-eigen-geld-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-eigen-geld-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-    // $tekstStap2EigenGeld = $atts['eigen-geld'] == '' ? 'eigen-geld' : $atts['eigen-geld'];
-    // echo "<div style=\"padding:15px;\">".$tekstStap2EigenGeld."</div></div>";
-    // // echo "<div id=\"hoeveeleigengelddiv\">";
-    // echo "<label for=\"hoeveeleigengeld\">Inbreng eigen geld</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveeleigengeld\" />";
-    // // echo "</div>";
-    // echo "<div>Te lenen : <span id=\"telenen\"></span></div>";
-
-    // <!--<h3>Hypotheekvorm</h3>-->
-    // <!--<input class=\"form-breedte75-procent text_input is_empty\" type=\"radio\" id=\"annuiteiten\" name=\"hypotheekvorm\">Annuiteiten-->
-    // <!--<input class=\"form-breedte75-procent text_input is_empty\" type=\"radio\" id=\"lineair\" name=\"hypotheekvorm\">Lineair-->
-    // <!--<label for=\"rentevasteperiode\">Rentevaste periode</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"rentevasteperiode\" />-->
-
     echo "<input type=\"submit\" class=\"button-primary\" id=\"terug-naar-stap1\" value=\"Terug\" />";
     echo "&nbsp;";
     echo "&nbsp;";
