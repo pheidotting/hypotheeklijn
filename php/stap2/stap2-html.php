@@ -13,8 +13,15 @@
         echo "<label for=\"koopsom\">Koopsom van de woning</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"koopsom\" />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-koopsom-question\" />";
         echo "<div id=\"stap2-koopsom-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-koopsom-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-        $tekstStap2koopsom = $atts['stap2-koopsom'] == '' ? 'stap2-koopsom' : $atts['stap2-koopsom'];
-        echo "<div style=\"padding:15px;\">".$tekstStap2koopsom."</div></div>";
+        echo "<div style=\"padding:15px;\">";
+        echo "Met de koopsom wordt het bedrag bedoelt waar je de woning voor hebt aangekocht. Dit bedrag staat ook vermeld in de koopovereenkomst. Koop je een nieuwbouwing vul dan het totaalbedrag invan de grondprijs en aanneemovereenkomst.";
+        echo "<br />";
+        echo "<br />";
+        echo "Wens je een hypotheek met Nationale Hypotheek Garantie (NHG), let er dan op dat de maximale koopsom niet hoger zijn dan € 245.000,00.";
+        echo "<br />";
+        echo "<br />";
+        echo "Heb je vragen bij het invullen van de koopsom? Onze hypotheekspecialisten helpen je graag verder.";
+        echo "</div></div>";
     echo "</div>";
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
@@ -22,53 +29,75 @@
         echo "<input type=\"radio\" name=\"verbouwen-ja-nee\" value=\"ja\">Ja<br />";
         echo "<input type=\"radio\" name=\"verbouwen-ja-nee\" value=\"nee\">Nee<br />";
         echo "<div id=\"verbouwen-ja\" style=\"display:none;\">";
-            echo "Om te kunnen bepalen of je een bouwdepot mee kunt nemen in je aanvraag is het van belang dat je even gaat sparren met onze specialisten. Zij kunnen je vertellen of dit kunt opgeven in de aanvraag. ";
+            echo "Om te kunnen bepalen of je een bouwdepot mee kunt nemen in je aanvraag is het van belang dat je even gaat sparren met onze specialisten. Zij kunnen je vertellen of je dit kunt opgeven in de aanvraag. ";
+            echo "<br />";
+            echo "<br />";
             echo "<label for=\"verbouwingskosten\">Wat zijn de geschatte verbouwingskosten</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"verbouwingskosten\" />";
         echo "</div>";
     echo "</div>";
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<label for=\"waardehuis\">Waarde van de woning</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"waardehuis\" />";
+        echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-waardehuis-question\" />";
+        echo "<div id=\"stap2-waardehuis-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-waardehuis-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
+        echo "<div style=\"padding:15px;\">";
+        echo "Op dit moment mag je niet meer niet lenen dan 101% van de marktwaarde.Is je nieuwe woning al getaxeerd? Dan kun je de marktwaarde hier invullen. Weet je op dit moment niet de marktwaarde, vul dan hier ook de koopsom in.";
+        echo "<br />";
+        echo "<br />";
+        echo "Bij nieuwbouw kun je hier het totaal van de grondprijs en aanneemovereenkomst invullen.";
+        echo "</div></div>";
     echo "</div>";
     
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<label for=\"overdrachtsbelasting\">Overdrachtsbelasting</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"overdrachtsbelasting\" disabled=\"disabled\" />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-overdrachtsbelasting-question\" />";
         echo "<div id=\"stap2-overdrachtsbelasting-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-overdrachtsbelasting-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-        $tekstStap2Overdrachtsbelasting = $atts['stap2-overdrachtsbelasting'] == '' ? 'stap2-overdrachtsbelasting' : $atts['stap2-overdrachtsbelasting'];
-        echo "<div style=\"padding:15px;\">".$tekstStap2Overdrachtsbelasting."</div></div>";
+        echo "<div style=\"padding:15px;\">Het percentage overdrachtsbelasting bedraagt op dit moment 2% van de koopsom.</div></div>";
     echo "</div>";
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<label for=\"leveringsakte-notaris\">Kosten leveringsakte notaris</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"leveringsakte-notaris\" value=\"800\" />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-leveringsakte-question\" />";
         echo "<div id=\"stap2-leveringsakte-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-leveringsakte-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-        $tekstStap2Leveringsakte = $atts['stap2-leveringsakte'] == '' ? 'stap2-leveringsakte' : $atts['stap2-leveringsakte'];
-        echo "<div style=\"padding:15px;\">".$tekstStap2Leveringsakte."</div></div>";
+        echo "<div style=\"padding:15px;\">";
+        echo "Als de hypotheek helemaal rond is dan kun je naar de notaris om offcieel eigenaar te worden van je aangekochte woning. De kosten voor opmaken van de leveringsakte verschillen erg per notaris. Als koper mag jij bepalen waar je de akte gaat tekenen. Het is verstandig om de tarieven te vergelijken.";
+        echo "<br />";
+        echo "<br />";
+        echo "Wij hebben een standaard bedrag van €800,00 ingevuld. Dit kun je zelf aanpassen.";
+        echo "</div></div>";
     echo "</div>";
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<label for=\"hypotheekakte-notaris\">Kosten hypotheekakte notaris</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hypotheekakte-notaris\" value=\"800\" />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-hypotheekakte-question\" />";
         echo "<div id=\"stap2-hypotheekakte-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-hypotheekakte-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-        $tekstStap2Hypotheekakte = $atts['stap2-hypotheekakte'] == '' ? 'stap2-hypotheekakte' : $atts['stap2-hypotheekakte'];
-        echo "<div style=\"padding:15px;\">".$tekstStap2Hypotheekakte."</div></div>";
+        echo "<div style=\"padding:15px;\">";
+        echo "Als de hypotheek helemaal rond is dan kun je naar de notaris om de hypotheekakte te tekenen, wij noemen dit passeren. Hiermee wordt de hypotheek definitief. De kosten voor opmaken van de hypotheekakteverschillen erg per notaris. Als koper mag jij bepalen waar je de akte gaat tekenen. Het is verstandig om de tarieven te vergelijken.";
+        echo "<br />";
+        echo "<br />";
+        echo "Wij hebben een standaard bedrag van €800,00 ingevuld. Dit kun je zelf aanpassen.";
+        echo "</div></div>";
     echo "</div>";
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<label for=\"taxatie\">Kosten taxatie</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"taxatie\" value=\"500\" />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-taxatie-question\" />";
         echo "<div id=\"stap2-taxatie-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-taxatie-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-        $tekstStap2Taxatie = $atts['stap2-taxatie'] == '' ? 'stap2-taxatie' : $atts['stap2-taxatie'];
-        echo "<div style=\"padding:15px;\">".$tekstStap2Taxatie."</div></div>";
+        echo "<div style=\"padding:15px;\">";
+        echo "Als je een bestaande woning aankoopt moet de woning getaxeerd worden. De geldverstrekker wil weten of de koopsom marktconform is. Blijkt de taxatiewaarde onder de koopsom te liggen, dan betekend dit dat je meer eigen geld moet inleggen.";
+        echo "<br />";
+        echo "<br />";
+        echo "De kosten voor de taxatie kunnen erg verschillen. Het is daarom verstandig de tarieven te vergelijken.";
+        echo "</div></div>";
     echo "</div>";
 
     echo "<div class=\"first_form form_element form_fullwidth\">";
         echo "<label for=\"commissie\">Kosten Hypotheeklijn</label><input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"commissie\" value=\"700\" disabled=\"disabled\" />";
         echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-commissie-question\" />";
         echo "<div id=\"stap2-commissie-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-commissie-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
-        $tekstStap2Commissie = $atts['stap2-commissie'] == '' ? 'stap2-commissie' : $atts['stap2-commissie'];
-        echo "<div style=\"padding:15px;\">".$tekstStap2Commissie."</div></div>";
+        echo "<div style=\"padding:15px;\">";
+        echo "Voor onze dienstverlening brengen wij een concurrenttarief van € 700,00 in rekening. Voor ondernemers geldt een tarief van € 850,00. Onze tarieven zijn transparant en er zijn adertjes onder het gras. Kijk voor meer informatie op: Veelgestelde vragen";
+        echo "</div></div>";
     echo "</div>";
 
     echo "<div class=\"first_form form_element form_fullwidth\">";

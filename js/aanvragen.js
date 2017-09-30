@@ -547,6 +547,30 @@ jQuery(document).ready(function($) {
         $('#stap2-koopsom-help').show();
         $('#stap2-koopsom-question').hide();
     });
+    $('#stap2-waardehuis-kruis').click(function(){
+        $('#stap2-waardehuis-help').hide();
+        $('#stap2-waardehuis-question').show();
+    });
+    $('#stap2-waardehuis-question').click(function(){
+        $('#stap2-waardehuis-help').show();
+        $('#stap2-waardehuis-question').hide();
+    });
+    $('#stap2-rentevasteperiode-kruis').click(function(){
+        $('#stap2-rentevasteperiode-help').hide();
+        $('#stap2-rentevasteperiode-question').show();
+    });
+    $('#stap2-rentevasteperiode-question').click(function(){
+        $('#stap2-rentevasteperiode-help').show();
+        $('#stap2-rentevasteperiode-question').hide();
+    });
+    $('#stap2-soorthypotheek-kruis').click(function(){
+        $('#stap2-soorthypotheek-help').hide();
+        $('#stap2-soorthypotheek-question').show();
+    });
+    $('#stap2-soorthypotheek-question').click(function(){
+        $('#stap2-soorthypotheek-help').show();
+        $('#stap2-soorthypotheek-question').hide();
+    });
     $('#stap2-overdrachtsbelasting-kruis').click(function(){
         $('#stap2-overdrachtsbelasting-help').hide();
         $('#stap2-overdrachtsbelasting-question').show();
