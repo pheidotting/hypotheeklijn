@@ -223,7 +223,8 @@
         echo "<tr>";
             echo "<td>Wil je meer dan het verplichte bedrag inbrengen?</td>";
             echo "<td>";
-                echo "<input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveeleigengeld-getal\" />";
+                echo "Uit spaargeld : <input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveeleigengeld-getal\" /><br />";
+                echo "Uit schenking : <input class=\"form-breedte75-procent text_input is_empty\" type=\"number\" id=\"hoeveeleigengeldschenking-getal\" />";
                 echo "<img src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/help.png\" style=\"float:right; padding-top:5px; cursor: pointer;\" id=\"stap2-eigenmiddelenzelf-question\" />";
                 echo "<div id=\"stap2-eigenmiddelenzelf-help\" style=\"clear:both; background-color:#dedede; display:none;\"><img id=\"stap2-eigenmiddelenzelf-kruis\" src=\"../wp-content/plugins/regel-zelf-uw-hypotheek/png/cross.png\" style=\"float:right; cursor: pointer;\" />";
                 echo "<div style=\"padding:15px;\">";

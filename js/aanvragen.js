@@ -196,6 +196,14 @@ jQuery(document).ready(function($) {
         // opvragenRentepercentages();
         berekenTeLenen();
     });
+    $('#hoeveeleigengeldschenking-getal').change(function(){
+        opvragenRentepercentages();
+        // kloptHoeveelEigenGeldWel();
+        hoogteHypotheek($('#percentage').val());
+        hoogteHypotheek($('#percentage').val(), true);
+        // opvragenRentepercentages();
+        berekenTeLenen();
+    });
     $('#rentevasteperiode').change(function(){
         zetRentevasteperiodeSidebar();
         opvragenRentepercentages();
@@ -1335,6 +1343,7 @@ jQuery(document).ready(function($) {
 	    var benodigd = parseInt($('#benodigdehypotheek-getal').text());
 	    var eigengeld = parseInt($('#eigen-middelen-bedrag-getal').text());
 	    var eigengeldZelf = parseInt($('#hoeveeleigengeld-getal').val());
+	    var eigengeldSchenking = parseInt($('#hoeveeleigengeldschenking-getal').val());
 	    
 	    if(isNaN(eigengeld)) {
 	        eigengeld = 0;
@@ -1342,11 +1351,14 @@ jQuery(document).ready(function($) {
 	    if(isNaN(eigengeldZelf)) {
 	        eigengeldZelf = 0;
 	    }
+	    if(isNaN(eigengeldSchenking)) {
+	        eigengeldSchenking = 0;
+	    }
 	    
-	    $('#telenen').text(maakBedragOp(benodigd - eigengeld - eigengeldZelf));
-	    $('#telenen-sidebar').text(maakBedragOp(benodigd - eigengeld - eigengeldZelf));
-	    $('#telenen-orv').text(maakBedragOp(benodigd - eigengeld - eigengeldZelf));
-	    $('#telenen-getal').text(benodigd - eigengeld - eigengeldZelf);
+	    $('#telenen').text(maakBedragOp(benodigd - eigengeld - eigengeldZelf - eigengeldSchenking));
+	    $('#telenen-sidebar').text(maakBedragOp(benodigd - eigengeld - eigengeldZelf - eigengeldSchenking));
+	    $('#telenen-orv').text(maakBedragOp(benodigd - eigengeld - eigengeldZelf - eigengeldSchenking));
+	    $('#telenen-getal').text(benodigd - eigengeld - eigengeldZelf - eigengeldSchenking);
 	                
         if(bepalenOfOrvNodigIs()) {
             $('#orv-gegevens').show();
